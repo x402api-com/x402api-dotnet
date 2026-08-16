@@ -1,0 +1,24 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: X402Api
+  maintainOpenAPIOrder: true
+  persistentEdits:
+    enabled: true
+  repoUrl: https://github.com/x402api-com/x402api-dotnet
+  fixes:
+    nameResolutionDec2023: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: true
+    nameOverrideFeb2026: true
+csharp:
+  version: 1.0.0
+  maxMethodParams: 0
+  clientServerStatusCodesAsErrors: true
+  responseFormat: envelope-http
+  author: x402api
+  packageName: X402Api
+  dotnetVersion: net8.0
+  description: Official .NET SDK for the x402api public API.
+  defaultErrorName: X402ApiError
+  forwardCompatibleEnumsByDefault: true
