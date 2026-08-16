@@ -16,6 +16,7 @@ csharp:
   maxMethodParams: 0
   clientServerStatusCodesAsErrors: true
   responseFormat: envelope-http
+  envVarPrefix: X402API
   author: x402api
   packageName: X402Api
   dotnetVersion: net8.0
