@@ -1,0 +1,18 @@
+packageName: X402Api
+apiName: X402Api
+packageVersion: 1.0.0
+packageGuid: 5D841236-834E-4E6B-A9F6-B6E12C38AE6B
+packageAuthors: x402api
+packageCompany: x402api
+packageTitle: x402api .NET SDK
+packageDescription: Official .NET SDK for the x402api public API
+licenseId: MIT
+library: generichost
+targetFramework: net8.0
+nullableReferenceTypes: true
+useDateTimeOffset: true
+hideGenerationTimestamp: true
+disallowAdditionalPropertiesIfNotPresent: false
+useOneOfDiscriminatorLookup: true
+useSourceGeneration: true
+validatable: true

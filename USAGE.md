@@ -1,87 +1,170 @@
-## Using the x402api .NET SDK
+# .NET usage guide
 
-The examples below show the configured public surface. Generated request and
-response model names are documented under `docs/` after the first SDK generation.
+The [README](README.md) contains installation instructions and the complete function index. This guide focuses on safe production patterns.
 
-### Configure authentication
+## Register and reuse the clients
 
-Create a scoped tenant API key in x402api and expose it to the server process as
-`X402API_TENANT_API_KEY`. The SDK sends it as a bearer credential. Never embed a
-tenant API key in browser, mobile, desktop, or other distributed client code.
-
-### Initialize the client
+Register x402api once in your application's dependency-injection container. The generated APIs use `HttpClientFactory` and should be resolved from DI.
 
 ```csharp
-using X402Api;
+using Microsoft.Extensions.Hosting;
+using X402Api.Client;
+using X402Api.Extensions;
 
-var sdk = new X402Api(
-    tenantApiKey: Environment.GetEnvironmentVariable("X402API_TENANT_API_KEY")
-        ?? throw new InvalidOperationException("X402API_TENANT_API_KEY is required")
+string token = Environment.GetEnvironmentVariable("X402API_TENANT_API_KEY")
+    ?? throw new InvalidOperationException(
+        "X402API_TENANT_API_KEY is required");
+
+using IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureX402Api((_, options) =>
+    {
+        options.AddTokens(new BearerToken(token));
+        options.UseProvider<RateLimitProvider<BearerToken>, BearerToken>();
+        options.AddX402ApiHttpClients(
+            client => client.Timeout = TimeSpan.FromSeconds(15),
+            builder => builder
+                .AddRetryPolicy(2)
+                .AddCircuitBreakerPolicy(5, TimeSpan.FromSeconds(30))
+        );
+    })
+    .Build();
+```
+
+The retry policy is optional and is not enabled unless you configure it. Use separate service providers or token providers when your process acts for multiple tenant credentials.
+
+## Create and retrieve a charge
+
+```csharp
+var request = new DynamicChargeCreate(
+    Guid.Parse("00000000-0000-4000-8000-000000000001"),
+    "https://merchant.example.com/premium-report",
+    new List<DynamicChargePrice>
+    {
+        new("base_usdc", "1000000")
+    },
+    900,
+    metadata: new Option<Dictionary<string, object>?>(
+        new Dictionary<string, object>
+        {
+            ["order_id"] = "order-123"
+        })
 );
 
-var readiness = await sdk.PaymentReadiness.RetrieveAsync();
-Console.WriteLine(readiness);
+IProgrammaticChargesApi chargesApi =
+    host.Services.GetRequiredService<IProgrammaticChargesApi>();
+
+string idempotencyKey = "charge-order-123-v1";
+IChargesCreateApiResponse createResponse =
+    await chargesApi.ChargesCreateAsync(idempotencyKey, request);
+
+if (!createResponse.TryCreated(out DynamicChargeResponse? charge))
+{
+    throw new InvalidOperationException(
+        $"x402api returned {(int)createResponse.StatusCode}: " +
+        createResponse.RawContent);
+}
+
+IChargesRetrieveApiResponse retrieveResponse =
+    await chargesApi.ChargesRetrieveAsync(charge.ChargeId);
+DynamicChargeResponse? sameCharge = retrieveResponse.Ok();
 ```
 
-The idiomatic method shape for this SDK is `sdk.ResourceName.MethodNameAsync(request)`.
-All request fields are collected into a typed request object so new optional API
-fields do not break existing call sites.
+Prices use atomic-unit strings, not floating point. For example, `"1000000"` represents one token for an asset with six decimals.
 
-### Create a charge
+## Pagination and HTTP headers
 
-The logical SDK call is `charges.create`. Supply a unique `Idempotency-Key` for
-each intended mutation and reuse the same key only when retrying that exact
-request. The request contains a resource-version UUID, the protected URL, one or
-more asset prices expressed in atomic units, and an expiry between 30 and 3600
-seconds.
+```csharp
+IOrdersAndPaymentsApi paymentsApi =
+    host.Services.GetRequiredService<IOrdersAndPaymentsApi>();
+string? cursorValue = null;
 
-The equivalent HTTP request is useful for validating credentials independently
-of the SDK:
+do
+{
+    Option<string> cursor = cursorValue is null
+        ? default
+        : new Option<string>(cursorValue);
+    IPaymentsListApiResponse response =
+        await paymentsApi.PaymentsListAsync(
+            cursor: cursor,
+            pageSize: new Option<int>(100));
 
-```bash
-curl --request POST https://api.x402api.com/v1/charges \
-  --header "Authorization: Bearer $X402API_TENANT_API_KEY" \
-  --header "Content-Type: application/json" \
-  --header "Idempotency-Key: charge-$(date +%s)" \
-  --data '{
-    "resource_version_id": "00000000-0000-4000-8000-000000000001",
-    "resource_url": "https://merchant.example.com/premium-report",
-    "prices": [{
-      "asset_id": "base_usdc",
-      "amount_atomic": "1000000"
-    }],
-    "expires_in_seconds": 900,
-    "metadata": {"customer_reference": "customer-123"}
-  }'
+    if (!response.TryOk(out List<SettlementJob>? payments))
+    {
+        throw new InvalidOperationException(
+            $"x402api returned {(int)response.StatusCode}: " +
+            response.RawContent);
+    }
+
+    foreach (SettlementJob payment in payments)
+    {
+        Process(payment);
+    }
+
+    cursorValue = response.Headers.TryGetValues(
+            "X-X402API-Next-Cursor",
+            out IEnumerable<string>? values)
+        ? values.First()
+        : null;
+} while (cursorValue is not null);
 ```
 
-### Read payment state and receipts
+Treat the cursor as opaque and pass it back unchanged. The same pattern applies to orders, payment observations, receiving addresses, resources, and resource versions. Every operation accepts a `CancellationToken`.
 
-Use `payments.list` for a tenant-wide view, `payments.retrieve` for one payment,
-`payments.listObservations` for chain evidence, and `payments.retrieveReceipt`
-for the signed final receipt. Retrieve the public verification-key history with
-`receiptVerificationKeys.retrieve` before verifying receipts offline.
+## Error handling
 
-### Cursor pagination
+Documented HTTP outcomes are returned as response wrappers rather than thrown as exceptions. Use status helpers and typed accessors:
 
-`orders.list`, `payments.list`, `payments.listObservations`,
-`receivingAddresses.list`, `resources.list`, and `resources.listVersions` accept
-`pageSize` (1-100) and an optional opaque `cursor`. Do not decode or construct
-cursors. Read the next cursor from `X-X402API-Next-Cursor` or the `Link` response
-header and pass it unchanged to the next call.
+```csharp
+IPaymentsRetrieveApiResponse response =
+    await paymentsApi.PaymentsRetrieveAsync(paymentId, cancellationToken);
 
-### Idempotent mutations
+if (response.IsOk)
+{
+    SettlementJob? payment = response.Ok();
+}
+else
+{
+    ApiErrorEnvelope? error = response.Default();
+    string? requestId = response.Headers.TryGetValues(
+            "X-Request-ID",
+            out IEnumerable<string>? values)
+        ? values.FirstOrDefault()
+        : null;
+    LogApiError(response.StatusCode, error, response.RawContent, requestId);
+}
+```
 
-Every mutating operation marked in the function table requires an idempotency
-key of 8-160 characters matching `[A-Za-z0-9._:-]+`. A transport timeout does
-not prove that a mutation failed. Retry the same payload with the same key, or
-call `idempotency.getOutcome` to resolve its durable outcome.
+Network, timeout, cancellation, and unexpected client failures can still throw. `*OrDefaultAsync` methods return `null` when no documented response wrapper can be produced.
 
-### Errors, retries, and HTTP metadata
+## Idempotency and retries
 
-The SDK raises or returns a typed `X402ApiError` for documented 4xx, 5xx, and
-default error responses. Generated responses use the `envelope-http` format so
-callers can inspect the decoded body, status code, and response headers. The SDK
-applies short exponential-backoff retries to connection failures and status
-codes 408, 429, 500, 502, 503, and 504. Application-level retries must still
-respect idempotency requirements.
+Mutations require keys of 8-160 characters matching `[A-Za-z0-9._:-]+`. Persist the key with the intent you are executing.
+
+- New intended mutation: generate a new key.
+- Timeout or connection reset after sending: retry the identical body with the same key.
+- Known validation failure: fix the request and use a new key.
+- Uncertain durable outcome: call `IIdempotencyApi.IdempotencyGetOutcomeAsync(key)`.
+
+Bound retry attempts, use exponential backoff with jitter, respect `Retry-After`, and normally retry only connection failures plus HTTP `408`, `429`, `500`, `502`, `503`, and `504`. The generated `AddRetryPolicy` helper handles transient HTTP failures but uses a simple bounded retry; supply your own Polly policy when you need jitter or `Retry-After` awareness.
+
+## Public endpoints
+
+These endpoints do not need a tenant key. They can be resolved from an x402api host registration that does not call `AddTokens`:
+
+```csharp
+using IHost publicHost = Host.CreateDefaultBuilder(args)
+    .ConfigureX402Api()
+    .Build();
+
+IFacilitatorDiscoveryApi facilitator =
+    publicHost.Services.GetRequiredService<IFacilitatorDiscoveryApi>();
+IFacilitatorGetSupportedApiResponse supported =
+    await facilitator.FacilitatorGetSupportedAsync();
+
+IOrdersAndPaymentsApi publicPayments =
+    publicHost.Services.GetRequiredService<IOrdersAndPaymentsApi>();
+IReceiptVerificationKeysRetrieveApiResponse keys =
+    await publicPayments.ReceiptVerificationKeysRetrieveAsync();
+```
+
+Do not edit generated files under `src/X402Api/` or `docs/`; update the OpenAPI contract or generator configuration instead.
