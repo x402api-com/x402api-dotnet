@@ -12,7 +12,7 @@
     <Description>Official .NET SDK for the x402api public API</Description>
     <Copyright>No Copyright</Copyright>
     <RootNamespace>X402Api</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>0.1.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\X402Api.xml</DocumentationFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/x402api-com/x402api-dotnet.git</RepositoryUrl>

@@ -4,21 +4,19 @@ All URIs are relative to *https://api.x402api.com*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**NetworkFeesCreateQuote**](ResourcesAndPricingApi.md#networkfeescreatequote) | **POST** /v1/network-fee-quotes | Create a network-fee quote |
-| [**ResourcesActivateVersion**](ResourcesAndPricingApi.md#resourcesactivateversion) | **POST** /v1/resources/{resource_id}/versions/{version_id}/activate | Activate a resource version |
-| [**ResourcesCreate**](ResourcesAndPricingApi.md#resourcescreate) | **POST** /v1/resources | Create a resource |
-| [**ResourcesCreateVersion**](ResourcesAndPricingApi.md#resourcescreateversion) | **POST** /v1/resources/{resource_id}/versions | Create a resource version |
-| [**ResourcesList**](ResourcesAndPricingApi.md#resourceslist) | **GET** /v1/resources | List resources |
-| [**ResourcesListVersions**](ResourcesAndPricingApi.md#resourceslistversions) | **GET** /v1/resources/{resource_id}/versions | List resource versions |
-| [**ResourcesRetireVersion**](ResourcesAndPricingApi.md#resourcesretireversion) | **POST** /v1/resources/{resource_id}/versions/{version_id}/retire | Retire a resource version |
+| [**V1NetworkFeeQuotesCreate**](ResourcesAndPricingApi.md#v1networkfeequotescreate) | **POST** /v1/network-fee-quotes |  |
+| [**V1ResourcesCreate**](ResourcesAndPricingApi.md#v1resourcescreate) | **POST** /v1/resources |  |
+| [**V1ResourcesList**](ResourcesAndPricingApi.md#v1resourceslist) | **GET** /v1/resources |  |
+| [**V1ResourcesVersionsActivateCreate**](ResourcesAndPricingApi.md#v1resourcesversionsactivatecreate) | **POST** /v1/resources/{resource_id}/versions/{version_id}/activate |  |
+| [**V1ResourcesVersionsCreate**](ResourcesAndPricingApi.md#v1resourcesversionscreate) | **POST** /v1/resources/{resource_id}/versions |  |
+| [**V1ResourcesVersionsList**](ResourcesAndPricingApi.md#v1resourcesversionslist) | **GET** /v1/resources/{resource_id}/versions |  |
+| [**V1ResourcesVersionsRetireCreate**](ResourcesAndPricingApi.md#v1resourcesversionsretirecreate) | **POST** /v1/resources/{resource_id}/versions/{version_id}/retire |  |
 
-<a id="networkfeescreatequote"></a>
-# **NetworkFeesCreateQuote**
-> NetworkFeePreviewResponse NetworkFeesCreateQuote (NetworkFeePreview networkFeePreview)
+<a id="v1networkfeequotescreate"></a>
+# **V1NetworkFeeQuotesCreate**
+> NetworkFeePreviewResponse V1NetworkFeeQuotesCreate (NetworkFeePreview networkFeePreview)
 
-Create a network-fee quote
 
-Preview bounded network fees for the requested resource prices and rails.
 
 
 ### Parameters
@@ -44,66 +42,22 @@ Preview bounded network fees for the requested resource prices and rails.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response for create a network-fee quote. |  * X-Request-ID -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="resourcesactivateversion"></a>
-# **ResourcesActivateVersion**
-> ResourceVersion ResourcesActivateVersion (string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate)
+<a id="v1resourcescreate"></a>
+# **V1ResourcesCreate**
+> Resource V1ResourcesCreate (string idempotencyKey, ResourceCreate resourceCreate)
 
-Activate a resource version
 
-Activate one immutable resource version idempotently.
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **idempotencyKey** | **string** | Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome. |  |
-| **resourceId** | **Guid** |  |  |
-| **versionId** | **Guid** |  |  |
-| **resourceVersionActivate** | [**ResourceVersionActivate**](ResourceVersionActivate.md) |  |  |
-
-### Return type
-
-[**ResourceVersion**](ResourceVersion.md)
-
-### Authorization
-
-[tenantApiKey](../README.md#tenantApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Successful response for activate a resource version. |  * X-Request-ID -  <br>  |
-| **409** | The request failed. |  * X-Request-ID -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-<a id="resourcescreate"></a>
-# **ResourcesCreate**
-> Resource ResourcesCreate (string idempotencyKey, ResourceCreate resourceCreate)
-
-Create a resource
-
-Create one tenant resource idempotently.
-
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **idempotencyKey** | **string** | Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome. |  |
+| **idempotencyKey** | **string** | Unique mutation key; replaying different content returns HTTP 409. |  |
 | **resourceCreate** | [**ResourceCreate**](ResourceCreate.md) |  |  |
 
 ### Return type
@@ -123,58 +77,15 @@ Create one tenant resource idempotently.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Successful response for create a resource. |  * X-Request-ID -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **201** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="resourcescreateversion"></a>
-# **ResourcesCreateVersion**
-> ResourceVersion ResourcesCreateVersion (string idempotencyKey, Guid resourceId, ResourceVersionCreate resourceVersionCreate)
-
-Create a resource version
-
-Create an immutable priced version of one tenant resource idempotently.
+<a id="v1resourceslist"></a>
+# **V1ResourcesList**
+> List&lt;Resource&gt; V1ResourcesList (string cursor = null, int pageSize = null)
 
 
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **idempotencyKey** | **string** | Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome. |  |
-| **resourceId** | **Guid** |  |  |
-| **resourceVersionCreate** | [**ResourceVersionCreate**](ResourceVersionCreate.md) |  |  |
-
-### Return type
-
-[**ResourceVersion**](ResourceVersion.md)
-
-### Authorization
-
-[tenantApiKey](../README.md#tenantApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **201** | Successful response for create a resource version. |  * X-Request-ID -  <br>  |
-| **409** | The request failed. |  * X-Request-ID -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-<a id="resourceslist"></a>
-# **ResourcesList**
-> List&lt;Resource&gt; ResourcesList (string cursor = null, int pageSize = null)
-
-List resources
-
-List tenant resources and their visible versions using opaque cursor pagination.
 
 
 ### Parameters
@@ -201,18 +112,90 @@ List tenant resources and their visible versions using opaque cursor pagination.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response for list resources. |  * X-Request-ID -  <br>  * Link -  <br>  * X-X402API-Next-Cursor -  <br>  * X-X402API-Result-Truncated -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="resourceslistversions"></a>
-# **ResourcesListVersions**
-> List&lt;ResourceVersion&gt; ResourcesListVersions (Guid resourceId, string cursor = null, int pageSize = null)
+<a id="v1resourcesversionsactivatecreate"></a>
+# **V1ResourcesVersionsActivateCreate**
+> ResourceVersion V1ResourcesVersionsActivateCreate (string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate)
 
-List resource versions
 
-List immutable versions of one tenant resource using opaque cursor pagination.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **idempotencyKey** | **string** | Unique mutation key; replaying different content returns HTTP 409. |  |
+| **resourceId** | **Guid** |  |  |
+| **versionId** | **Guid** |  |  |
+| **resourceVersionActivate** | [**ResourceVersionActivate**](ResourceVersionActivate.md) |  |  |
+
+### Return type
+
+[**ResourceVersion**](ResourceVersion.md)
+
+### Authorization
+
+[tenantApiKey](../README.md#tenantApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **409** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="v1resourcesversionscreate"></a>
+# **V1ResourcesVersionsCreate**
+> ResourceVersion V1ResourcesVersionsCreate (string idempotencyKey, Guid resourceId, ResourceVersionCreate resourceVersionCreate)
+
+
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **idempotencyKey** | **string** | Unique mutation key; replaying different content returns HTTP 409. |  |
+| **resourceId** | **Guid** |  |  |
+| **resourceVersionCreate** | [**ResourceVersionCreate**](ResourceVersionCreate.md) |  |  |
+
+### Return type
+
+[**ResourceVersion**](ResourceVersion.md)
+
+### Authorization
+
+[tenantApiKey](../README.md#tenantApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** |  |  -  |
+| **409** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="v1resourcesversionslist"></a>
+# **V1ResourcesVersionsList**
+> List&lt;ResourceVersion&gt; V1ResourcesVersionsList (Guid resourceId, string cursor = null, int pageSize = null)
+
+
 
 
 ### Parameters
@@ -240,25 +223,22 @@ List immutable versions of one tenant resource using opaque cursor pagination.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response for list resource versions. |  * X-Request-ID -  <br>  * Link -  <br>  * X-X402API-Next-Cursor -  <br>  * X-X402API-Result-Truncated -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="resourcesretireversion"></a>
-# **ResourcesRetireVersion**
-> ResourceVersion ResourcesRetireVersion (string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire)
+<a id="v1resourcesversionsretirecreate"></a>
+# **V1ResourcesVersionsRetireCreate**
+> ResourceVersion V1ResourcesVersionsRetireCreate (string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire)
 
-Retire a resource version
 
-Retire one immutable resource version idempotently.
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **idempotencyKey** | **string** | Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome. |  |
+| **idempotencyKey** | **string** | Unique mutation key; replaying different content returns HTTP 409. |  |
 | **resourceId** | **Guid** |  |  |
 | **versionId** | **Guid** |  |  |
 | **resourceVersionRetire** | [**ResourceVersionRetire**](ResourceVersionRetire.md) |  |  |
@@ -280,8 +260,7 @@ Retire one immutable resource version idempotently.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response for retire a resource version. |  * X-Request-ID -  <br>  |
-| **409** | The request failed. |  * X-Request-ID -  <br>  |
-| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **200** |  |  -  |
+| **409** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

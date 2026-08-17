@@ -8,8 +8,6 @@ docs/apis/ProgrammaticChargesApi.md
 docs/apis/ReceivingAddressesApi.md
 docs/apis/ResourcesAndPricingApi.md
 docs/apis/WalletsAndTransfersApi.md
-docs/models/ApiError.md
-docs/models/ApiErrorEnvelope.md
 docs/models/BalanceAsset.md
 docs/models/DynamicChargeCreate.md
 docs/models/DynamicChargePrice.md
@@ -123,8 +121,6 @@ src/X402Api/Extensions/IHostBuilderExtensions.cs
 src/X402Api/Extensions/IHttpClientBuilderExtensions.cs
 src/X402Api/Extensions/IServiceCollectionExtensions.cs
 src/X402Api/Logging/RestLogEvents.cs
-src/X402Api/Model/ApiError.cs
-src/X402Api/Model/ApiErrorEnvelope.cs
 src/X402Api/Model/BalanceAsset.cs
 src/X402Api/Model/DynamicChargeCreate.cs
 src/X402Api/Model/DynamicChargePrice.cs
