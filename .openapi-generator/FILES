@@ -88,6 +88,7 @@ docs/models/TenantPaymentResourceProjection.md
 docs/models/TenantPaymentScreeningProjection.md
 docs/models/TenantPaymentScreeningSubjectProjection.md
 docs/models/TenantPaymentScreeningSubjectProjectionStatusEnum.md
+docs/models/TrackingStatusEnum.md
 docs/models/WalletBalanceResponse.md
 docs/models/WalletChainReseedContext.md
 docs/models/WalletFencedChainReseedContext.md
@@ -208,6 +209,7 @@ src/X402Api/Model/TenantPaymentResourceProjection.cs
 src/X402Api/Model/TenantPaymentScreeningProjection.cs
 src/X402Api/Model/TenantPaymentScreeningSubjectProjection.cs
 src/X402Api/Model/TenantPaymentScreeningSubjectProjectionStatusEnum.cs
+src/X402Api/Model/TrackingStatusEnum.cs
 src/X402Api/Model/WalletBalanceResponse.cs
 src/X402Api/Model/WalletChainReseedContext.cs
 src/X402Api/Model/WalletFencedChainReseedContext.cs

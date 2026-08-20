@@ -146,6 +146,8 @@ namespace X402Api.Client
             _jsonOptions.Converters.Add(new TenantPaymentScreeningSubjectProjectionJsonConverter());
             _jsonOptions.Converters.Add(new TenantPaymentScreeningSubjectProjectionStatusEnumJsonConverter());
             _jsonOptions.Converters.Add(new TenantPaymentScreeningSubjectProjectionStatusEnumNullableJsonConverter());
+            _jsonOptions.Converters.Add(new TrackingStatusEnumJsonConverter());
+            _jsonOptions.Converters.Add(new TrackingStatusEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new WalletBalanceResponseJsonConverter());
             _jsonOptions.Converters.Add(new WalletChainReseedContextJsonConverter());
             _jsonOptions.Converters.Add(new WalletFencedChainReseedContextJsonConverter());
@@ -240,6 +242,7 @@ namespace X402Api.Client
                 new TenantPaymentScreeningProjectionSerializationContext(),
                 new TenantPaymentScreeningSubjectProjectionSerializationContext(),
                 new TenantPaymentScreeningSubjectProjectionStatusEnumSerializationContext(),
+                new TrackingStatusEnumSerializationContext(),
                 new WalletBalanceResponseSerializationContext(),
                 new WalletChainReseedContextSerializationContext(),
                 new WalletFencedChainReseedContextSerializationContext(),

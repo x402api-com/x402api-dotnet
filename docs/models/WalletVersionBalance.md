@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **WalletAddress** | **string** |  |
 **State** | **WalletVersionBalanceStateEnum** |  |
 **ObservationState** | **ObservationStateEnum** |  |
+**TrackingStatus** | **TrackingStatusEnum** |  |
 **Assets** | [**List&lt;BalanceAsset&gt;**](BalanceAsset.md) |  |
 **ObservedAt** | **DateTimeOffset** |  |
 **ReseedContext** | [**WalletChainReseedContext**](WalletChainReseedContext.md) |  |

@@ -39,17 +39,19 @@ namespace X402Api.Model
         /// <param name="walletAddress">walletAddress</param>
         /// <param name="state">state</param>
         /// <param name="observationState">observationState</param>
+        /// <param name="trackingStatus">trackingStatus</param>
         /// <param name="assets">assets</param>
         /// <param name="observedAt">observedAt</param>
         /// <param name="reseedContext">reseedContext</param>
         [JsonConstructor]
-        public WalletVersionBalance(Guid walletVersionId, int varVersion, string walletAddress, WalletVersionBalanceStateEnum state, ObservationStateEnum observationState, List<BalanceAsset> assets, DateTimeOffset? observedAt = default, WalletChainReseedContext? reseedContext = default)
+        public WalletVersionBalance(Guid walletVersionId, int varVersion, string walletAddress, WalletVersionBalanceStateEnum state, ObservationStateEnum observationState, TrackingStatusEnum trackingStatus, List<BalanceAsset> assets, DateTimeOffset? observedAt = default, WalletChainReseedContext? reseedContext = default)
         {
             WalletVersionId = walletVersionId;
             VarVersion = varVersion;
             WalletAddress = walletAddress;
             State = state;
             ObservationState = observationState;
+            TrackingStatus = trackingStatus;
             Assets = assets;
             ObservedAt = observedAt;
             ReseedContext = reseedContext;
@@ -69,6 +71,12 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("observation_state")]
         public ObservationStateEnum ObservationState { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TrackingStatus
+        /// </summary>
+        [JsonPropertyName("tracking_status")]
+        public TrackingStatusEnum TrackingStatus { get; set; }
 
         /// <summary>
         /// Gets or Sets WalletVersionId
@@ -125,6 +133,7 @@ namespace X402Api.Model
             sb.Append("  WalletAddress: ").Append(WalletAddress).Append("\n");
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  ObservationState: ").Append(ObservationState).Append("\n");
+            sb.Append("  TrackingStatus: ").Append(TrackingStatus).Append("\n");
             sb.Append("  Assets: ").Append(Assets).Append("\n");
             sb.Append("  ObservedAt: ").Append(ObservedAt).Append("\n");
             sb.Append("  ReseedContext: ").Append(ReseedContext).Append("\n");
@@ -186,6 +195,7 @@ namespace X402Api.Model
             Option<string?> walletAddress = default;
             Option<WalletVersionBalanceStateEnum?> state = default;
             Option<ObservationStateEnum?> observationState = default;
+            Option<TrackingStatusEnum?> trackingStatus = default;
             Option<List<BalanceAsset>?> assets = default;
             Option<DateTimeOffset?> observedAt = default;
             Option<WalletChainReseedContext?> reseedContext = default;
@@ -220,6 +230,9 @@ namespace X402Api.Model
                         case "observation_state":
                             observationState = new Option<ObservationStateEnum?>(JsonSerializer.Deserialize<ObservationStateEnum?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "tracking_status":
+                            trackingStatus = new Option<TrackingStatusEnum?>(JsonSerializer.Deserialize<TrackingStatusEnum?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "assets":
                             assets = new Option<List<BalanceAsset>?>(JsonSerializer.Deserialize<List<BalanceAsset>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -250,6 +263,9 @@ namespace X402Api.Model
             if (!observationState.IsSet)
                 throw new ArgumentException("Property is required for class WalletVersionBalance.", nameof(observationState));
 
+            if (!trackingStatus.IsSet)
+                throw new ArgumentException("Property is required for class WalletVersionBalance.", nameof(trackingStatus));
+
             if (!assets.IsSet)
                 throw new ArgumentException("Property is required for class WalletVersionBalance.", nameof(assets));
 
@@ -274,10 +290,13 @@ namespace X402Api.Model
             if (observationState.IsSet && observationState.Value == null)
                 throw new ArgumentNullException(nameof(observationState), "Property is not nullable for class WalletVersionBalance.");
 
+            if (trackingStatus.IsSet && trackingStatus.Value == null)
+                throw new ArgumentNullException(nameof(trackingStatus), "Property is not nullable for class WalletVersionBalance.");
+
             if (assets.IsSet && assets.Value == null)
                 throw new ArgumentNullException(nameof(assets), "Property is not nullable for class WalletVersionBalance.");
 
-            return new WalletVersionBalance(walletVersionId.Value!.Value!, varVersion.Value!.Value!, walletAddress.Value!, state.Value!.Value!, observationState.Value!.Value!, assets.Value!, observedAt.Value!, reseedContext.Value!);
+            return new WalletVersionBalance(walletVersionId.Value!.Value!, varVersion.Value!.Value!, walletAddress.Value!, state.Value!.Value!, observationState.Value!.Value!, trackingStatus.Value!.Value!, assets.Value!, observedAt.Value!, reseedContext.Value!);
         }
 
         /// <summary>
@@ -321,6 +340,9 @@ namespace X402Api.Model
 
             var observationStateRawValue = ObservationStateEnumValueConverter.ToJsonValue(walletVersionBalance.ObservationState);
             writer.WriteString("observation_state", observationStateRawValue);
+
+            var trackingStatusRawValue = TrackingStatusEnumValueConverter.ToJsonValue(walletVersionBalance.TrackingStatus);
+            writer.WriteString("tracking_status", trackingStatusRawValue);
 
             writer.WritePropertyName("assets");
             JsonSerializer.Serialize(writer, walletVersionBalance.Assets, jsonSerializerOptions);

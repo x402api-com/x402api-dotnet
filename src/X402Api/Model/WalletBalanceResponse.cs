@@ -38,18 +38,20 @@ namespace X402Api.Model
         /// <param name="network">network</param>
         /// <param name="requestedFinality">requestedFinality</param>
         /// <param name="observationState">observationState</param>
+        /// <param name="trackingStatus">trackingStatus</param>
         /// <param name="assets">assets</param>
         /// <param name="walletVersions">walletVersions</param>
         /// <param name="reseedContexts">reseedContexts</param>
         /// <param name="walletAddress">walletAddress</param>
         /// <param name="observedAt">observedAt</param>
         [JsonConstructor]
-        public WalletBalanceResponse(Guid walletId, string network, WalletObservationFinalityEnum requestedFinality, ObservationStateEnum observationState, List<BalanceAsset> assets, List<WalletVersionBalance> walletVersions, List<WalletFencedChainReseedContext> reseedContexts, string? walletAddress = default, DateTimeOffset? observedAt = default)
+        public WalletBalanceResponse(Guid walletId, string network, WalletObservationFinalityEnum requestedFinality, ObservationStateEnum observationState, TrackingStatusEnum trackingStatus, List<BalanceAsset> assets, List<WalletVersionBalance> walletVersions, List<WalletFencedChainReseedContext> reseedContexts, string? walletAddress = default, DateTimeOffset? observedAt = default)
         {
             WalletId = walletId;
             Network = network;
             RequestedFinality = requestedFinality;
             ObservationState = observationState;
+            TrackingStatus = trackingStatus;
             Assets = assets;
             WalletVersions = walletVersions;
             ReseedContexts = reseedContexts;
@@ -71,6 +73,12 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("observation_state")]
         public ObservationStateEnum ObservationState { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TrackingStatus
+        /// </summary>
+        [JsonPropertyName("tracking_status")]
+        public TrackingStatusEnum TrackingStatus { get; set; }
 
         /// <summary>
         /// Gets or Sets WalletId
@@ -132,6 +140,7 @@ namespace X402Api.Model
             sb.Append("  Network: ").Append(Network).Append("\n");
             sb.Append("  RequestedFinality: ").Append(RequestedFinality).Append("\n");
             sb.Append("  ObservationState: ").Append(ObservationState).Append("\n");
+            sb.Append("  TrackingStatus: ").Append(TrackingStatus).Append("\n");
             sb.Append("  Assets: ").Append(Assets).Append("\n");
             sb.Append("  WalletVersions: ").Append(WalletVersions).Append("\n");
             sb.Append("  ReseedContexts: ").Append(ReseedContexts).Append("\n");
@@ -194,6 +203,7 @@ namespace X402Api.Model
             Option<string?> network = default;
             Option<WalletObservationFinalityEnum?> requestedFinality = default;
             Option<ObservationStateEnum?> observationState = default;
+            Option<TrackingStatusEnum?> trackingStatus = default;
             Option<List<BalanceAsset>?> assets = default;
             Option<List<WalletVersionBalance>?> walletVersions = default;
             Option<List<WalletFencedChainReseedContext>?> reseedContexts = default;
@@ -226,6 +236,9 @@ namespace X402Api.Model
                             break;
                         case "observation_state":
                             observationState = new Option<ObservationStateEnum?>(JsonSerializer.Deserialize<ObservationStateEnum?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "tracking_status":
+                            trackingStatus = new Option<TrackingStatusEnum?>(JsonSerializer.Deserialize<TrackingStatusEnum?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "assets":
                             assets = new Option<List<BalanceAsset>?>(JsonSerializer.Deserialize<List<BalanceAsset>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -260,6 +273,9 @@ namespace X402Api.Model
             if (!observationState.IsSet)
                 throw new ArgumentException("Property is required for class WalletBalanceResponse.", nameof(observationState));
 
+            if (!trackingStatus.IsSet)
+                throw new ArgumentException("Property is required for class WalletBalanceResponse.", nameof(trackingStatus));
+
             if (!assets.IsSet)
                 throw new ArgumentException("Property is required for class WalletBalanceResponse.", nameof(assets));
 
@@ -287,6 +303,9 @@ namespace X402Api.Model
             if (observationState.IsSet && observationState.Value == null)
                 throw new ArgumentNullException(nameof(observationState), "Property is not nullable for class WalletBalanceResponse.");
 
+            if (trackingStatus.IsSet && trackingStatus.Value == null)
+                throw new ArgumentNullException(nameof(trackingStatus), "Property is not nullable for class WalletBalanceResponse.");
+
             if (assets.IsSet && assets.Value == null)
                 throw new ArgumentNullException(nameof(assets), "Property is not nullable for class WalletBalanceResponse.");
 
@@ -296,7 +315,7 @@ namespace X402Api.Model
             if (reseedContexts.IsSet && reseedContexts.Value == null)
                 throw new ArgumentNullException(nameof(reseedContexts), "Property is not nullable for class WalletBalanceResponse.");
 
-            return new WalletBalanceResponse(walletId.Value!.Value!, network.Value!, requestedFinality.Value!.Value!, observationState.Value!.Value!, assets.Value!, walletVersions.Value!, reseedContexts.Value!, walletAddress.Value!, observedAt.Value!);
+            return new WalletBalanceResponse(walletId.Value!.Value!, network.Value!, requestedFinality.Value!.Value!, observationState.Value!.Value!, trackingStatus.Value!.Value!, assets.Value!, walletVersions.Value!, reseedContexts.Value!, walletAddress.Value!, observedAt.Value!);
         }
 
         /// <summary>
@@ -344,6 +363,9 @@ namespace X402Api.Model
 
             var observationStateRawValue = ObservationStateEnumValueConverter.ToJsonValue(walletBalanceResponse.ObservationState);
             writer.WriteString("observation_state", observationStateRawValue);
+
+            var trackingStatusRawValue = TrackingStatusEnumValueConverter.ToJsonValue(walletBalanceResponse.TrackingStatus);
+            writer.WriteString("tracking_status", trackingStatusRawValue);
 
             writer.WritePropertyName("assets");
             JsonSerializer.Serialize(writer, walletBalanceResponse.Assets, jsonSerializerOptions);

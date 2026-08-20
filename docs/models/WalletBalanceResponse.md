@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Network** | **string** |  |
 **RequestedFinality** | **WalletObservationFinalityEnum** |  |
 **ObservationState** | **ObservationStateEnum** |  |
+**TrackingStatus** | **TrackingStatusEnum** |  |
 **Assets** | [**List&lt;BalanceAsset&gt;**](BalanceAsset.md) |  |
 **WalletVersions** | [**List&lt;WalletVersionBalance&gt;**](WalletVersionBalance.md) |  |
 **ReseedContexts** | [**List&lt;WalletFencedChainReseedContext&gt;**](WalletFencedChainReseedContext.md) |  |

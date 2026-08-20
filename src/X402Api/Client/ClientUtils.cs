@@ -158,6 +158,8 @@ namespace X402Api.Client
                 return TenantPaymentReceiptProjectionStatusEnumValueConverter.ToJsonValue(tenantPaymentReceiptProjectionStatusEnum);
             if (obj is TenantPaymentScreeningSubjectProjectionStatusEnum tenantPaymentScreeningSubjectProjectionStatusEnum)
                 return TenantPaymentScreeningSubjectProjectionStatusEnumValueConverter.ToJsonValue(tenantPaymentScreeningSubjectProjectionStatusEnum);
+            if (obj is TrackingStatusEnum trackingStatusEnum)
+                return TrackingStatusEnumValueConverter.ToJsonValue(trackingStatusEnum);
             if (obj is WalletObservationFinalityEnum walletObservationFinalityEnum)
                 return WalletObservationFinalityEnumValueConverter.ToJsonValue(walletObservationFinalityEnum);
             if (obj is WalletVersionBalanceStateEnum walletVersionBalanceStateEnum)
