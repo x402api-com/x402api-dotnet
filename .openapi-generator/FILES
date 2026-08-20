@@ -8,7 +8,10 @@ docs/apis/ProgrammaticChargesApi.md
 docs/apis/ReceivingAddressesApi.md
 docs/apis/ResourcesAndPricingApi.md
 docs/apis/WalletsAndTransfersApi.md
+docs/models/ApiError.md
+docs/models/ApiErrorEnvelope.md
 docs/models/BalanceAsset.md
+docs/models/CanonicalPaymentReadinessRail.md
 docs/models/DynamicChargeCreate.md
 docs/models/DynamicChargePrice.md
 docs/models/DynamicChargeResponse.md
@@ -41,7 +44,11 @@ docs/models/Order.md
 docs/models/OrderStatusEnum.md
 docs/models/PaymentReadiness.md
 docs/models/PaymentReadinessAsset.md
+docs/models/PaymentReadinessBlocker.md
+docs/models/PaymentReadinessBlockerOwnerEnum.md
 docs/models/PaymentReadinessRail.md
+docs/models/PaymentReadinessRailStatusEnum.md
+docs/models/PaymentReadinessStateEnum.md
 docs/models/PaymentReceipt.md
 docs/models/PriceInput.md
 docs/models/ReadinessStatusEnum.md
@@ -121,7 +128,10 @@ src/X402Api/Extensions/IHostBuilderExtensions.cs
 src/X402Api/Extensions/IHttpClientBuilderExtensions.cs
 src/X402Api/Extensions/IServiceCollectionExtensions.cs
 src/X402Api/Logging/RestLogEvents.cs
+src/X402Api/Model/ApiError.cs
+src/X402Api/Model/ApiErrorEnvelope.cs
 src/X402Api/Model/BalanceAsset.cs
+src/X402Api/Model/CanonicalPaymentReadinessRail.cs
 src/X402Api/Model/DynamicChargeCreate.cs
 src/X402Api/Model/DynamicChargePrice.cs
 src/X402Api/Model/DynamicChargeResponse.cs
@@ -154,7 +164,11 @@ src/X402Api/Model/Order.cs
 src/X402Api/Model/OrderStatusEnum.cs
 src/X402Api/Model/PaymentReadiness.cs
 src/X402Api/Model/PaymentReadinessAsset.cs
+src/X402Api/Model/PaymentReadinessBlocker.cs
+src/X402Api/Model/PaymentReadinessBlockerOwnerEnum.cs
 src/X402Api/Model/PaymentReadinessRail.cs
+src/X402Api/Model/PaymentReadinessRailStatusEnum.cs
+src/X402Api/Model/PaymentReadinessStateEnum.cs
 src/X402Api/Model/PaymentReceipt.cs
 src/X402Api/Model/PriceInput.cs
 src/X402Api/Model/ReadinessStatusEnum.cs

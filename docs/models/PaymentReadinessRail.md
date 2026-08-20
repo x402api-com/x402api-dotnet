@@ -4,7 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AssetId** | **string** |  | [readonly]
 **Network** | **string** |  | [readonly]
+**Symbol** | **string** |  | [readonly]
+**Selected** | **bool** |  | [readonly]
+**WalletReady** | **bool** |  | [readonly]
+**PlatformAvailable** | **bool** |  | [readonly]
+**AcceptingNewPayments** | **bool** |  | [readonly]
+**Status** | **string** |  | [readonly]
+**Blockers** | [**List&lt;PaymentReadinessBlocker&gt;**](PaymentReadinessBlocker.md) |  | [readonly]
 **TenantChallengesEnabled** | **bool** |  | [readonly]
 **TenantSettlementEnabled** | **bool** |  | [readonly]
 **NetworkAssistanceEnabled** | **bool** |  | [readonly]

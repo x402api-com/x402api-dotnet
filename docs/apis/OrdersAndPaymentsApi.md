@@ -4,19 +4,21 @@ All URIs are relative to *https://api.x402api.com*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**V1OrdersList**](OrdersAndPaymentsApi.md#v1orderslist) | **GET** /v1/orders |  |
-| [**V1OrdersRetrieve**](OrdersAndPaymentsApi.md#v1ordersretrieve) | **GET** /v1/orders/{id} |  |
-| [**V1PaymentReceiptVerificationKeysRetrieve**](OrdersAndPaymentsApi.md#v1paymentreceiptverificationkeysretrieve) | **GET** /v1/payment-receipt-verification-keys |  |
-| [**V1PaymentsList**](OrdersAndPaymentsApi.md#v1paymentslist) | **GET** /v1/payments |  |
-| [**V1PaymentsObservationsList**](OrdersAndPaymentsApi.md#v1paymentsobservationslist) | **GET** /v1/payments/{id}/observations |  |
-| [**V1PaymentsReceiptRetrieve**](OrdersAndPaymentsApi.md#v1paymentsreceiptretrieve) | **GET** /v1/payments/{id}/receipt |  |
-| [**V1PaymentsRetrieve**](OrdersAndPaymentsApi.md#v1paymentsretrieve) | **GET** /v1/payments/{id} |  |
+| [**OrdersList**](OrdersAndPaymentsApi.md#orderslist) | **GET** /v1/orders | List orders |
+| [**OrdersRetrieve**](OrdersAndPaymentsApi.md#ordersretrieve) | **GET** /v1/orders/{id} | Retrieve an order |
+| [**PaymentsList**](OrdersAndPaymentsApi.md#paymentslist) | **GET** /v1/payments | List payments |
+| [**PaymentsListObservations**](OrdersAndPaymentsApi.md#paymentslistobservations) | **GET** /v1/payments/{id}/observations | List payment observations |
+| [**PaymentsRetrieve**](OrdersAndPaymentsApi.md#paymentsretrieve) | **GET** /v1/payments/{id} | Retrieve a payment |
+| [**PaymentsRetrieveReceipt**](OrdersAndPaymentsApi.md#paymentsretrievereceipt) | **GET** /v1/payments/{id}/receipt | Retrieve a payment receipt |
+| [**ReceiptVerificationKeysRetrieve**](OrdersAndPaymentsApi.md#receiptverificationkeysretrieve) | **GET** /v1/payment-receipt-verification-keys | Retrieve receipt verification keys |
 
-<a id="v1orderslist"></a>
-# **V1OrdersList**
-> List&lt;Order&gt; V1OrdersList (string cursor = null, int pageSize = null)
+<a id="orderslist"></a>
+# **OrdersList**
+> List&lt;Order&gt; OrdersList (string cursor = null, int pageSize = null)
 
+List orders
 
+List tenant-visible orders using opaque cursor pagination.
 
 
 ### Parameters
@@ -43,15 +45,18 @@ All URIs are relative to *https://api.x402api.com*
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for list orders. |  * X-Request-ID -  <br>  * Link -  <br>  * X-X402API-Next-Cursor -  <br>  * X-X402API-Result-Truncated -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="v1ordersretrieve"></a>
-# **V1OrdersRetrieve**
-> Order V1OrdersRetrieve (Guid id)
+<a id="ordersretrieve"></a>
+# **OrdersRetrieve**
+> Order OrdersRetrieve (Guid id)
 
+Retrieve an order
 
+Retrieve one tenant-visible order by its canonical identifier.
 
 
 ### Parameters
@@ -77,47 +82,18 @@ All URIs are relative to *https://api.x402api.com*
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for retrieve an order. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="v1paymentreceiptverificationkeysretrieve"></a>
-# **V1PaymentReceiptVerificationKeysRetrieve**
-> ReceiptVerificationKeyHistory V1PaymentReceiptVerificationKeysRetrieve ()
+<a id="paymentslist"></a>
+# **PaymentsList**
+> List&lt;SettlementJob&gt; PaymentsList (string cursor = null, int pageSize = null)
 
+List payments
 
-
-Public key history; authenticity still requires an out-of-band pin.
-
-
-### Parameters
-This endpoint does not need any parameter.
-### Return type
-
-[**ReceiptVerificationKeyHistory**](ReceiptVerificationKeyHistory.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-<a id="v1paymentslist"></a>
-# **V1PaymentsList**
-> List&lt;SettlementJob&gt; V1PaymentsList (string cursor = null, int pageSize = null)
-
-
+List tenant-visible payments using opaque cursor pagination.
 
 
 ### Parameters
@@ -144,15 +120,18 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for list payments. |  * X-Request-ID -  <br>  * Link -  <br>  * X-X402API-Next-Cursor -  <br>  * X-X402API-Result-Truncated -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="v1paymentsobservationslist"></a>
-# **V1PaymentsObservationsList**
-> List&lt;SettlementChainObservation&gt; V1PaymentsObservationsList (Guid id, string cursor = null, int pageSize = null)
+<a id="paymentslistobservations"></a>
+# **PaymentsListObservations**
+> List&lt;SettlementChainObservation&gt; PaymentsListObservations (Guid id, string cursor = null, int pageSize = null)
 
+List payment observations
 
+List finalized and pending chain observations for one tenant-visible payment.
 
 
 ### Parameters
@@ -180,49 +159,18 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for list payment observations. |  * X-Request-ID -  <br>  * Link -  <br>  * X-X402API-Next-Cursor -  <br>  * X-X402API-Result-Truncated -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="v1paymentsreceiptretrieve"></a>
-# **V1PaymentsReceiptRetrieve**
-> PaymentReceipt V1PaymentsReceiptRetrieve (Guid id)
+<a id="paymentsretrieve"></a>
+# **PaymentsRetrieve**
+> SettlementJob PaymentsRetrieve (Guid id)
 
+Retrieve a payment
 
-
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **id** | **Guid** |  |  |
-
-### Return type
-
-[**PaymentReceipt**](PaymentReceipt.md)
-
-### Authorization
-
-[tenantApiKey](../README.md#tenantApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-<a id="v1paymentsretrieve"></a>
-# **V1PaymentsRetrieve**
-> SettlementJob V1PaymentsRetrieve (Guid id)
-
-
+Retrieve one tenant-visible payment by its canonical identifier.
 
 
 ### Parameters
@@ -248,6 +196,77 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for retrieve a payment. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="paymentsretrievereceipt"></a>
+# **PaymentsRetrieveReceipt**
+> PaymentReceipt PaymentsRetrieveReceipt (Guid id)
+
+Retrieve a payment receipt
+
+Retrieve the signed receipt projection for one tenant-visible payment.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **Guid** |  |  |
+
+### Return type
+
+[**PaymentReceipt**](PaymentReceipt.md)
+
+### Authorization
+
+[tenantApiKey](../README.md#tenantApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful response for retrieve a payment receipt. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="receiptverificationkeysretrieve"></a>
+# **ReceiptVerificationKeysRetrieve**
+> ReceiptVerificationKeyHistory ReceiptVerificationKeysRetrieve ()
+
+Retrieve receipt verification keys
+
+Return the public receipt verification-key history for out-of-band-pinned verification.
+
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**ReceiptVerificationKeyHistory**](ReceiptVerificationKeyHistory.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful response for retrieve receipt verification keys. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

@@ -4,6 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**State** | **PaymentReadinessStateEnum** |  | [readonly]
+**AcceptingNewPayments** | **bool** |  | [readonly]
+**PausedByTenant** | **bool** |  | [readonly]
+**PlatformAvailable** | **bool** |  | [readonly]
+**HealthValidUntil** | **DateTimeOffset** |  | [readonly]
 **ObservedAt** | **DateTimeOffset** |  | [readonly]
 **TenantStatus** | **string** |  | [readonly]
 **TenantAcceptingNewChallenges** | **bool** |  | [readonly]
@@ -12,6 +17,7 @@ Name | Type | Description | Notes
 **ControlPlaneReadyForNewChallenges** | **bool** |  | [readonly]
 **ControlPlaneReadyForSettlement** | **bool** |  | [readonly]
 **Rails** | [**List&lt;PaymentReadinessRail&gt;**](PaymentReadinessRail.md) |  | [readonly]
+**CanonicalRails** | [**List&lt;CanonicalPaymentReadinessRail&gt;**](CanonicalPaymentReadinessRail.md) |  | [readonly]
 **ExternalOnboarding** | **Object** |  | [readonly]
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

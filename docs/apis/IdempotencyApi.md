@@ -4,13 +4,15 @@ All URIs are relative to *https://api.x402api.com*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**V1IdempotencyOutcomesRetrieve**](IdempotencyApi.md#v1idempotencyoutcomesretrieve) | **GET** /v1/idempotency-outcomes/{idempotency_key} |  |
+| [**IdempotencyGetOutcome**](IdempotencyApi.md#idempotencygetoutcome) | **GET** /v1/idempotency-outcomes/{idempotency_key} | Get an idempotency outcome |
 
-<a id="v1idempotencyoutcomesretrieve"></a>
-# **V1IdempotencyOutcomesRetrieve**
-> IdempotencyOutcome V1IdempotencyOutcomesRetrieve (string idempotencyKey)
+<a id="idempotencygetoutcome"></a>
+# **IdempotencyGetOutcome**
+> IdempotencyOutcome IdempotencyGetOutcome (string idempotencyKey)
 
+Get an idempotency outcome
 
+Return the authoritative tenant-scoped outcome for a durable mutation key.
 
 
 ### Parameters
@@ -36,6 +38,7 @@ All URIs are relative to *https://api.x402api.com*
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for get an idempotency outcome. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

@@ -4,13 +4,15 @@ All URIs are relative to *https://api.x402api.com*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**V1PaymentReadinessRetrieve**](AssetsAndPaymentControlsApi.md#v1paymentreadinessretrieve) | **GET** /v1/payment-readiness |  |
+| [**PaymentReadinessRetrieve**](AssetsAndPaymentControlsApi.md#paymentreadinessretrieve) | **GET** /v1/payment-readiness | Retrieve payment readiness |
 
-<a id="v1paymentreadinessretrieve"></a>
-# **V1PaymentReadinessRetrieve**
-> PaymentReadiness V1PaymentReadinessRetrieve ()
+<a id="paymentreadinessretrieve"></a>
+# **PaymentReadinessRetrieve**
+> PaymentReadiness PaymentReadinessRetrieve ()
 
+Retrieve payment readiness
 
+Return the tenant's current external-wallet payment-readiness projection.
 
 
 ### Parameters
@@ -32,6 +34,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** |  |  -  |
+| **200** | Successful response for retrieve payment readiness. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
