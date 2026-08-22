@@ -67,6 +67,8 @@ namespace X402Api.Client
             _jsonOptions.Converters.Add(new FeePolicyModeInputEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new FeePolicyQuoteCurrencyInputEnumJsonConverter());
             _jsonOptions.Converters.Add(new FeePolicyQuoteCurrencyInputEnumNullableJsonConverter());
+            _jsonOptions.Converters.Add(new GasModeEnumJsonConverter());
+            _jsonOptions.Converters.Add(new GasModeEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new HTTPMethodEnumJsonConverter());
             _jsonOptions.Converters.Add(new HTTPMethodEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new IdempotencyOutcomeJsonConverter());
@@ -182,6 +184,7 @@ namespace X402Api.Client
                 new FeePolicyDocumentSerializationContext(),
                 new FeePolicyModeInputEnumSerializationContext(),
                 new FeePolicyQuoteCurrencyInputEnumSerializationContext(),
+                new GasModeEnumSerializationContext(),
                 new HTTPMethodEnumSerializationContext(),
                 new IdempotencyOutcomeSerializationContext(),
                 new IdempotencyOutcomeStateEnumSerializationContext(),

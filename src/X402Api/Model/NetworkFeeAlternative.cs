@@ -43,6 +43,8 @@ namespace X402Api.Model
         /// <param name="quoteCurrency">quoteCurrency</param>
         /// <param name="listedAmountAtomic">listedAmountAtomic</param>
         /// <param name="feeAllowanceCapQuoteMicros">feeAllowanceCapQuoteMicros</param>
+        /// <param name="gasMode">gasMode</param>
+        /// <param name="maximumTenantGasReservationMicros">maximumTenantGasReservationMicros</param>
         /// <param name="feeAllowanceQuoteMicros">feeAllowanceQuoteMicros</param>
         /// <param name="feeAllowanceAtomic">feeAllowanceAtomic</param>
         /// <param name="buyerPaymentAtomic">buyerPaymentAtomic</param>
@@ -55,11 +57,12 @@ namespace X402Api.Model
         /// <param name="nativeDecimals">nativeDecimals</param>
         /// <param name="nativeUsdQuoteMicros">nativeUsdQuoteMicros</param>
         /// <param name="estimatedFeeQuoteMicros">estimatedFeeQuoteMicros</param>
+        /// <param name="buyerNativeFeeAtomic">buyerNativeFeeAtomic</param>
         /// <param name="providerDisagreementBps">providerDisagreementBps</param>
         /// <param name="quoteExpiresAt">quoteExpiresAt</param>
         /// <param name="exclusionReason">exclusionReason</param>
         [JsonConstructor]
-        public NetworkFeeAlternative(string type, int varVersion, string network, string assetId, string contractAddress, FeePolicyModeInputEnum feeMode, FeePolicyQuoteCurrencyInputEnum quoteCurrency, string listedAmountAtomic, string feeAllowanceCapQuoteMicros, string feeAllowanceQuoteMicros, string feeAllowanceAtomic, string buyerPaymentAtomic, string tenantProceedsAtomic, NetworkFeeEvidence feeEvidence, string feeEvidenceDigest, bool eligible, string? estimatedNativeFeeAtomic = default, string? nativeSymbol = default, int? nativeDecimals = default, string? nativeUsdQuoteMicros = default, string? estimatedFeeQuoteMicros = default, int? providerDisagreementBps = default, DateTimeOffset? quoteExpiresAt = default, string? exclusionReason = default)
+        public NetworkFeeAlternative(string type, int varVersion, string network, string assetId, string contractAddress, FeePolicyModeInputEnum feeMode, FeePolicyQuoteCurrencyInputEnum quoteCurrency, string listedAmountAtomic, string feeAllowanceCapQuoteMicros, GasModeEnum gasMode, string maximumTenantGasReservationMicros, string feeAllowanceQuoteMicros, string feeAllowanceAtomic, string buyerPaymentAtomic, string tenantProceedsAtomic, NetworkFeeEvidence feeEvidence, string feeEvidenceDigest, bool eligible, string? estimatedNativeFeeAtomic = default, string? nativeSymbol = default, int? nativeDecimals = default, string? nativeUsdQuoteMicros = default, string? estimatedFeeQuoteMicros = default, string? buyerNativeFeeAtomic = default, int? providerDisagreementBps = default, DateTimeOffset? quoteExpiresAt = default, string? exclusionReason = default)
         {
             Type = type;
             VarVersion = varVersion;
@@ -70,6 +73,8 @@ namespace X402Api.Model
             QuoteCurrency = quoteCurrency;
             ListedAmountAtomic = listedAmountAtomic;
             FeeAllowanceCapQuoteMicros = feeAllowanceCapQuoteMicros;
+            GasMode = gasMode;
+            MaximumTenantGasReservationMicros = maximumTenantGasReservationMicros;
             FeeAllowanceQuoteMicros = feeAllowanceQuoteMicros;
             FeeAllowanceAtomic = feeAllowanceAtomic;
             BuyerPaymentAtomic = buyerPaymentAtomic;
@@ -82,6 +87,7 @@ namespace X402Api.Model
             NativeDecimals = nativeDecimals;
             NativeUsdQuoteMicros = nativeUsdQuoteMicros;
             EstimatedFeeQuoteMicros = estimatedFeeQuoteMicros;
+            BuyerNativeFeeAtomic = buyerNativeFeeAtomic;
             ProviderDisagreementBps = providerDisagreementBps;
             QuoteExpiresAt = quoteExpiresAt;
             ExclusionReason = exclusionReason;
@@ -101,6 +107,12 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("quoteCurrency")]
         public FeePolicyQuoteCurrencyInputEnum QuoteCurrency { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GasMode
+        /// </summary>
+        [JsonPropertyName("gasMode")]
+        public GasModeEnum GasMode { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -143,6 +155,12 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("feeAllowanceCapQuoteMicros")]
         public string FeeAllowanceCapQuoteMicros { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MaximumTenantGasReservationMicros
+        /// </summary>
+        [JsonPropertyName("maximumTenantGasReservationMicros")]
+        public string MaximumTenantGasReservationMicros { get; set; }
 
         /// <summary>
         /// Gets or Sets FeeAllowanceQuoteMicros
@@ -217,6 +235,12 @@ namespace X402Api.Model
         public string? EstimatedFeeQuoteMicros { get; set; }
 
         /// <summary>
+        /// Gets or Sets BuyerNativeFeeAtomic
+        /// </summary>
+        [JsonPropertyName("buyerNativeFeeAtomic")]
+        public string? BuyerNativeFeeAtomic { get; set; }
+
+        /// <summary>
         /// Gets or Sets ProviderDisagreementBps
         /// </summary>
         [JsonPropertyName("providerDisagreementBps")]
@@ -257,6 +281,8 @@ namespace X402Api.Model
             sb.Append("  QuoteCurrency: ").Append(QuoteCurrency).Append("\n");
             sb.Append("  ListedAmountAtomic: ").Append(ListedAmountAtomic).Append("\n");
             sb.Append("  FeeAllowanceCapQuoteMicros: ").Append(FeeAllowanceCapQuoteMicros).Append("\n");
+            sb.Append("  GasMode: ").Append(GasMode).Append("\n");
+            sb.Append("  MaximumTenantGasReservationMicros: ").Append(MaximumTenantGasReservationMicros).Append("\n");
             sb.Append("  FeeAllowanceQuoteMicros: ").Append(FeeAllowanceQuoteMicros).Append("\n");
             sb.Append("  FeeAllowanceAtomic: ").Append(FeeAllowanceAtomic).Append("\n");
             sb.Append("  BuyerPaymentAtomic: ").Append(BuyerPaymentAtomic).Append("\n");
@@ -269,6 +295,7 @@ namespace X402Api.Model
             sb.Append("  NativeDecimals: ").Append(NativeDecimals).Append("\n");
             sb.Append("  NativeUsdQuoteMicros: ").Append(NativeUsdQuoteMicros).Append("\n");
             sb.Append("  EstimatedFeeQuoteMicros: ").Append(EstimatedFeeQuoteMicros).Append("\n");
+            sb.Append("  BuyerNativeFeeAtomic: ").Append(BuyerNativeFeeAtomic).Append("\n");
             sb.Append("  ProviderDisagreementBps: ").Append(ProviderDisagreementBps).Append("\n");
             sb.Append("  QuoteExpiresAt: ").Append(QuoteExpiresAt).Append("\n");
             sb.Append("  ExclusionReason: ").Append(ExclusionReason).Append("\n");
@@ -347,6 +374,22 @@ namespace X402Api.Model
                 if (!regexFeeAllowanceCapQuoteMicros.Match(this.FeeAllowanceCapQuoteMicros).Success)
                 {
                     yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FeeAllowanceCapQuoteMicros, must match a pattern of " + regexFeeAllowanceCapQuoteMicros, new [] { "FeeAllowanceCapQuoteMicros" });
+                }
+            }
+
+            // MaximumTenantGasReservationMicros (string) maxLength
+            if (this.MaximumTenantGasReservationMicros != null && this.MaximumTenantGasReservationMicros.Length > 78)
+            {
+                yield return new ValidationResult("Invalid value for MaximumTenantGasReservationMicros, length must be less than 78.", new [] { "MaximumTenantGasReservationMicros" });
+            }
+
+            if (this.MaximumTenantGasReservationMicros != null) {
+                // MaximumTenantGasReservationMicros (string) pattern
+                Regex regexMaximumTenantGasReservationMicros = new Regex(@"^(0|[1-9][0-9]*)$", RegexOptions.CultureInvariant);
+
+                if (!regexMaximumTenantGasReservationMicros.Match(this.MaximumTenantGasReservationMicros).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MaximumTenantGasReservationMicros, must match a pattern of " + regexMaximumTenantGasReservationMicros, new [] { "MaximumTenantGasReservationMicros" });
                 }
             }
 
@@ -496,6 +539,22 @@ namespace X402Api.Model
                 }
             }
 
+            // BuyerNativeFeeAtomic (string) maxLength
+            if (this.BuyerNativeFeeAtomic != null && this.BuyerNativeFeeAtomic.Length > 78)
+            {
+                yield return new ValidationResult("Invalid value for BuyerNativeFeeAtomic, length must be less than 78.", new [] { "BuyerNativeFeeAtomic" });
+            }
+
+            if (this.BuyerNativeFeeAtomic != null) {
+                // BuyerNativeFeeAtomic (string) pattern
+                Regex regexBuyerNativeFeeAtomic = new Regex(@"^(0|[1-9][0-9]*)$", RegexOptions.CultureInvariant);
+
+                if (this.BuyerNativeFeeAtomic != null && !regexBuyerNativeFeeAtomic.Match(this.BuyerNativeFeeAtomic).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BuyerNativeFeeAtomic, must match a pattern of " + regexBuyerNativeFeeAtomic, new [] { "BuyerNativeFeeAtomic" });
+                }
+            }
+
             // ProviderDisagreementBps (int) maximum
             if (this.ProviderDisagreementBps > (int)10000)
             {
@@ -564,6 +623,8 @@ namespace X402Api.Model
             Option<FeePolicyQuoteCurrencyInputEnum?> quoteCurrency = default;
             Option<string?> listedAmountAtomic = default;
             Option<string?> feeAllowanceCapQuoteMicros = default;
+            Option<GasModeEnum?> gasMode = default;
+            Option<string?> maximumTenantGasReservationMicros = default;
             Option<string?> feeAllowanceQuoteMicros = default;
             Option<string?> feeAllowanceAtomic = default;
             Option<string?> buyerPaymentAtomic = default;
@@ -576,6 +637,7 @@ namespace X402Api.Model
             Option<int?> nativeDecimals = default;
             Option<string?> nativeUsdQuoteMicros = default;
             Option<string?> estimatedFeeQuoteMicros = default;
+            Option<string?> buyerNativeFeeAtomic = default;
             Option<int?> providerDisagreementBps = default;
             Option<DateTimeOffset?> quoteExpiresAt = default;
             Option<string?> exclusionReason = default;
@@ -622,6 +684,12 @@ namespace X402Api.Model
                         case "feeAllowanceCapQuoteMicros":
                             feeAllowanceCapQuoteMicros = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "gasMode":
+                            gasMode = new Option<GasModeEnum?>(JsonSerializer.Deserialize<GasModeEnum?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "maximumTenantGasReservationMicros":
+                            maximumTenantGasReservationMicros = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "feeAllowanceQuoteMicros":
                             feeAllowanceQuoteMicros = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -657,6 +725,9 @@ namespace X402Api.Model
                             break;
                         case "estimatedFeeQuoteMicros":
                             estimatedFeeQuoteMicros = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "buyerNativeFeeAtomic":
+                            buyerNativeFeeAtomic = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "providerDisagreementBps":
                             providerDisagreementBps = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -700,6 +771,12 @@ namespace X402Api.Model
             if (!feeAllowanceCapQuoteMicros.IsSet)
                 throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(feeAllowanceCapQuoteMicros));
 
+            if (!gasMode.IsSet)
+                throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(gasMode));
+
+            if (!maximumTenantGasReservationMicros.IsSet)
+                throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(maximumTenantGasReservationMicros));
+
             if (!feeAllowanceQuoteMicros.IsSet)
                 throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(feeAllowanceQuoteMicros));
 
@@ -735,6 +812,9 @@ namespace X402Api.Model
 
             if (!estimatedFeeQuoteMicros.IsSet)
                 throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(estimatedFeeQuoteMicros));
+
+            if (!buyerNativeFeeAtomic.IsSet)
+                throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(buyerNativeFeeAtomic));
 
             if (!providerDisagreementBps.IsSet)
                 throw new ArgumentException("Property is required for class NetworkFeeAlternative.", nameof(providerDisagreementBps));
@@ -772,6 +852,12 @@ namespace X402Api.Model
             if (feeAllowanceCapQuoteMicros.IsSet && feeAllowanceCapQuoteMicros.Value == null)
                 throw new ArgumentNullException(nameof(feeAllowanceCapQuoteMicros), "Property is not nullable for class NetworkFeeAlternative.");
 
+            if (gasMode.IsSet && gasMode.Value == null)
+                throw new ArgumentNullException(nameof(gasMode), "Property is not nullable for class NetworkFeeAlternative.");
+
+            if (maximumTenantGasReservationMicros.IsSet && maximumTenantGasReservationMicros.Value == null)
+                throw new ArgumentNullException(nameof(maximumTenantGasReservationMicros), "Property is not nullable for class NetworkFeeAlternative.");
+
             if (feeAllowanceQuoteMicros.IsSet && feeAllowanceQuoteMicros.Value == null)
                 throw new ArgumentNullException(nameof(feeAllowanceQuoteMicros), "Property is not nullable for class NetworkFeeAlternative.");
 
@@ -793,7 +879,7 @@ namespace X402Api.Model
             if (eligible.IsSet && eligible.Value == null)
                 throw new ArgumentNullException(nameof(eligible), "Property is not nullable for class NetworkFeeAlternative.");
 
-            return new NetworkFeeAlternative(type.Value!, varVersion.Value!.Value!, network.Value!, assetId.Value!, contractAddress.Value!, feeMode.Value!.Value!, quoteCurrency.Value!.Value!, listedAmountAtomic.Value!, feeAllowanceCapQuoteMicros.Value!, feeAllowanceQuoteMicros.Value!, feeAllowanceAtomic.Value!, buyerPaymentAtomic.Value!, tenantProceedsAtomic.Value!, feeEvidence.Value!, feeEvidenceDigest.Value!, eligible.Value!.Value!, estimatedNativeFeeAtomic.Value!, nativeSymbol.Value!, nativeDecimals.Value!, nativeUsdQuoteMicros.Value!, estimatedFeeQuoteMicros.Value!, providerDisagreementBps.Value!, quoteExpiresAt.Value!, exclusionReason.Value!);
+            return new NetworkFeeAlternative(type.Value!, varVersion.Value!.Value!, network.Value!, assetId.Value!, contractAddress.Value!, feeMode.Value!.Value!, quoteCurrency.Value!.Value!, listedAmountAtomic.Value!, feeAllowanceCapQuoteMicros.Value!, gasMode.Value!.Value!, maximumTenantGasReservationMicros.Value!, feeAllowanceQuoteMicros.Value!, feeAllowanceAtomic.Value!, buyerPaymentAtomic.Value!, tenantProceedsAtomic.Value!, feeEvidence.Value!, feeEvidenceDigest.Value!, eligible.Value!.Value!, estimatedNativeFeeAtomic.Value!, nativeSymbol.Value!, nativeDecimals.Value!, nativeUsdQuoteMicros.Value!, estimatedFeeQuoteMicros.Value!, buyerNativeFeeAtomic.Value!, providerDisagreementBps.Value!, quoteExpiresAt.Value!, exclusionReason.Value!);
         }
 
         /// <summary>
@@ -838,6 +924,9 @@ namespace X402Api.Model
             if (networkFeeAlternative.FeeAllowanceCapQuoteMicros == null)
                 throw new ArgumentNullException(nameof(networkFeeAlternative.FeeAllowanceCapQuoteMicros), "Property is required for class NetworkFeeAlternative.");
 
+            if (networkFeeAlternative.MaximumTenantGasReservationMicros == null)
+                throw new ArgumentNullException(nameof(networkFeeAlternative.MaximumTenantGasReservationMicros), "Property is required for class NetworkFeeAlternative.");
+
             if (networkFeeAlternative.FeeAllowanceQuoteMicros == null)
                 throw new ArgumentNullException(nameof(networkFeeAlternative.FeeAllowanceQuoteMicros), "Property is required for class NetworkFeeAlternative.");
 
@@ -875,6 +964,11 @@ namespace X402Api.Model
             writer.WriteString("listedAmountAtomic", networkFeeAlternative.ListedAmountAtomic);
 
             writer.WriteString("feeAllowanceCapQuoteMicros", networkFeeAlternative.FeeAllowanceCapQuoteMicros);
+
+            var gasModeRawValue = GasModeEnumValueConverter.ToJsonValue(networkFeeAlternative.GasMode);
+            writer.WriteString("gasMode", gasModeRawValue);
+
+            writer.WriteString("maximumTenantGasReservationMicros", networkFeeAlternative.MaximumTenantGasReservationMicros);
 
             writer.WriteString("feeAllowanceQuoteMicros", networkFeeAlternative.FeeAllowanceQuoteMicros);
 
@@ -914,6 +1008,11 @@ namespace X402Api.Model
                 writer.WriteString("estimatedFeeQuoteMicros", networkFeeAlternative.EstimatedFeeQuoteMicros);
             else
                 writer.WriteNull("estimatedFeeQuoteMicros");
+
+            if (networkFeeAlternative.BuyerNativeFeeAtomic != null)
+                writer.WriteString("buyerNativeFeeAtomic", networkFeeAlternative.BuyerNativeFeeAtomic);
+            else
+                writer.WriteNull("buyerNativeFeeAtomic");
 
             if (networkFeeAlternative.ProviderDisagreementBps != null)
                 writer.WriteNumber("providerDisagreementBps", networkFeeAlternative.ProviderDisagreementBps.Value);

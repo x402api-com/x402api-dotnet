@@ -28,6 +28,7 @@ docs/models/ExternalReceivingAddressRotation.md
 docs/models/FeePolicyDocument.md
 docs/models/FeePolicyModeInputEnum.md
 docs/models/FeePolicyQuoteCurrencyInputEnum.md
+docs/models/GasModeEnum.md
 docs/models/HTTPMethodEnum.md
 docs/models/IdempotencyOutcome.md
 docs/models/IdempotencyOutcomeStateEnum.md
@@ -149,6 +150,7 @@ src/X402Api/Model/ExternalReceivingAddressRotation.cs
 src/X402Api/Model/FeePolicyDocument.cs
 src/X402Api/Model/FeePolicyModeInputEnum.cs
 src/X402Api/Model/FeePolicyQuoteCurrencyInputEnum.cs
+src/X402Api/Model/GasModeEnum.cs
 src/X402Api/Model/HTTPMethodEnum.cs
 src/X402Api/Model/IdempotencyOutcome.cs
 src/X402Api/Model/IdempotencyOutcomeStateEnum.cs

@@ -120,6 +120,8 @@ namespace X402Api.Client
                 return FeePolicyModeInputEnumValueConverter.ToJsonValue(feePolicyModeInputEnum);
             if (obj is FeePolicyQuoteCurrencyInputEnum feePolicyQuoteCurrencyInputEnum)
                 return FeePolicyQuoteCurrencyInputEnumValueConverter.ToJsonValue(feePolicyQuoteCurrencyInputEnum);
+            if (obj is GasModeEnum gasModeEnum)
+                return GasModeEnumValueConverter.ToJsonValue(gasModeEnum);
             if (obj is HTTPMethodEnum hTTPMethodEnum)
                 return HTTPMethodEnumValueConverter.ToJsonValue(hTTPMethodEnum);
             if (obj is IdempotencyOutcomeStateEnum idempotencyOutcomeStateEnum)

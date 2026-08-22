@@ -42,14 +42,20 @@ namespace X402Api.Model
         /// <param name="signingKeyVersion">signingKeyVersion</param>
         /// <param name="eligibleAlternatives">eligibleAlternatives</param>
         /// <param name="settlementAmountAtomic">settlementAmountAtomic</param>
+        /// <param name="gasMode">gasMode</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="receipt">receipt</param>
         /// <param name="feePolicy">feePolicy</param>
         /// <param name="feeEvidence">feeEvidence</param>
         /// <param name="feeQuoteDigest">feeQuoteDigest</param>
         /// <param name="feeQuoteExpiresAt">feeQuoteExpiresAt</param>
+        /// <param name="buyerNativeFeeAtomic">buyerNativeFeeAtomic</param>
+        /// <param name="sponsoredNativeFeeAtomic">sponsoredNativeFeeAtomic</param>
+        /// <param name="sponsoredNativeSymbol">sponsoredNativeSymbol</param>
+        /// <param name="tenantGasChargeMicros">tenantGasChargeMicros</param>
+        /// <param name="gasSponsorshipEvidenceDigest">gasSponsorshipEvidenceDigest</param>
         [JsonConstructor]
-        internal PaymentReceipt(Guid id, Guid orderId, Guid settlementJobId, string receiptDigest, string signature, string signingKeyVersion, List<NetworkFeeAlternative> eligibleAlternatives, string settlementAmountAtomic, DateTimeOffset createdAt, Object? receipt = default, FeePolicyDocument? feePolicy = default, NetworkFeeEvidence? feeEvidence = default, string? feeQuoteDigest = default, DateTimeOffset? feeQuoteExpiresAt = default)
+        internal PaymentReceipt(Guid id, Guid orderId, Guid settlementJobId, string receiptDigest, string signature, string signingKeyVersion, List<NetworkFeeAlternative> eligibleAlternatives, string settlementAmountAtomic, string gasMode, DateTimeOffset createdAt, Object? receipt = default, FeePolicyDocument? feePolicy = default, NetworkFeeEvidence? feeEvidence = default, string? feeQuoteDigest = default, DateTimeOffset? feeQuoteExpiresAt = default, string? buyerNativeFeeAtomic = default, string? sponsoredNativeFeeAtomic = default, string? sponsoredNativeSymbol = default, string? tenantGasChargeMicros = default, string? gasSponsorshipEvidenceDigest = default)
         {
             Id = id;
             OrderId = orderId;
@@ -59,12 +65,18 @@ namespace X402Api.Model
             SigningKeyVersion = signingKeyVersion;
             EligibleAlternatives = eligibleAlternatives;
             SettlementAmountAtomic = settlementAmountAtomic;
+            GasMode = gasMode;
             CreatedAt = createdAt;
             Receipt = receipt;
             FeePolicy = feePolicy;
             FeeEvidence = feeEvidence;
             FeeQuoteDigest = feeQuoteDigest;
             FeeQuoteExpiresAt = feeQuoteExpiresAt;
+            BuyerNativeFeeAtomic = buyerNativeFeeAtomic;
+            SponsoredNativeFeeAtomic = sponsoredNativeFeeAtomic;
+            SponsoredNativeSymbol = sponsoredNativeSymbol;
+            TenantGasChargeMicros = tenantGasChargeMicros;
+            GasSponsorshipEvidenceDigest = gasSponsorshipEvidenceDigest;
             OnCreated();
         }
 
@@ -119,6 +131,12 @@ namespace X402Api.Model
         public string SettlementAmountAtomic { get; }
 
         /// <summary>
+        /// Gets or Sets GasMode
+        /// </summary>
+        [JsonPropertyName("gas_mode")]
+        public string GasMode { get; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [JsonPropertyName("created_at")]
@@ -155,6 +173,36 @@ namespace X402Api.Model
         public DateTimeOffset? FeeQuoteExpiresAt { get; }
 
         /// <summary>
+        /// Gets or Sets BuyerNativeFeeAtomic
+        /// </summary>
+        [JsonPropertyName("buyer_native_fee_atomic")]
+        public string? BuyerNativeFeeAtomic { get; }
+
+        /// <summary>
+        /// Gets or Sets SponsoredNativeFeeAtomic
+        /// </summary>
+        [JsonPropertyName("sponsored_native_fee_atomic")]
+        public string? SponsoredNativeFeeAtomic { get; }
+
+        /// <summary>
+        /// Gets or Sets SponsoredNativeSymbol
+        /// </summary>
+        [JsonPropertyName("sponsored_native_symbol")]
+        public string? SponsoredNativeSymbol { get; }
+
+        /// <summary>
+        /// Gets or Sets TenantGasChargeMicros
+        /// </summary>
+        [JsonPropertyName("tenant_gas_charge_micros")]
+        public string? TenantGasChargeMicros { get; }
+
+        /// <summary>
+        /// Gets or Sets GasSponsorshipEvidenceDigest
+        /// </summary>
+        [JsonPropertyName("gas_sponsorship_evidence_digest")]
+        public string? GasSponsorshipEvidenceDigest { get; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -176,12 +224,18 @@ namespace X402Api.Model
             sb.Append("  SigningKeyVersion: ").Append(SigningKeyVersion).Append("\n");
             sb.Append("  EligibleAlternatives: ").Append(EligibleAlternatives).Append("\n");
             sb.Append("  SettlementAmountAtomic: ").Append(SettlementAmountAtomic).Append("\n");
+            sb.Append("  GasMode: ").Append(GasMode).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Receipt: ").Append(Receipt).Append("\n");
             sb.Append("  FeePolicy: ").Append(FeePolicy).Append("\n");
             sb.Append("  FeeEvidence: ").Append(FeeEvidence).Append("\n");
             sb.Append("  FeeQuoteDigest: ").Append(FeeQuoteDigest).Append("\n");
             sb.Append("  FeeQuoteExpiresAt: ").Append(FeeQuoteExpiresAt).Append("\n");
+            sb.Append("  BuyerNativeFeeAtomic: ").Append(BuyerNativeFeeAtomic).Append("\n");
+            sb.Append("  SponsoredNativeFeeAtomic: ").Append(SponsoredNativeFeeAtomic).Append("\n");
+            sb.Append("  SponsoredNativeSymbol: ").Append(SponsoredNativeSymbol).Append("\n");
+            sb.Append("  TenantGasChargeMicros: ").Append(TenantGasChargeMicros).Append("\n");
+            sb.Append("  GasSponsorshipEvidenceDigest: ").Append(GasSponsorshipEvidenceDigest).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -248,12 +302,18 @@ namespace X402Api.Model
             Option<string?> signingKeyVersion = default;
             Option<List<NetworkFeeAlternative>?> eligibleAlternatives = default;
             Option<string?> settlementAmountAtomic = default;
+            Option<string?> gasMode = default;
             Option<DateTimeOffset?> createdAt = default;
             Option<Object?> receipt = default;
             Option<FeePolicyDocument?> feePolicy = default;
             Option<NetworkFeeEvidence?> feeEvidence = default;
             Option<string?> feeQuoteDigest = default;
             Option<DateTimeOffset?> feeQuoteExpiresAt = default;
+            Option<string?> buyerNativeFeeAtomic = default;
+            Option<string?> sponsoredNativeFeeAtomic = default;
+            Option<string?> sponsoredNativeSymbol = default;
+            Option<string?> tenantGasChargeMicros = default;
+            Option<string?> gasSponsorshipEvidenceDigest = default;
 
             while (utf8JsonReader.Read())
             {
@@ -294,6 +354,9 @@ namespace X402Api.Model
                         case "settlement_amount_atomic":
                             settlementAmountAtomic = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "gas_mode":
+                            gasMode = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "created_at":
                             createdAt = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -311,6 +374,21 @@ namespace X402Api.Model
                             break;
                         case "fee_quote_expires_at":
                             feeQuoteExpiresAt = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "buyer_native_fee_atomic":
+                            buyerNativeFeeAtomic = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "sponsored_native_fee_atomic":
+                            sponsoredNativeFeeAtomic = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "sponsored_native_symbol":
+                            sponsoredNativeSymbol = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "tenant_gas_charge_micros":
+                            tenantGasChargeMicros = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "gas_sponsorship_evidence_digest":
+                            gasSponsorshipEvidenceDigest = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -342,6 +420,9 @@ namespace X402Api.Model
             if (!settlementAmountAtomic.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(settlementAmountAtomic));
 
+            if (!gasMode.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(gasMode));
+
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(createdAt));
 
@@ -359,6 +440,21 @@ namespace X402Api.Model
 
             if (!feeQuoteExpiresAt.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(feeQuoteExpiresAt));
+
+            if (!buyerNativeFeeAtomic.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(buyerNativeFeeAtomic));
+
+            if (!sponsoredNativeFeeAtomic.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(sponsoredNativeFeeAtomic));
+
+            if (!sponsoredNativeSymbol.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(sponsoredNativeSymbol));
+
+            if (!tenantGasChargeMicros.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(tenantGasChargeMicros));
+
+            if (!gasSponsorshipEvidenceDigest.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReceipt.", nameof(gasSponsorshipEvidenceDigest));
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class PaymentReceipt.");
@@ -384,10 +480,13 @@ namespace X402Api.Model
             if (settlementAmountAtomic.IsSet && settlementAmountAtomic.Value == null)
                 throw new ArgumentNullException(nameof(settlementAmountAtomic), "Property is not nullable for class PaymentReceipt.");
 
+            if (gasMode.IsSet && gasMode.Value == null)
+                throw new ArgumentNullException(nameof(gasMode), "Property is not nullable for class PaymentReceipt.");
+
             if (createdAt.IsSet && createdAt.Value == null)
                 throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class PaymentReceipt.");
 
-            return new PaymentReceipt(id.Value!.Value!, orderId.Value!.Value!, settlementJobId.Value!.Value!, receiptDigest.Value!, signature.Value!, signingKeyVersion.Value!, eligibleAlternatives.Value!, settlementAmountAtomic.Value!, createdAt.Value!.Value!, receipt.Value!, feePolicy.Value!, feeEvidence.Value!, feeQuoteDigest.Value!, feeQuoteExpiresAt.Value!);
+            return new PaymentReceipt(id.Value!.Value!, orderId.Value!.Value!, settlementJobId.Value!.Value!, receiptDigest.Value!, signature.Value!, signingKeyVersion.Value!, eligibleAlternatives.Value!, settlementAmountAtomic.Value!, gasMode.Value!, createdAt.Value!.Value!, receipt.Value!, feePolicy.Value!, feeEvidence.Value!, feeQuoteDigest.Value!, feeQuoteExpiresAt.Value!, buyerNativeFeeAtomic.Value!, sponsoredNativeFeeAtomic.Value!, sponsoredNativeSymbol.Value!, tenantGasChargeMicros.Value!, gasSponsorshipEvidenceDigest.Value!);
         }
 
         /// <summary>
@@ -429,6 +528,9 @@ namespace X402Api.Model
             if (paymentReceipt.SettlementAmountAtomic == null)
                 throw new ArgumentNullException(nameof(paymentReceipt.SettlementAmountAtomic), "Property is required for class PaymentReceipt.");
 
+            if (paymentReceipt.GasMode == null)
+                throw new ArgumentNullException(nameof(paymentReceipt.GasMode), "Property is required for class PaymentReceipt.");
+
             writer.WriteString("id", paymentReceipt.Id);
 
             writer.WriteString("order_id", paymentReceipt.OrderId);
@@ -444,6 +546,8 @@ namespace X402Api.Model
             writer.WritePropertyName("eligible_alternatives");
             JsonSerializer.Serialize(writer, paymentReceipt.EligibleAlternatives, jsonSerializerOptions);
             writer.WriteString("settlement_amount_atomic", paymentReceipt.SettlementAmountAtomic);
+
+            writer.WriteString("gas_mode", paymentReceipt.GasMode);
 
             writer.WriteString("created_at", paymentReceipt.CreatedAt.ToString(CreatedAtFormat));
 
@@ -477,6 +581,31 @@ namespace X402Api.Model
                 writer.WriteString("fee_quote_expires_at", paymentReceipt.FeeQuoteExpiresAt.Value.ToString(FeeQuoteExpiresAtFormat));
             else
                 writer.WriteNull("fee_quote_expires_at");
+
+            if (paymentReceipt.BuyerNativeFeeAtomic != null)
+                writer.WriteString("buyer_native_fee_atomic", paymentReceipt.BuyerNativeFeeAtomic);
+            else
+                writer.WriteNull("buyer_native_fee_atomic");
+
+            if (paymentReceipt.SponsoredNativeFeeAtomic != null)
+                writer.WriteString("sponsored_native_fee_atomic", paymentReceipt.SponsoredNativeFeeAtomic);
+            else
+                writer.WriteNull("sponsored_native_fee_atomic");
+
+            if (paymentReceipt.SponsoredNativeSymbol != null)
+                writer.WriteString("sponsored_native_symbol", paymentReceipt.SponsoredNativeSymbol);
+            else
+                writer.WriteNull("sponsored_native_symbol");
+
+            if (paymentReceipt.TenantGasChargeMicros != null)
+                writer.WriteString("tenant_gas_charge_micros", paymentReceipt.TenantGasChargeMicros);
+            else
+                writer.WriteNull("tenant_gas_charge_micros");
+
+            if (paymentReceipt.GasSponsorshipEvidenceDigest != null)
+                writer.WriteString("gas_sponsorship_evidence_digest", paymentReceipt.GasSponsorshipEvidenceDigest);
+            else
+                writer.WriteNull("gas_sponsorship_evidence_digest");
         }
     }
 

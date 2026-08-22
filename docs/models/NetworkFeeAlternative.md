@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **QuoteCurrency** | **FeePolicyQuoteCurrencyInputEnum** |  |
 **ListedAmountAtomic** | **string** |  |
 **FeeAllowanceCapQuoteMicros** | **string** |  |
+**GasMode** | **GasModeEnum** |  |
+**MaximumTenantGasReservationMicros** | **string** |  |
 **FeeAllowanceQuoteMicros** | **string** |  |
 **FeeAllowanceAtomic** | **string** |  |
 **BuyerPaymentAtomic** | **string** |  |
@@ -25,6 +27,7 @@ Name | Type | Description | Notes
 **NativeDecimals** | **int** |  |
 **NativeUsdQuoteMicros** | **string** |  |
 **EstimatedFeeQuoteMicros** | **string** |  |
+**BuyerNativeFeeAtomic** | **string** |  |
 **ProviderDisagreementBps** | **int** |  |
 **QuoteExpiresAt** | **DateTimeOffset** |  |
 **ExclusionReason** | **string** |  |
