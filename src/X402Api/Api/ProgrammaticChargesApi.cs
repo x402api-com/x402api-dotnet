@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Create a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Create one idempotent dynamic charge with immutable x402 payment terms.
+        /// Create one idempotent dynamic charge with immutable x402 payment terms. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -55,7 +55,7 @@ namespace X402Api.Api
         /// Create a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Create one idempotent dynamic charge with immutable x402 payment terms.
+        /// Create one idempotent dynamic charge with immutable x402 payment terms. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </remarks>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="dynamicChargeCreate"></param>
@@ -67,7 +67,7 @@ namespace X402Api.Api
         /// Retrieve a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Retrieve the frozen terms and current projected status of a tenant charge.
+        /// Retrieve the frozen terms and current projected status of a tenant charge. Requires a tenant API key with the &#x60;commerce:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>
@@ -79,7 +79,7 @@ namespace X402Api.Api
         /// Retrieve a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Retrieve the frozen terms and current projected status of a tenant charge.
+        /// Retrieve the frozen terms and current projected status of a tenant charge. Requires a tenant API key with the &#x60;commerce:read&#x60; scope.
         /// </remarks>
         /// <param name="chargeId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -296,7 +296,7 @@ namespace X402Api.Api
         partial void OnErrorChargesCreate(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, DynamicChargeCreate dynamicChargeCreate);
 
         /// <summary>
-        /// Create a programmatic charge Create one idempotent dynamic charge with immutable x402 payment terms.
+        /// Create a programmatic charge Create one idempotent dynamic charge with immutable x402 payment terms. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </summary>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="dynamicChargeCreate"></param>
@@ -315,7 +315,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Create a programmatic charge Create one idempotent dynamic charge with immutable x402 payment terms.
+        /// Create a programmatic charge Create one idempotent dynamic charge with immutable x402 payment terms. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -675,7 +675,7 @@ namespace X402Api.Api
         partial void OnErrorChargesRetrieve(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid chargeId);
 
         /// <summary>
-        /// Retrieve a programmatic charge Retrieve the frozen terms and current projected status of a tenant charge.
+        /// Retrieve a programmatic charge Retrieve the frozen terms and current projected status of a tenant charge. Requires a tenant API key with the &#x60;commerce:read&#x60; scope.
         /// </summary>
         /// <param name="chargeId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -693,7 +693,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve a programmatic charge Retrieve the frozen terms and current projected status of a tenant charge.
+        /// Retrieve a programmatic charge Retrieve the frozen terms and current projected status of a tenant charge. Requires a tenant API key with the &#x60;commerce:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chargeId"></param>

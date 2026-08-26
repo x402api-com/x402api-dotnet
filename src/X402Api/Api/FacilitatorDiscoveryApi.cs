@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Get supported facilitator profiles
         /// </summary>
         /// <remarks>
-        /// Return the currently approved public x402 facilitator profiles.
+        /// Return the currently approved public x402 facilitator profiles. Public endpoint; no API key or scope is required.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -53,7 +53,7 @@ namespace X402Api.Api
         /// Get supported facilitator profiles
         /// </summary>
         /// <remarks>
-        /// Return the currently approved public x402 facilitator profiles.
+        /// Return the currently approved public x402 facilitator profiles. Public endpoint; no API key or scope is required.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IFacilitatorGetSupportedApiResponse"/>?&gt;</returns>
@@ -188,7 +188,7 @@ namespace X402Api.Api
         partial void OnErrorFacilitatorGetSupported(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Get supported facilitator profiles Return the currently approved public x402 facilitator profiles.
+        /// Get supported facilitator profiles Return the currently approved public x402 facilitator profiles. Public endpoint; no API key or scope is required.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IFacilitatorGetSupportedApiResponse"/>&gt;</returns>
@@ -205,7 +205,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Get supported facilitator profiles Return the currently approved public x402 facilitator profiles.
+        /// Get supported facilitator profiles Return the currently approved public x402 facilitator profiles. Public endpoint; no API key or scope is required.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

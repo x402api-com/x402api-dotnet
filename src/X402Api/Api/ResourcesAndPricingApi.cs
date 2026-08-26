@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Create a network-fee quote
         /// </summary>
         /// <remarks>
-        /// Preview bounded network fees for the requested resource prices and rails.
+        /// Preview bounded network fees for the requested resource prices and rails. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="networkFeePreview"></param>
@@ -54,7 +54,7 @@ namespace X402Api.Api
         /// Create a network-fee quote
         /// </summary>
         /// <remarks>
-        /// Preview bounded network fees for the requested resource prices and rails.
+        /// Preview bounded network fees for the requested resource prices and rails. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <param name="networkFeePreview"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -62,39 +62,10 @@ namespace X402Api.Api
         Task<INetworkFeesCreateQuoteApiResponse?> NetworkFeesCreateQuoteOrDefaultAsync(NetworkFeePreview networkFeePreview, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Activate a resource version
-        /// </summary>
-        /// <remarks>
-        /// Activate one immutable resource version idempotently.
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesActivateVersionApiResponse"/>&gt;</returns>
-        Task<IResourcesActivateVersionApiResponse> ResourcesActivateVersionAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Activate a resource version
-        /// </summary>
-        /// <remarks>
-        /// Activate one immutable resource version idempotently.
-        /// </remarks>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesActivateVersionApiResponse"/>?&gt;</returns>
-        Task<IResourcesActivateVersionApiResponse?> ResourcesActivateVersionOrDefaultAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
         /// Create a resource
         /// </summary>
         /// <remarks>
-        /// Create one tenant resource idempotently.
+        /// Create one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -107,7 +78,7 @@ namespace X402Api.Api
         /// Create a resource
         /// </summary>
         /// <remarks>
-        /// Create one tenant resource idempotently.
+        /// Create one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </remarks>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="resourceCreate"></param>
@@ -119,7 +90,7 @@ namespace X402Api.Api
         /// Create a resource version
         /// </summary>
         /// <remarks>
-        /// Create an immutable priced version of one tenant resource idempotently.
+        /// Create an immutable priced version of one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -133,7 +104,7 @@ namespace X402Api.Api
         /// Create a resource version
         /// </summary>
         /// <remarks>
-        /// Create an immutable priced version of one tenant resource idempotently.
+        /// Create an immutable priced version of one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </remarks>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="resourceId"></param>
@@ -146,7 +117,7 @@ namespace X402Api.Api
         /// List resources
         /// </summary>
         /// <remarks>
-        /// List tenant resources and their visible versions using opaque cursor pagination.
+        /// List tenant resources and their visible versions using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -159,7 +130,7 @@ namespace X402Api.Api
         /// List resources
         /// </summary>
         /// <remarks>
-        /// List tenant resources and their visible versions using opaque cursor pagination.
+        /// List tenant resources and their visible versions using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -171,7 +142,7 @@ namespace X402Api.Api
         /// List resource versions
         /// </summary>
         /// <remarks>
-        /// List immutable versions of one tenant resource using opaque cursor pagination.
+        /// List immutable versions of one tenant resource using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="resourceId"></param>
@@ -185,7 +156,7 @@ namespace X402Api.Api
         /// List resource versions
         /// </summary>
         /// <remarks>
-        /// List immutable versions of one tenant resource using opaque cursor pagination.
+        /// List immutable versions of one tenant resource using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </remarks>
         /// <param name="resourceId"></param>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -193,35 +164,6 @@ namespace X402Api.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IResourcesListVersionsApiResponse"/>?&gt;</returns>
         Task<IResourcesListVersionsApiResponse?> ResourcesListVersionsOrDefaultAsync(Guid resourceId, Option<string> cursor = default, Option<int> pageSize = default, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Retire a resource version
-        /// </summary>
-        /// <remarks>
-        /// Retire one immutable resource version idempotently.
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesRetireVersionApiResponse"/>&gt;</returns>
-        Task<IResourcesRetireVersionApiResponse> ResourcesRetireVersionAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Retire a resource version
-        /// </summary>
-        /// <remarks>
-        /// Retire one immutable resource version idempotently.
-        /// </remarks>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesRetireVersionApiResponse"/>?&gt;</returns>
-        Task<IResourcesRetireVersionApiResponse?> ResourcesRetireVersionOrDefaultAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -234,30 +176,6 @@ namespace X402Api.Api
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is the default response type
-        /// </summary>
-        /// <returns></returns>
-        bool IsDefault { get; }
-    }
-
-    /// <summary>
-    /// The <see cref="IResourcesActivateVersionApiResponse"/>
-    /// </summary>
-    public interface IResourcesActivateVersionApiResponse : X402Api.Client.IApiResponse, IOk<X402Api.Model.ResourceVersion?>, IConflict<X402Api.Model.ApiErrorEnvelope?>, IDefault<X402Api.Model.ApiErrorEnvelope?>
-    {
-        /// <summary>
-        /// Returns true if the response is 200 Ok
-        /// </summary>
-        /// <returns></returns>
-        bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 409 Conflict
-        /// </summary>
-        /// <returns></returns>
-        bool IsConflict { get; }
 
         /// <summary>
         /// Returns true if the response is the default response type
@@ -345,30 +263,6 @@ namespace X402Api.Api
     }
 
     /// <summary>
-    /// The <see cref="IResourcesRetireVersionApiResponse"/>
-    /// </summary>
-    public interface IResourcesRetireVersionApiResponse : X402Api.Client.IApiResponse, IOk<X402Api.Model.ResourceVersion?>, IConflict<X402Api.Model.ApiErrorEnvelope?>, IDefault<X402Api.Model.ApiErrorEnvelope?>
-    {
-        /// <summary>
-        /// Returns true if the response is 200 Ok
-        /// </summary>
-        /// <returns></returns>
-        bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 409 Conflict
-        /// </summary>
-        /// <returns></returns>
-        bool IsConflict { get; }
-
-        /// <summary>
-        /// Returns true if the response is the default response type
-        /// </summary>
-        /// <returns></returns>
-        bool IsDefault { get; }
-    }
-
-    /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
     public class ResourcesAndPricingApiEvents
@@ -391,26 +285,6 @@ namespace X402Api.Api
         internal void ExecuteOnErrorNetworkFeesCreateQuote(Exception exception)
         {
             OnErrorNetworkFeesCreateQuote?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnResourcesActivateVersion;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorResourcesActivateVersion;
-
-        internal void ExecuteOnResourcesActivateVersion(ResourcesAndPricingApi.ResourcesActivateVersionApiResponse apiResponse)
-        {
-            OnResourcesActivateVersion?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorResourcesActivateVersion(Exception exception)
-        {
-            OnErrorResourcesActivateVersion?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -491,26 +365,6 @@ namespace X402Api.Api
         internal void ExecuteOnErrorResourcesListVersions(Exception exception)
         {
             OnErrorResourcesListVersions?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnResourcesRetireVersion;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorResourcesRetireVersion;
-
-        internal void ExecuteOnResourcesRetireVersion(ResourcesAndPricingApi.ResourcesRetireVersionApiResponse apiResponse)
-        {
-            OnResourcesRetireVersion?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorResourcesRetireVersion(Exception exception)
-        {
-            OnErrorResourcesRetireVersion?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -615,7 +469,7 @@ namespace X402Api.Api
         partial void OnErrorNetworkFeesCreateQuote(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, NetworkFeePreview networkFeePreview);
 
         /// <summary>
-        /// Create a network-fee quote Preview bounded network fees for the requested resource prices and rails.
+        /// Create a network-fee quote Preview bounded network fees for the requested resource prices and rails. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <param name="networkFeePreview"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -633,7 +487,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Create a network-fee quote Preview bounded network fees for the requested resource prices and rails.
+        /// Create a network-fee quote Preview bounded network fees for the requested resource prices and rails. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="networkFeePreview"></param>
@@ -857,380 +711,6 @@ namespace X402Api.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatResourcesActivateVersion(ref string idempotencyKey, ref Guid resourceId, ref Guid versionId, ResourceVersionActivate resourceVersionActivate);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceVersionActivate"></param>
-        /// <returns></returns>
-        private void ValidateResourcesActivateVersion(string idempotencyKey, ResourceVersionActivate resourceVersionActivate)
-        {
-            if (idempotencyKey == null)
-                throw new ArgumentNullException(nameof(idempotencyKey));
-
-            if (resourceVersionActivate == null)
-                throw new ArgumentNullException(nameof(resourceVersionActivate));
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        private void AfterResourcesActivateVersionDefaultImplementation(IResourcesActivateVersionApiResponse apiResponseLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate)
-        {
-            bool suppressDefaultLog = false;
-            AfterResourcesActivateVersion(ref suppressDefaultLog, apiResponseLocalVar, idempotencyKey, resourceId, versionId, resourceVersionActivate);
-            if (!suppressDefaultLog)
-                Logger.LogInformation(RestLogEvents.ApiRequestCompleted, "{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        partial void AfterResourcesActivateVersion(ref bool suppressDefaultLog, IResourcesActivateVersionApiResponse apiResponseLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        private void OnErrorResourcesActivateVersionDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate)
-        {
-            bool suppressDefaultLogLocalVar = false;
-            OnErrorResourcesActivateVersion(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idempotencyKey, resourceId, versionId, resourceVersionActivate);
-            if (!suppressDefaultLogLocalVar)
-                Logger.LogError(RestLogEvents.ApiRequestFailed, exceptionLocalVar, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLogLocalVar"></param>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        partial void OnErrorResourcesActivateVersion(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate);
-
-        /// <summary>
-        /// Activate a resource version Activate one immutable resource version idempotently.
-        /// </summary>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesActivateVersionApiResponse"/>&gt;</returns>
-        public async Task<IResourcesActivateVersionApiResponse?> ResourcesActivateVersionOrDefaultAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate, System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await ResourcesActivateVersionAsync(idempotencyKey, resourceId, versionId, resourceVersionActivate, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Activate a resource version Activate one immutable resource version idempotently.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionActivate"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesActivateVersionApiResponse"/>&gt;</returns>
-        public async Task<IResourcesActivateVersionApiResponse> ResourcesActivateVersionAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionActivate resourceVersionActivate, System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                ValidateResourcesActivateVersion(idempotencyKey, resourceVersionActivate);
-
-                FormatResourcesActivateVersion(ref idempotencyKey, ref resourceId, ref versionId, resourceVersionActivate);
-
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
-                        ? "/v1/resources/{resource_id}/versions/{version_id}/activate"
-                        : string.Concat(HttpClient.BaseAddress.AbsolutePath.TrimEnd('/'), "/v1/resources/{resource_id}/versions/{version_id}/activate");
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bresource_id%7D", Uri.EscapeDataString(resourceId.ToString()));
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bversion_id%7D", Uri.EscapeDataString(versionId.ToString()));
-
-                    httpRequestMessageLocalVar.Content = (resourceVersionActivate as object) is X402Api.Client.FileParameter fileParameterLocalVar
-                        ? httpRequestMessageLocalVar.Content = new StreamContent(fileParameterLocalVar.Content)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(resourceVersionActivate, _jsonSerializerOptions));
-
-                    // Set client side default value of Header Param "Idempotency-Key".
-                    if (ClientUtils.IsContentHeader("Idempotency-Key"))
-                    {
-                        httpRequestMessageLocalVar.Content?.Headers.Add("Idempotency-Key", ClientUtils.ParameterToString(idempotencyKey));
-                    }
-                    else
-                    {
-                        httpRequestMessageLocalVar.Headers.Add("Idempotency-Key", ClientUtils.ParameterToString(idempotencyKey));
-                    }
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
-
-                    string[] contentTypes = new string[] {
-                        "application/json"
-                    };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
-
-                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        ResourcesActivateVersionApiResponse apiResponseLocalVar;
-
-                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
-                            default: {
-                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                                apiResponseLocalVar = new(Logger, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/resources/{resource_id}/versions/{version_id}/activate", requestedAtLocalVar, _jsonSerializerOptions);
-
-                                break;
-                            }
-                        }
-
-                        AfterResourcesActivateVersionDefaultImplementation(apiResponseLocalVar, idempotencyKey, resourceId, versionId, resourceVersionActivate);
-
-                        Events.ExecuteOnResourcesActivateVersion(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorResourcesActivateVersionDefaultImplementation(e, "/v1/resources/{resource_id}/versions/{version_id}/activate", uriBuilderLocalVar.Path, idempotencyKey, resourceId, versionId, resourceVersionActivate);
-                Events.ExecuteOnErrorResourcesActivateVersion(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="ResourcesActivateVersionApiResponse"/>
-        /// </summary>
-        public partial class ResourcesActivateVersionApiResponse : X402Api.Client.ApiResponse, IResourcesActivateVersionApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<ResourcesAndPricingApi> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="ResourcesActivateVersionApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public ResourcesActivateVersionApiResponse(ILogger<ResourcesAndPricingApi> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            /// <summary>
-            /// The <see cref="ResourcesActivateVersionApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="contentStream"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public ResourcesActivateVersionApiResponse(ILogger<ResourcesAndPricingApi> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ResourceVersion? Ok()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ResourceVersion>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out X402Api.Model.ResourceVersion? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Ok();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 409 Conflict
-            /// </summary>
-            /// <returns></returns>
-            public bool IsConflict => 409 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 409 Conflict
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ApiErrorEnvelope? Conflict()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsConflict
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ApiErrorEnvelope>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 409 Conflict and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryConflict([NotNullWhen(true)]out X402Api.Model.ApiErrorEnvelope? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Conflict();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)409);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is the default response type
-            /// </summary>
-            /// <returns></returns>
-            public bool IsDefault => !IsOk && !IsConflict;
-
-            /// <summary>
-            /// Deserializes the response if the response is 0 Default
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ApiErrorEnvelope? Default()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsDefault
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ApiErrorEnvelope>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 0 Default and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryDefault([NotNullWhen(true)]out X402Api.Model.ApiErrorEnvelope? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Default();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)0);
-                }
-
-                return result != null;
-            }
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(RestLogEvents.ApiDeserializationFailed, exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
-        }
-
         partial void FormatResourcesCreate(ref string idempotencyKey, ResourceCreate resourceCreate);
 
         /// <summary>
@@ -1299,7 +779,7 @@ namespace X402Api.Api
         partial void OnErrorResourcesCreate(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, ResourceCreate resourceCreate);
 
         /// <summary>
-        /// Create a resource Create one tenant resource idempotently.
+        /// Create a resource Create one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </summary>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="resourceCreate"></param>
@@ -1318,7 +798,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Create a resource Create one tenant resource idempotently.
+        /// Create a resource Create one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -1625,7 +1105,7 @@ namespace X402Api.Api
         partial void OnErrorResourcesCreateVersion(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, Guid resourceId, ResourceVersionCreate resourceVersionCreate);
 
         /// <summary>
-        /// Create a resource version Create an immutable priced version of one tenant resource idempotently.
+        /// Create a resource version Create an immutable priced version of one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </summary>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="resourceId"></param>
@@ -1645,7 +1125,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Create a resource version Create an immutable priced version of one tenant resource idempotently.
+        /// Create a resource version Create an immutable priced version of one tenant resource idempotently. Requires a tenant API key with the &#x60;resources:write&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -1984,7 +1464,7 @@ namespace X402Api.Api
         partial void OnErrorResourcesList(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<string> cursor, Option<int> pageSize);
 
         /// <summary>
-        /// List resources List tenant resources and their visible versions using opaque cursor pagination.
+        /// List resources List tenant resources and their visible versions using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -2003,7 +1483,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// List resources List tenant resources and their visible versions using opaque cursor pagination.
+        /// List resources List tenant resources and their visible versions using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -2293,7 +1773,7 @@ namespace X402Api.Api
         partial void OnErrorResourcesListVersions(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid resourceId, Option<string> cursor, Option<int> pageSize);
 
         /// <summary>
-        /// List resource versions List immutable versions of one tenant resource using opaque cursor pagination.
+        /// List resource versions List immutable versions of one tenant resource using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <param name="resourceId"></param>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -2313,7 +1793,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// List resource versions List immutable versions of one tenant resource using opaque cursor pagination.
+        /// List resource versions List immutable versions of one tenant resource using opaque cursor pagination. Requires a tenant API key with the &#x60;resources:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="resourceId"></param>
@@ -2493,380 +1973,6 @@ namespace X402Api.Api
             /// </summary>
             /// <returns></returns>
             public bool IsDefault => !IsOk;
-
-            /// <summary>
-            /// Deserializes the response if the response is 0 Default
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ApiErrorEnvelope? Default()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsDefault
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ApiErrorEnvelope>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 0 Default and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryDefault([NotNullWhen(true)]out X402Api.Model.ApiErrorEnvelope? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Default();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)0);
-                }
-
-                return result != null;
-            }
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(RestLogEvents.ApiDeserializationFailed, exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
-        }
-
-        partial void FormatResourcesRetireVersion(ref string idempotencyKey, ref Guid resourceId, ref Guid versionId, ResourceVersionRetire resourceVersionRetire);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceVersionRetire"></param>
-        /// <returns></returns>
-        private void ValidateResourcesRetireVersion(string idempotencyKey, ResourceVersionRetire resourceVersionRetire)
-        {
-            if (idempotencyKey == null)
-                throw new ArgumentNullException(nameof(idempotencyKey));
-
-            if (resourceVersionRetire == null)
-                throw new ArgumentNullException(nameof(resourceVersionRetire));
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        private void AfterResourcesRetireVersionDefaultImplementation(IResourcesRetireVersionApiResponse apiResponseLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire)
-        {
-            bool suppressDefaultLog = false;
-            AfterResourcesRetireVersion(ref suppressDefaultLog, apiResponseLocalVar, idempotencyKey, resourceId, versionId, resourceVersionRetire);
-            if (!suppressDefaultLog)
-                Logger.LogInformation(RestLogEvents.ApiRequestCompleted, "{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        partial void AfterResourcesRetireVersion(ref bool suppressDefaultLog, IResourcesRetireVersionApiResponse apiResponseLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        private void OnErrorResourcesRetireVersionDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire)
-        {
-            bool suppressDefaultLogLocalVar = false;
-            OnErrorResourcesRetireVersion(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idempotencyKey, resourceId, versionId, resourceVersionRetire);
-            if (!suppressDefaultLogLocalVar)
-                Logger.LogError(RestLogEvents.ApiRequestFailed, exceptionLocalVar, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLogLocalVar"></param>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="idempotencyKey"></param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        partial void OnErrorResourcesRetireVersion(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire);
-
-        /// <summary>
-        /// Retire a resource version Retire one immutable resource version idempotently.
-        /// </summary>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesRetireVersionApiResponse"/>&gt;</returns>
-        public async Task<IResourcesRetireVersionApiResponse?> ResourcesRetireVersionOrDefaultAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire, System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await ResourcesRetireVersionAsync(idempotencyKey, resourceId, versionId, resourceVersionRetire, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Retire a resource version Retire one immutable resource version idempotently.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
-        /// <param name="resourceId"></param>
-        /// <param name="versionId"></param>
-        /// <param name="resourceVersionRetire"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IResourcesRetireVersionApiResponse"/>&gt;</returns>
-        public async Task<IResourcesRetireVersionApiResponse> ResourcesRetireVersionAsync(string idempotencyKey, Guid resourceId, Guid versionId, ResourceVersionRetire resourceVersionRetire, System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                ValidateResourcesRetireVersion(idempotencyKey, resourceVersionRetire);
-
-                FormatResourcesRetireVersion(ref idempotencyKey, ref resourceId, ref versionId, resourceVersionRetire);
-
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
-                        ? "/v1/resources/{resource_id}/versions/{version_id}/retire"
-                        : string.Concat(HttpClient.BaseAddress.AbsolutePath.TrimEnd('/'), "/v1/resources/{resource_id}/versions/{version_id}/retire");
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bresource_id%7D", Uri.EscapeDataString(resourceId.ToString()));
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bversion_id%7D", Uri.EscapeDataString(versionId.ToString()));
-
-                    httpRequestMessageLocalVar.Content = (resourceVersionRetire as object) is X402Api.Client.FileParameter fileParameterLocalVar
-                        ? httpRequestMessageLocalVar.Content = new StreamContent(fileParameterLocalVar.Content)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(resourceVersionRetire, _jsonSerializerOptions));
-
-                    // Set client side default value of Header Param "Idempotency-Key".
-                    if (ClientUtils.IsContentHeader("Idempotency-Key"))
-                    {
-                        httpRequestMessageLocalVar.Content?.Headers.Add("Idempotency-Key", ClientUtils.ParameterToString(idempotencyKey));
-                    }
-                    else
-                    {
-                        httpRequestMessageLocalVar.Headers.Add("Idempotency-Key", ClientUtils.ParameterToString(idempotencyKey));
-                    }
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
-
-                    string[] contentTypes = new string[] {
-                        "application/json"
-                    };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
-
-                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        ResourcesRetireVersionApiResponse apiResponseLocalVar;
-
-                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
-                            default: {
-                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                                apiResponseLocalVar = new(Logger, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/resources/{resource_id}/versions/{version_id}/retire", requestedAtLocalVar, _jsonSerializerOptions);
-
-                                break;
-                            }
-                        }
-
-                        AfterResourcesRetireVersionDefaultImplementation(apiResponseLocalVar, idempotencyKey, resourceId, versionId, resourceVersionRetire);
-
-                        Events.ExecuteOnResourcesRetireVersion(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorResourcesRetireVersionDefaultImplementation(e, "/v1/resources/{resource_id}/versions/{version_id}/retire", uriBuilderLocalVar.Path, idempotencyKey, resourceId, versionId, resourceVersionRetire);
-                Events.ExecuteOnErrorResourcesRetireVersion(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="ResourcesRetireVersionApiResponse"/>
-        /// </summary>
-        public partial class ResourcesRetireVersionApiResponse : X402Api.Client.ApiResponse, IResourcesRetireVersionApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<ResourcesAndPricingApi> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="ResourcesRetireVersionApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public ResourcesRetireVersionApiResponse(ILogger<ResourcesAndPricingApi> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            /// <summary>
-            /// The <see cref="ResourcesRetireVersionApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="contentStream"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public ResourcesRetireVersionApiResponse(ILogger<ResourcesAndPricingApi> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ResourceVersion? Ok()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ResourceVersion>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out X402Api.Model.ResourceVersion? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Ok();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 409 Conflict
-            /// </summary>
-            /// <returns></returns>
-            public bool IsConflict => 409 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 409 Conflict
-            /// </summary>
-            /// <returns></returns>
-            public X402Api.Model.ApiErrorEnvelope? Conflict()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsConflict
-                    ? System.Text.Json.JsonSerializer.Deserialize<X402Api.Model.ApiErrorEnvelope>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 409 Conflict and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryConflict([NotNullWhen(true)]out X402Api.Model.ApiErrorEnvelope? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Conflict();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)409);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is the default response type
-            /// </summary>
-            /// <returns></returns>
-            public bool IsDefault => !IsOk && !IsConflict;
 
             /// <summary>
             /// Deserializes the response if the response is 0 Default

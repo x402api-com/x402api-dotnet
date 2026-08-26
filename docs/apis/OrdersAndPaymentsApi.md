@@ -18,7 +18,7 @@ All URIs are relative to *https://api.x402api.com*
 
 List orders
 
-List tenant-visible orders using opaque cursor pagination.
+List tenant-visible orders using opaque cursor pagination. Requires a tenant API key with the `orders:read` scope.
 
 
 ### Parameters
@@ -56,7 +56,7 @@ List tenant-visible orders using opaque cursor pagination.
 
 Retrieve an order
 
-Retrieve one tenant-visible order by its canonical identifier.
+Retrieve one tenant-visible order by its canonical identifier. Requires a tenant API key with the `orders:read` scope.
 
 
 ### Parameters
@@ -93,7 +93,7 @@ Retrieve one tenant-visible order by its canonical identifier.
 
 List payments
 
-List tenant-visible payments using opaque cursor pagination.
+List tenant-visible payments using opaque cursor pagination. Requires a tenant API key with the `payments:read` scope.
 
 
 ### Parameters
@@ -131,7 +131,7 @@ List tenant-visible payments using opaque cursor pagination.
 
 List payment observations
 
-List finalized and pending chain observations for one tenant-visible payment.
+List finalized and pending chain observations for one tenant-visible payment. Requires a tenant API key with the `payments:read` scope.
 
 
 ### Parameters
@@ -170,7 +170,7 @@ List finalized and pending chain observations for one tenant-visible payment.
 
 Retrieve a payment
 
-Retrieve one tenant-visible payment by its canonical identifier.
+Retrieve one tenant-visible payment by its canonical identifier. Requires a tenant API key with the `payments:read` scope.
 
 
 ### Parameters
@@ -207,7 +207,7 @@ Retrieve one tenant-visible payment by its canonical identifier.
 
 Retrieve a payment receipt
 
-Retrieve the signed receipt projection for one tenant-visible payment.
+Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the `payments:read` scope.
 
 
 ### Parameters
@@ -244,7 +244,7 @@ Retrieve the signed receipt projection for one tenant-visible payment.
 
 Retrieve receipt verification keys
 
-Return the public receipt verification-key history for out-of-band-pinned verification.
+Return the public receipt verification-key history for out-of-band-pinned verification. Public endpoint; no API key or scope is required.
 
 
 ### Parameters

@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Get an idempotency outcome
         /// </summary>
         /// <remarks>
-        /// Return the authoritative tenant-scoped outcome for a durable mutation key.
+        /// Return the authoritative tenant-scoped outcome for a durable mutation key. Requires an authenticated tenant API key; no additional scope is required.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey"></param>
@@ -54,7 +54,7 @@ namespace X402Api.Api
         /// Get an idempotency outcome
         /// </summary>
         /// <remarks>
-        /// Return the authoritative tenant-scoped outcome for a durable mutation key.
+        /// Return the authoritative tenant-scoped outcome for a durable mutation key. Requires an authenticated tenant API key; no additional scope is required.
         /// </remarks>
         /// <param name="idempotencyKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -207,7 +207,7 @@ namespace X402Api.Api
         partial void OnErrorIdempotencyGetOutcome(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey);
 
         /// <summary>
-        /// Get an idempotency outcome Return the authoritative tenant-scoped outcome for a durable mutation key.
+        /// Get an idempotency outcome Return the authoritative tenant-scoped outcome for a durable mutation key. Requires an authenticated tenant API key; no additional scope is required.
         /// </summary>
         /// <param name="idempotencyKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -225,7 +225,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Get an idempotency outcome Return the authoritative tenant-scoped outcome for a durable mutation key.
+        /// Get an idempotency outcome Return the authoritative tenant-scoped outcome for a durable mutation key. Requires an authenticated tenant API key; no additional scope is required.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey"></param>

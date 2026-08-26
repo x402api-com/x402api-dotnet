@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Retrieve wallet balances
         /// </summary>
         /// <remarks>
-        /// Retrieve finalized external-wallet balance observations at the requested finality.
+        /// Retrieve finalized external-wallet balance observations at the requested finality. Requires a tenant API key with the &#x60;balances:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -55,7 +55,7 @@ namespace X402Api.Api
         /// Retrieve wallet balances
         /// </summary>
         /// <remarks>
-        /// Retrieve finalized external-wallet balance observations at the requested finality.
+        /// Retrieve finalized external-wallet balance observations at the requested finality. Requires a tenant API key with the &#x60;balances:read&#x60; scope.
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="finality"> (optional, default to finalized)</param>
@@ -213,7 +213,7 @@ namespace X402Api.Api
         partial void OnErrorWalletsRetrieveBalance(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid id, Option<string> finality);
 
         /// <summary>
-        /// Retrieve wallet balances Retrieve finalized external-wallet balance observations at the requested finality.
+        /// Retrieve wallet balances Retrieve finalized external-wallet balance observations at the requested finality. Requires a tenant API key with the &#x60;balances:read&#x60; scope.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="finality"> (optional, default to finalized)</param>
@@ -232,7 +232,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve wallet balances Retrieve finalized external-wallet balance observations at the requested finality.
+        /// Retrieve wallet balances Retrieve finalized external-wallet balance observations at the requested finality. Requires a tenant API key with the &#x60;balances:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>

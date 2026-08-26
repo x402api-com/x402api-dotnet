@@ -12,7 +12,7 @@ All URIs are relative to *https://api.x402api.com*
 
 Get an idempotency outcome
 
-Return the authoritative tenant-scoped outcome for a durable mutation key.
+Return the authoritative tenant-scoped outcome for a durable mutation key. Requires an authenticated tenant API key; no additional scope is required.
 
 
 ### Parameters

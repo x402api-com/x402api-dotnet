@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Retrieve payment readiness
         /// </summary>
         /// <remarks>
-        /// Return the tenant&#39;s current external-wallet payment-readiness projection.
+        /// Return the tenant&#39;s current external-wallet payment-readiness projection. Requires a tenant API key with the &#x60;payment-controls:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -53,7 +53,7 @@ namespace X402Api.Api
         /// Retrieve payment readiness
         /// </summary>
         /// <remarks>
-        /// Return the tenant&#39;s current external-wallet payment-readiness projection.
+        /// Return the tenant&#39;s current external-wallet payment-readiness projection. Requires a tenant API key with the &#x60;payment-controls:read&#x60; scope.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPaymentReadinessRetrieveApiResponse"/>?&gt;</returns>
@@ -188,7 +188,7 @@ namespace X402Api.Api
         partial void OnErrorPaymentReadinessRetrieve(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Retrieve payment readiness Return the tenant&#39;s current external-wallet payment-readiness projection.
+        /// Retrieve payment readiness Return the tenant&#39;s current external-wallet payment-readiness projection. Requires a tenant API key with the &#x60;payment-controls:read&#x60; scope.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPaymentReadinessRetrieveApiResponse"/>&gt;</returns>
@@ -205,7 +205,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve payment readiness Return the tenant&#39;s current external-wallet payment-readiness projection.
+        /// Retrieve payment readiness Return the tenant&#39;s current external-wallet payment-readiness projection. Requires a tenant API key with the &#x60;payment-controls:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

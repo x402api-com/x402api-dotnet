@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// List orders
         /// </summary>
         /// <remarks>
-        /// List tenant-visible orders using opaque cursor pagination.
+        /// List tenant-visible orders using opaque cursor pagination. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -55,7 +55,7 @@ namespace X402Api.Api
         /// List orders
         /// </summary>
         /// <remarks>
-        /// List tenant-visible orders using opaque cursor pagination.
+        /// List tenant-visible orders using opaque cursor pagination. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </remarks>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -67,7 +67,7 @@ namespace X402Api.Api
         /// Retrieve an order
         /// </summary>
         /// <remarks>
-        /// Retrieve one tenant-visible order by its canonical identifier.
+        /// Retrieve one tenant-visible order by its canonical identifier. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -79,7 +79,7 @@ namespace X402Api.Api
         /// Retrieve an order
         /// </summary>
         /// <remarks>
-        /// Retrieve one tenant-visible order by its canonical identifier.
+        /// Retrieve one tenant-visible order by its canonical identifier. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -90,7 +90,7 @@ namespace X402Api.Api
         /// List payments
         /// </summary>
         /// <remarks>
-        /// List tenant-visible payments using opaque cursor pagination.
+        /// List tenant-visible payments using opaque cursor pagination. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -103,7 +103,7 @@ namespace X402Api.Api
         /// List payments
         /// </summary>
         /// <remarks>
-        /// List tenant-visible payments using opaque cursor pagination.
+        /// List tenant-visible payments using opaque cursor pagination. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -115,7 +115,7 @@ namespace X402Api.Api
         /// List payment observations
         /// </summary>
         /// <remarks>
-        /// List finalized and pending chain observations for one tenant-visible payment.
+        /// List finalized and pending chain observations for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -129,7 +129,7 @@ namespace X402Api.Api
         /// List payment observations
         /// </summary>
         /// <remarks>
-        /// List finalized and pending chain observations for one tenant-visible payment.
+        /// List finalized and pending chain observations for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -142,7 +142,7 @@ namespace X402Api.Api
         /// Retrieve a payment
         /// </summary>
         /// <remarks>
-        /// Retrieve one tenant-visible payment by its canonical identifier.
+        /// Retrieve one tenant-visible payment by its canonical identifier. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -154,7 +154,7 @@ namespace X402Api.Api
         /// Retrieve a payment
         /// </summary>
         /// <remarks>
-        /// Retrieve one tenant-visible payment by its canonical identifier.
+        /// Retrieve one tenant-visible payment by its canonical identifier. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -165,7 +165,7 @@ namespace X402Api.Api
         /// Retrieve a payment receipt
         /// </summary>
         /// <remarks>
-        /// Retrieve the signed receipt projection for one tenant-visible payment.
+        /// Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -177,7 +177,7 @@ namespace X402Api.Api
         /// Retrieve a payment receipt
         /// </summary>
         /// <remarks>
-        /// Retrieve the signed receipt projection for one tenant-visible payment.
+        /// Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -188,7 +188,7 @@ namespace X402Api.Api
         /// Retrieve receipt verification keys
         /// </summary>
         /// <remarks>
-        /// Return the public receipt verification-key history for out-of-band-pinned verification.
+        /// Return the public receipt verification-key history for out-of-band-pinned verification. Public endpoint; no API key or scope is required.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -199,7 +199,7 @@ namespace X402Api.Api
         /// Retrieve receipt verification keys
         /// </summary>
         /// <remarks>
-        /// Return the public receipt verification-key history for out-of-band-pinned verification.
+        /// Return the public receipt verification-key history for out-of-band-pinned verification. Public endpoint; no API key or scope is required.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IReceiptVerificationKeysRetrieveApiResponse"/>?&gt;</returns>
@@ -583,7 +583,7 @@ namespace X402Api.Api
         partial void OnErrorOrdersList(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<string> cursor, Option<int> pageSize);
 
         /// <summary>
-        /// List orders List tenant-visible orders using opaque cursor pagination.
+        /// List orders List tenant-visible orders using opaque cursor pagination. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </summary>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -602,7 +602,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// List orders List tenant-visible orders using opaque cursor pagination.
+        /// List orders List tenant-visible orders using opaque cursor pagination. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -873,7 +873,7 @@ namespace X402Api.Api
         partial void OnErrorOrdersRetrieve(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid id);
 
         /// <summary>
-        /// Retrieve an order Retrieve one tenant-visible order by its canonical identifier.
+        /// Retrieve an order Retrieve one tenant-visible order by its canonical identifier. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -891,7 +891,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve an order Retrieve one tenant-visible order by its canonical identifier.
+        /// Retrieve an order Retrieve one tenant-visible order by its canonical identifier. Requires a tenant API key with the &#x60;orders:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -1165,7 +1165,7 @@ namespace X402Api.Api
         partial void OnErrorPaymentsList(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<string> cursor, Option<int> pageSize);
 
         /// <summary>
-        /// List payments List tenant-visible payments using opaque cursor pagination.
+        /// List payments List tenant-visible payments using opaque cursor pagination. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
         /// <param name="pageSize">Number of results in the bounded array page (default and maximum 100). (optional, default to 100)</param>
@@ -1184,7 +1184,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// List payments List tenant-visible payments using opaque cursor pagination.
+        /// List payments List tenant-visible payments using opaque cursor pagination. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -1474,7 +1474,7 @@ namespace X402Api.Api
         partial void OnErrorPaymentsListObservations(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid id, Option<string> cursor, Option<int> pageSize);
 
         /// <summary>
-        /// List payment observations List finalized and pending chain observations for one tenant-visible payment.
+        /// List payment observations List finalized and pending chain observations for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cursor">Opaque pagination cursor from X-X402API-Next-Cursor or rel&#x3D;next Link. (optional)</param>
@@ -1494,7 +1494,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// List payment observations List finalized and pending chain observations for one tenant-visible payment.
+        /// List payment observations List finalized and pending chain observations for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -1767,7 +1767,7 @@ namespace X402Api.Api
         partial void OnErrorPaymentsRetrieve(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid id);
 
         /// <summary>
-        /// Retrieve a payment Retrieve one tenant-visible payment by its canonical identifier.
+        /// Retrieve a payment Retrieve one tenant-visible payment by its canonical identifier. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1785,7 +1785,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve a payment Retrieve one tenant-visible payment by its canonical identifier.
+        /// Retrieve a payment Retrieve one tenant-visible payment by its canonical identifier. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -2044,7 +2044,7 @@ namespace X402Api.Api
         partial void OnErrorPaymentsRetrieveReceipt(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid id);
 
         /// <summary>
-        /// Retrieve a payment receipt Retrieve the signed receipt projection for one tenant-visible payment.
+        /// Retrieve a payment receipt Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2062,7 +2062,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve a payment receipt Retrieve the signed receipt projection for one tenant-visible payment.
+        /// Retrieve a payment receipt Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the &#x60;payments:read&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -2315,7 +2315,7 @@ namespace X402Api.Api
         partial void OnErrorReceiptVerificationKeysRetrieve(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Retrieve receipt verification keys Return the public receipt verification-key history for out-of-band-pinned verification.
+        /// Retrieve receipt verification keys Return the public receipt verification-key history for out-of-band-pinned verification. Public endpoint; no API key or scope is required.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IReceiptVerificationKeysRetrieveApiResponse"/>&gt;</returns>
@@ -2332,7 +2332,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Retrieve receipt verification keys Return the public receipt verification-key history for out-of-band-pinned verification.
+        /// Retrieve receipt verification keys Return the public receipt verification-key history for out-of-band-pinned verification. Public endpoint; no API key or scope is required.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
