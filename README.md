@@ -50,6 +50,19 @@ IProgrammaticChargesApi chargesApi =
 
 `FacilitatorGetSupportedAsync` and `ReceiptVerificationKeysRetrieveAsync` are public; the generated host still accepts the same client registration for them. All other operations use tenant bearer authentication.
 
+Tenant API keys must also grant the exact scope documented by each operation:
+
+- charges: `commerce:write` to create and `commerce:read` to retrieve;
+- network-fee quotes and resource reads: `resources:read`;
+- resource creation and new versions: `resources:write`;
+- orders: `orders:read`;
+- payment readiness: `payment-controls:read`;
+- payments, observations, and receipts: `payments:read`;
+- receiving-address capabilities and lists: `wallets:read`; and
+- wallet balances: `balances:read`.
+
+The SDK excludes dashboard-only mutations that require a human tenant owner with recent step-up. A tenant API key cannot call those operations regardless of its scopes.
+
 ## Quick start: create a charge
 
 ```csharp
@@ -158,18 +171,11 @@ All methods are asynchronous and also have an `OrDefaultAsync` variant. Links le
 | [`IOrdersAndPaymentsApi`](docs/apis/OrdersAndPaymentsApi.md) | `PaymentsRetrieveReceiptAsync(id)` | `GET /v1/payments/{id}/receipt` |
 | [`IOrdersAndPaymentsApi`](docs/apis/OrdersAndPaymentsApi.md) | `ReceiptVerificationKeysRetrieveAsync()` | `GET /v1/payment-receipt-verification-keys` |
 | [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesGetControlCapabilitiesAsync()` | `GET /v1/receiving-address-control-capabilities` |
-| [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesCreateControlChallengeAsync(idempotencyKey, body)` | `POST /v1/receiving-address-control-challenges` |
 | [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesListAsync(cursor, pageSize)` | `GET /v1/receiving-addresses` |
-| [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesRegisterAsync(idempotencyKey, body)` | `POST /v1/receiving-addresses` |
-| [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesActivateAsync(idempotencyKey, readinessId)` | `POST /v1/receiving-addresses/{readiness_id}/activate` |
-| [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesRefreshReadinessAsync(idempotencyKey, readinessId)` | `POST /v1/receiving-addresses/{readiness_id}/readiness-refreshes` |
-| [`IReceivingAddressesApi`](docs/apis/ReceivingAddressesApi.md) | `ReceivingAddressesRotateAsync(idempotencyKey, readinessId, body)` | `POST /v1/receiving-addresses/{readiness_id}/rotations` |
 | [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesListAsync(cursor, pageSize)` | `GET /v1/resources` |
 | [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesCreateAsync(idempotencyKey, resourceCreate)` | `POST /v1/resources` |
 | [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesListVersionsAsync(resourceId, cursor, pageSize)` | `GET /v1/resources/{resource_id}/versions` |
 | [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesCreateVersionAsync(idempotencyKey, resourceId, body)` | `POST /v1/resources/{resource_id}/versions` |
-| [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesActivateVersionAsync(idempotencyKey, resourceId, versionId, body)` | `POST /v1/resources/{resource_id}/versions/{version_id}/activate` |
-| [`IResourcesAndPricingApi`](docs/apis/ResourcesAndPricingApi.md) | `ResourcesRetireVersionAsync(idempotencyKey, resourceId, versionId, body)` | `POST /v1/resources/{resource_id}/versions/{version_id}/retire` |
 | [`IWalletsAndTransfersApi`](docs/apis/WalletsAndTransfersApi.md) | `WalletsRetrieveBalanceAsync(id, finality)` | `GET /v1/wallets/{id}/balances` |
 
 All request and response model documentation is in [`docs/models/`](docs/models/). See [`USAGE.md`](USAGE.md) for more complete patterns.
