@@ -34,23 +34,23 @@ namespace X402Api.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicChargeResponse" /> class.
         /// </summary>
-        /// <param name="chargeId">chargeId</param>
+        /// <param name="chargeId">Immutable challenge UUID created for this charge.</param>
         /// <param name="chargeDigest">chargeDigest</param>
         /// <param name="orderId">orderId</param>
-        /// <param name="status">status</param>
+        /// <param name="status">Current projected order status; payment terms remain immutable.</param>
         /// <param name="resourceVersionId">resourceVersionId</param>
-        /// <param name="paymentIdentifier">paymentIdentifier</param>
+        /// <param name="paymentIdentifier">Opaque server challenge handle. Return it to the buyer as X-X402API-Challenge-Handle; it is not the buyer payment identifier.</param>
         /// <param name="expiresAt">expiresAt</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="prices">prices</param>
         /// <param name="requestedExpiresInSeconds">requestedExpiresInSeconds</param>
         /// <param name="metadata">Tenant application metadata frozen into the charge digest. Maximum canonical size is 16 KiB; floating-point numbers are not accepted.</param>
         /// <param name="metadataDigest">metadataDigest</param>
-        /// <param name="paymentRequiredHeader">paymentRequiredHeader</param>
+        /// <param name="paymentRequiredHeader">Canonical base64-encoded value to return in the buyer-facing PAYMENT-REQUIRED header.</param>
         /// <param name="eligibleAlternatives">eligibleAlternatives</param>
         /// <param name="feePolicy">feePolicy</param>
         /// <param name="feeQuoteDigest">feeQuoteDigest</param>
-        /// <param name="paymentRequired">paymentRequired</param>
+        /// <param name="paymentRequired">Complete immutable x402 v2 PAYMENT-REQUIRED document.</param>
         [JsonConstructor]
         public DynamicChargeResponse(Guid chargeId, string chargeDigest, Guid orderId, string status, Guid resourceVersionId, string paymentIdentifier, DateTimeOffset expiresAt, DateTimeOffset createdAt, List<DynamicChargePrice> prices, int requestedExpiresInSeconds, Dictionary<string, Object> metadata, string metadataDigest, string paymentRequiredHeader, List<NetworkFeeAlternative> eligibleAlternatives, FeePolicyDocument feePolicy, string feeQuoteDigest, Object? paymentRequired = default)
         {
@@ -77,8 +77,9 @@ namespace X402Api.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets ChargeId
+        /// Immutable challenge UUID created for this charge.
         /// </summary>
+        /// <value>Immutable challenge UUID created for this charge.</value>
         [JsonPropertyName("charge_id")]
         public Guid ChargeId { get; set; }
 
@@ -95,8 +96,9 @@ namespace X402Api.Model
         public Guid OrderId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Status
+        /// Current projected order status; payment terms remain immutable.
         /// </summary>
+        /// <value>Current projected order status; payment terms remain immutable.</value>
         [JsonPropertyName("status")]
         public string Status { get; set; }
 
@@ -107,8 +109,9 @@ namespace X402Api.Model
         public Guid ResourceVersionId { get; set; }
 
         /// <summary>
-        /// Gets or Sets PaymentIdentifier
+        /// Opaque server challenge handle. Return it to the buyer as X-X402API-Challenge-Handle; it is not the buyer payment identifier.
         /// </summary>
+        /// <value>Opaque server challenge handle. Return it to the buyer as X-X402API-Challenge-Handle; it is not the buyer payment identifier.</value>
         [JsonPropertyName("payment_identifier")]
         public string PaymentIdentifier { get; set; }
 
@@ -150,8 +153,9 @@ namespace X402Api.Model
         public string MetadataDigest { get; set; }
 
         /// <summary>
-        /// Gets or Sets PaymentRequiredHeader
+        /// Canonical base64-encoded value to return in the buyer-facing PAYMENT-REQUIRED header.
         /// </summary>
+        /// <value>Canonical base64-encoded value to return in the buyer-facing PAYMENT-REQUIRED header.</value>
         [JsonPropertyName("payment_required_header")]
         public string PaymentRequiredHeader { get; set; }
 
@@ -174,8 +178,9 @@ namespace X402Api.Model
         public string FeeQuoteDigest { get; set; }
 
         /// <summary>
-        /// Gets or Sets PaymentRequired
+        /// Complete immutable x402 v2 PAYMENT-REQUIRED document.
         /// </summary>
+        /// <value>Complete immutable x402 v2 PAYMENT-REQUIRED document.</value>
         [JsonPropertyName("payment_required")]
         public Object? PaymentRequired { get; set; }
 
