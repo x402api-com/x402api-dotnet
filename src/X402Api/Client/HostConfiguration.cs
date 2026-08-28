@@ -62,7 +62,6 @@ namespace X402Api.Client
             _jsonOptions.Converters.Add(new ExternalReceivingAddressJsonConverter());
             _jsonOptions.Converters.Add(new ExternalReceivingAddressCreateJsonConverter());
             _jsonOptions.Converters.Add(new ExternalReceivingAddressRotationJsonConverter());
-            _jsonOptions.Converters.Add(new FeePolicyDocumentJsonConverter());
             _jsonOptions.Converters.Add(new FeePolicyModeInputEnumJsonConverter());
             _jsonOptions.Converters.Add(new FeePolicyModeInputEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new FeePolicyQuoteCurrencyInputEnumJsonConverter());
@@ -74,10 +73,6 @@ namespace X402Api.Client
             _jsonOptions.Converters.Add(new IdempotencyOutcomeJsonConverter());
             _jsonOptions.Converters.Add(new IdempotencyOutcomeStateEnumJsonConverter());
             _jsonOptions.Converters.Add(new IdempotencyOutcomeStateEnumNullableJsonConverter());
-            _jsonOptions.Converters.Add(new NativeFeeObservationEvidenceJsonConverter());
-            _jsonOptions.Converters.Add(new NativeUsdObservationEvidenceJsonConverter());
-            _jsonOptions.Converters.Add(new NetworkFeeAlternativeJsonConverter());
-            _jsonOptions.Converters.Add(new NetworkFeeEvidenceJsonConverter());
             _jsonOptions.Converters.Add(new NetworkFeePreviewJsonConverter());
             _jsonOptions.Converters.Add(new NetworkFeePreviewPriceJsonConverter());
             _jsonOptions.Converters.Add(new NetworkFeePreviewResponseJsonConverter());
@@ -99,6 +94,8 @@ namespace X402Api.Client
             _jsonOptions.Converters.Add(new PaymentReadinessStateEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new PaymentReceiptJsonConverter());
             _jsonOptions.Converters.Add(new PriceInputJsonConverter());
+            _jsonOptions.Converters.Add(new PublicFeePolicyDocumentJsonConverter());
+            _jsonOptions.Converters.Add(new PublicNetworkFeeAlternativeJsonConverter());
             _jsonOptions.Converters.Add(new ReadinessStatusEnumJsonConverter());
             _jsonOptions.Converters.Add(new ReadinessStatusEnumNullableJsonConverter());
             _jsonOptions.Converters.Add(new ReceiptVerificationKeyJsonConverter());
@@ -181,17 +178,12 @@ namespace X402Api.Client
                 new ExternalReceivingAddressSerializationContext(),
                 new ExternalReceivingAddressCreateSerializationContext(),
                 new ExternalReceivingAddressRotationSerializationContext(),
-                new FeePolicyDocumentSerializationContext(),
                 new FeePolicyModeInputEnumSerializationContext(),
                 new FeePolicyQuoteCurrencyInputEnumSerializationContext(),
                 new GasModeEnumSerializationContext(),
                 new HTTPMethodEnumSerializationContext(),
                 new IdempotencyOutcomeSerializationContext(),
                 new IdempotencyOutcomeStateEnumSerializationContext(),
-                new NativeFeeObservationEvidenceSerializationContext(),
-                new NativeUsdObservationEvidenceSerializationContext(),
-                new NetworkFeeAlternativeSerializationContext(),
-                new NetworkFeeEvidenceSerializationContext(),
                 new NetworkFeePreviewSerializationContext(),
                 new NetworkFeePreviewPriceSerializationContext(),
                 new NetworkFeePreviewResponseSerializationContext(),
@@ -208,6 +200,8 @@ namespace X402Api.Client
                 new PaymentReadinessStateEnumSerializationContext(),
                 new PaymentReceiptSerializationContext(),
                 new PriceInputSerializationContext(),
+                new PublicFeePolicyDocumentSerializationContext(),
+                new PublicNetworkFeeAlternativeSerializationContext(),
                 new ReadinessStatusEnumSerializationContext(),
                 new ReceiptVerificationKeySerializationContext(),
                 new ReceiptVerificationKeyHistorySerializationContext(),

@@ -52,7 +52,7 @@ namespace X402Api.Model
         /// <param name="feeQuoteDigest">feeQuoteDigest</param>
         /// <param name="paymentRequired">Complete immutable x402 v2 PAYMENT-REQUIRED document.</param>
         [JsonConstructor]
-        public DynamicChargeResponse(Guid chargeId, string chargeDigest, Guid orderId, string status, Guid resourceVersionId, string paymentIdentifier, DateTimeOffset expiresAt, DateTimeOffset createdAt, List<DynamicChargePrice> prices, int requestedExpiresInSeconds, Dictionary<string, Object> metadata, string metadataDigest, string paymentRequiredHeader, List<NetworkFeeAlternative> eligibleAlternatives, FeePolicyDocument feePolicy, string feeQuoteDigest, Object? paymentRequired = default)
+        public DynamicChargeResponse(Guid chargeId, string chargeDigest, Guid orderId, string status, Guid resourceVersionId, string paymentIdentifier, DateTimeOffset expiresAt, DateTimeOffset createdAt, List<DynamicChargePrice> prices, int requestedExpiresInSeconds, Dictionary<string, Object> metadata, string metadataDigest, string paymentRequiredHeader, List<PublicNetworkFeeAlternative> eligibleAlternatives, PublicFeePolicyDocument feePolicy, string feeQuoteDigest, Object? paymentRequired = default)
         {
             ChargeId = chargeId;
             ChargeDigest = chargeDigest;
@@ -163,13 +163,13 @@ namespace X402Api.Model
         /// Gets or Sets EligibleAlternatives
         /// </summary>
         [JsonPropertyName("eligible_alternatives")]
-        public List<NetworkFeeAlternative> EligibleAlternatives { get; set; }
+        public List<PublicNetworkFeeAlternative> EligibleAlternatives { get; set; }
 
         /// <summary>
         /// Gets or Sets FeePolicy
         /// </summary>
         [JsonPropertyName("fee_policy")]
-        public FeePolicyDocument FeePolicy { get; set; }
+        public PublicFeePolicyDocument FeePolicy { get; set; }
 
         /// <summary>
         /// Gets or Sets FeeQuoteDigest
@@ -316,8 +316,8 @@ namespace X402Api.Model
             Option<Dictionary<string, Object>?> metadata = default;
             Option<string?> metadataDigest = default;
             Option<string?> paymentRequiredHeader = default;
-            Option<List<NetworkFeeAlternative>?> eligibleAlternatives = default;
-            Option<FeePolicyDocument?> feePolicy = default;
+            Option<List<PublicNetworkFeeAlternative>?> eligibleAlternatives = default;
+            Option<PublicFeePolicyDocument?> feePolicy = default;
             Option<string?> feeQuoteDigest = default;
             Option<Object?> paymentRequired = default;
 
@@ -376,10 +376,10 @@ namespace X402Api.Model
                             paymentRequiredHeader = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "eligible_alternatives":
-                            eligibleAlternatives = new Option<List<NetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<NetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            eligibleAlternatives = new Option<List<PublicNetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<PublicNetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "fee_policy":
-                            feePolicy = new Option<FeePolicyDocument?>(JsonSerializer.Deserialize<FeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            feePolicy = new Option<PublicFeePolicyDocument?>(JsonSerializer.Deserialize<PublicFeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "fee_quote_digest":
                             feeQuoteDigest = new Option<string?>(utf8JsonReader.GetString()!);

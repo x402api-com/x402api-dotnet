@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **Metadata** | **Dictionary&lt;string, Object&gt;** | Tenant application metadata frozen into the charge digest. Maximum canonical size is 16 KiB; floating-point numbers are not accepted. |
 **MetadataDigest** | **string** |  |
 **PaymentRequiredHeader** | **string** | Canonical base64-encoded value to return in the buyer-facing PAYMENT-REQUIRED header. |
-**EligibleAlternatives** | [**List&lt;NetworkFeeAlternative&gt;**](NetworkFeeAlternative.md) |  |
-**FeePolicy** | [**FeePolicyDocument**](FeePolicyDocument.md) |  |
+**EligibleAlternatives** | [**List&lt;PublicNetworkFeeAlternative&gt;**](PublicNetworkFeeAlternative.md) |  |
+**FeePolicy** | [**PublicFeePolicyDocument**](PublicFeePolicyDocument.md) |  |
 **FeeQuoteDigest** | **string** |  |
 **PaymentRequired** | **Object** | Complete immutable x402 v2 PAYMENT-REQUIRED document. |
 

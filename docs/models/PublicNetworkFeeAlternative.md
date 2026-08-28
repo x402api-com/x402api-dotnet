@@ -1,4 +1,4 @@
-# X402Api.Model.NetworkFeeAlternative
+# X402Api.Model.PublicNetworkFeeAlternative
 
 ## Properties
 
@@ -9,26 +9,12 @@ Name | Type | Description | Notes
 **Network** | **string** |  |
 **AssetId** | **string** |  |
 **ContractAddress** | **string** |  |
-**FeeMode** | **FeePolicyModeInputEnum** |  |
-**QuoteCurrency** | **FeePolicyQuoteCurrencyInputEnum** |  |
 **ListedAmountAtomic** | **string** |  |
-**FeeAllowanceCapQuoteMicros** | **string** |  |
 **GasMode** | **GasModeEnum** |  |
-**MaximumTenantGasReservationMicros** | **string** |  |
-**FeeAllowanceQuoteMicros** | **string** |  |
-**FeeAllowanceAtomic** | **string** |  |
 **BuyerPaymentAtomic** | **string** |  |
 **TenantProceedsAtomic** | **string** |  |
-**FeeEvidence** | [**NetworkFeeEvidence**](NetworkFeeEvidence.md) |  |
-**FeeEvidenceDigest** | **string** |  |
 **Eligible** | **bool** |  |
-**EstimatedNativeFeeAtomic** | **string** |  |
-**NativeSymbol** | **string** |  |
-**NativeDecimals** | **int** |  |
-**NativeUsdQuoteMicros** | **string** |  |
-**EstimatedFeeQuoteMicros** | **string** |  |
 **BuyerNativeFeeAtomic** | **string** |  |
-**ProviderDisagreementBps** | **int** |  |
 **QuoteExpiresAt** | **DateTimeOffset** |  |
 **ExclusionReason** | **string** |  |
 

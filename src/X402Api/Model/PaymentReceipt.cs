@@ -55,7 +55,7 @@ namespace X402Api.Model
         /// <param name="tenantGasChargeMicros">tenantGasChargeMicros</param>
         /// <param name="gasSponsorshipEvidenceDigest">gasSponsorshipEvidenceDigest</param>
         [JsonConstructor]
-        internal PaymentReceipt(Guid id, Guid orderId, Guid settlementJobId, string receiptDigest, string signature, string signingKeyVersion, List<NetworkFeeAlternative> eligibleAlternatives, string settlementAmountAtomic, string gasMode, DateTimeOffset createdAt, Object? receipt = default, FeePolicyDocument? feePolicy = default, NetworkFeeEvidence? feeEvidence = default, string? feeQuoteDigest = default, DateTimeOffset? feeQuoteExpiresAt = default, string? buyerNativeFeeAtomic = default, string? sponsoredNativeFeeAtomic = default, string? sponsoredNativeSymbol = default, string? tenantGasChargeMicros = default, string? gasSponsorshipEvidenceDigest = default)
+        internal PaymentReceipt(Guid id, Guid orderId, Guid settlementJobId, string receiptDigest, string signature, string signingKeyVersion, List<PublicNetworkFeeAlternative> eligibleAlternatives, string settlementAmountAtomic, string gasMode, DateTimeOffset createdAt, Object? receipt = default, PublicFeePolicyDocument? feePolicy = default, Dictionary<string, Object>? feeEvidence = default, string? feeQuoteDigest = default, DateTimeOffset? feeQuoteExpiresAt = default, string? buyerNativeFeeAtomic = default, string? sponsoredNativeFeeAtomic = default, string? sponsoredNativeSymbol = default, string? tenantGasChargeMicros = default, string? gasSponsorshipEvidenceDigest = default)
         {
             Id = id;
             OrderId = orderId;
@@ -122,7 +122,7 @@ namespace X402Api.Model
         /// Gets or Sets EligibleAlternatives
         /// </summary>
         [JsonPropertyName("eligible_alternatives")]
-        public List<NetworkFeeAlternative> EligibleAlternatives { get; }
+        public List<PublicNetworkFeeAlternative> EligibleAlternatives { get; }
 
         /// <summary>
         /// Gets or Sets SettlementAmountAtomic
@@ -152,13 +152,13 @@ namespace X402Api.Model
         /// Gets or Sets FeePolicy
         /// </summary>
         [JsonPropertyName("fee_policy")]
-        public FeePolicyDocument? FeePolicy { get; }
+        public PublicFeePolicyDocument? FeePolicy { get; }
 
         /// <summary>
         /// Gets or Sets FeeEvidence
         /// </summary>
         [JsonPropertyName("fee_evidence")]
-        public NetworkFeeEvidence? FeeEvidence { get; }
+        public Dictionary<string, Object>? FeeEvidence { get; }
 
         /// <summary>
         /// Gets or Sets FeeQuoteDigest
@@ -300,13 +300,13 @@ namespace X402Api.Model
             Option<string?> receiptDigest = default;
             Option<string?> signature = default;
             Option<string?> signingKeyVersion = default;
-            Option<List<NetworkFeeAlternative>?> eligibleAlternatives = default;
+            Option<List<PublicNetworkFeeAlternative>?> eligibleAlternatives = default;
             Option<string?> settlementAmountAtomic = default;
             Option<string?> gasMode = default;
             Option<DateTimeOffset?> createdAt = default;
             Option<Object?> receipt = default;
-            Option<FeePolicyDocument?> feePolicy = default;
-            Option<NetworkFeeEvidence?> feeEvidence = default;
+            Option<PublicFeePolicyDocument?> feePolicy = default;
+            Option<Dictionary<string, Object>?> feeEvidence = default;
             Option<string?> feeQuoteDigest = default;
             Option<DateTimeOffset?> feeQuoteExpiresAt = default;
             Option<string?> buyerNativeFeeAtomic = default;
@@ -349,7 +349,7 @@ namespace X402Api.Model
                             signingKeyVersion = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "eligible_alternatives":
-                            eligibleAlternatives = new Option<List<NetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<NetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            eligibleAlternatives = new Option<List<PublicNetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<PublicNetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "settlement_amount_atomic":
                             settlementAmountAtomic = new Option<string?>(utf8JsonReader.GetString()!);
@@ -364,10 +364,10 @@ namespace X402Api.Model
                             receipt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "fee_policy":
-                            feePolicy = new Option<FeePolicyDocument?>(JsonSerializer.Deserialize<FeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions));
+                            feePolicy = new Option<PublicFeePolicyDocument?>(JsonSerializer.Deserialize<PublicFeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "fee_evidence":
-                            feeEvidence = new Option<NetworkFeeEvidence?>(JsonSerializer.Deserialize<NetworkFeeEvidence>(ref utf8JsonReader, jsonSerializerOptions));
+                            feeEvidence = new Option<Dictionary<string, Object>?>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "fee_quote_digest":
                             feeQuoteDigest = new Option<string?>(utf8JsonReader.GetString());

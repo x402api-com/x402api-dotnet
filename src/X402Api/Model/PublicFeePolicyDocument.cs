@@ -27,26 +27,24 @@ using X402Api.Client;
 namespace X402Api.Model
 {
     /// <summary>
-    /// FeePolicyDocument
+    /// PublicFeePolicyDocument
     /// </summary>
-    public partial class FeePolicyDocument : IValidatableObject
+    public partial class PublicFeePolicyDocument : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeePolicyDocument" /> class.
+        /// Initializes a new instance of the <see cref="PublicFeePolicyDocument" /> class.
         /// </summary>
         /// <param name="type">type</param>
         /// <param name="varVersion">varVersion</param>
         /// <param name="feeMode">feeMode</param>
         /// <param name="quoteCurrency">quoteCurrency</param>
-        /// <param name="feeAllowanceCapQuoteMicros">feeAllowanceCapQuoteMicros</param>
         [JsonConstructor]
-        public FeePolicyDocument(string type, int varVersion, FeePolicyModeInputEnum feeMode, FeePolicyQuoteCurrencyInputEnum quoteCurrency, string feeAllowanceCapQuoteMicros)
+        public PublicFeePolicyDocument(string type, int varVersion, FeePolicyModeInputEnum feeMode, FeePolicyQuoteCurrencyInputEnum quoteCurrency)
         {
             Type = type;
             VarVersion = varVersion;
             FeeMode = feeMode;
             QuoteCurrency = quoteCurrency;
-            FeeAllowanceCapQuoteMicros = feeAllowanceCapQuoteMicros;
             OnCreated();
         }
 
@@ -77,12 +75,6 @@ namespace X402Api.Model
         public int VarVersion { get; set; }
 
         /// <summary>
-        /// Gets or Sets FeeAllowanceCapQuoteMicros
-        /// </summary>
-        [JsonPropertyName("feeAllowanceCapQuoteMicros")]
-        public string FeeAllowanceCapQuoteMicros { get; set; }
-
-        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -95,12 +87,11 @@ namespace X402Api.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FeePolicyDocument {\n");
+            sb.Append("class PublicFeePolicyDocument {\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
             sb.Append("  FeeMode: ").Append(FeeMode).Append("\n");
             sb.Append("  QuoteCurrency: ").Append(QuoteCurrency).Append("\n");
-            sb.Append("  FeeAllowanceCapQuoteMicros: ").Append(FeeAllowanceCapQuoteMicros).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,50 +110,34 @@ namespace X402Api.Model
                 yield return new ValidationResult("Invalid value for VarVersion, must be a value greater than or equal to 1.", new [] { "VarVersion" });
             }
 
-            // FeeAllowanceCapQuoteMicros (string) maxLength
-            if (this.FeeAllowanceCapQuoteMicros != null && this.FeeAllowanceCapQuoteMicros.Length > 78)
-            {
-                yield return new ValidationResult("Invalid value for FeeAllowanceCapQuoteMicros, length must be less than 78.", new [] { "FeeAllowanceCapQuoteMicros" });
-            }
-
-            if (this.FeeAllowanceCapQuoteMicros != null) {
-                // FeeAllowanceCapQuoteMicros (string) pattern
-                Regex regexFeeAllowanceCapQuoteMicros = new Regex(@"^(0|[1-9][0-9]*)$", RegexOptions.CultureInvariant);
-
-                if (!regexFeeAllowanceCapQuoteMicros.Match(this.FeeAllowanceCapQuoteMicros).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FeeAllowanceCapQuoteMicros, must match a pattern of " + regexFeeAllowanceCapQuoteMicros, new [] { "FeeAllowanceCapQuoteMicros" });
-                }
-            }
-
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FeePolicyDocument" />
+    /// A Json converter for type <see cref="PublicFeePolicyDocument" />
     /// </summary>
-    public partial class FeePolicyDocumentJsonConverter : JsonConverter<FeePolicyDocument>
+    public partial class PublicFeePolicyDocumentJsonConverter : JsonConverter<PublicFeePolicyDocument>
     {
         partial void OnCreated();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeePolicyDocumentJsonConverter" /> class.
+        /// Initializes a new instance of the <see cref="PublicFeePolicyDocumentJsonConverter" /> class.
         /// </summary>
-        public FeePolicyDocumentJsonConverter()
+        public PublicFeePolicyDocumentJsonConverter()
         {
             OnCreated();
         }
 
         /// <summary>
-        /// Deserializes json to <see cref="FeePolicyDocument" />
+        /// Deserializes json to <see cref="PublicFeePolicyDocument" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FeePolicyDocument Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PublicFeePolicyDocument Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -175,7 +150,6 @@ namespace X402Api.Model
             Option<int?> varVersion = default;
             Option<FeePolicyModeInputEnum?> feeMode = default;
             Option<FeePolicyQuoteCurrencyInputEnum?> quoteCurrency = default;
-            Option<string?> feeAllowanceCapQuoteMicros = default;
 
             while (utf8JsonReader.Read())
             {
@@ -204,9 +178,6 @@ namespace X402Api.Model
                         case "quoteCurrency":
                             quoteCurrency = new Option<FeePolicyQuoteCurrencyInputEnum?>(JsonSerializer.Deserialize<FeePolicyQuoteCurrencyInputEnum?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "feeAllowanceCapQuoteMicros":
-                            feeAllowanceCapQuoteMicros = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         default:
                             break;
                     }
@@ -214,86 +185,75 @@ namespace X402Api.Model
             }
 
             if (!type.IsSet)
-                throw new ArgumentException("Property is required for class FeePolicyDocument.", nameof(type));
+                throw new ArgumentException("Property is required for class PublicFeePolicyDocument.", nameof(type));
 
             if (!varVersion.IsSet)
-                throw new ArgumentException("Property is required for class FeePolicyDocument.", nameof(varVersion));
+                throw new ArgumentException("Property is required for class PublicFeePolicyDocument.", nameof(varVersion));
 
             if (!feeMode.IsSet)
-                throw new ArgumentException("Property is required for class FeePolicyDocument.", nameof(feeMode));
+                throw new ArgumentException("Property is required for class PublicFeePolicyDocument.", nameof(feeMode));
 
             if (!quoteCurrency.IsSet)
-                throw new ArgumentException("Property is required for class FeePolicyDocument.", nameof(quoteCurrency));
-
-            if (!feeAllowanceCapQuoteMicros.IsSet)
-                throw new ArgumentException("Property is required for class FeePolicyDocument.", nameof(feeAllowanceCapQuoteMicros));
+                throw new ArgumentException("Property is required for class PublicFeePolicyDocument.", nameof(quoteCurrency));
 
             if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class FeePolicyDocument.");
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class PublicFeePolicyDocument.");
 
             if (varVersion.IsSet && varVersion.Value == null)
-                throw new ArgumentNullException(nameof(varVersion), "Property is not nullable for class FeePolicyDocument.");
+                throw new ArgumentNullException(nameof(varVersion), "Property is not nullable for class PublicFeePolicyDocument.");
 
             if (feeMode.IsSet && feeMode.Value == null)
-                throw new ArgumentNullException(nameof(feeMode), "Property is not nullable for class FeePolicyDocument.");
+                throw new ArgumentNullException(nameof(feeMode), "Property is not nullable for class PublicFeePolicyDocument.");
 
             if (quoteCurrency.IsSet && quoteCurrency.Value == null)
-                throw new ArgumentNullException(nameof(quoteCurrency), "Property is not nullable for class FeePolicyDocument.");
+                throw new ArgumentNullException(nameof(quoteCurrency), "Property is not nullable for class PublicFeePolicyDocument.");
 
-            if (feeAllowanceCapQuoteMicros.IsSet && feeAllowanceCapQuoteMicros.Value == null)
-                throw new ArgumentNullException(nameof(feeAllowanceCapQuoteMicros), "Property is not nullable for class FeePolicyDocument.");
-
-            return new FeePolicyDocument(type.Value!, varVersion.Value!.Value!, feeMode.Value!.Value!, quoteCurrency.Value!.Value!, feeAllowanceCapQuoteMicros.Value!);
+            return new PublicFeePolicyDocument(type.Value!, varVersion.Value!.Value!, feeMode.Value!.Value!, quoteCurrency.Value!.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FeePolicyDocument" />
+        /// Serializes a <see cref="PublicFeePolicyDocument" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="feePolicyDocument"></param>
+        /// <param name="publicFeePolicyDocument"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FeePolicyDocument feePolicyDocument, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PublicFeePolicyDocument publicFeePolicyDocument, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, feePolicyDocument, jsonSerializerOptions);
+            WriteProperties(writer, publicFeePolicyDocument, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FeePolicyDocument" />
+        /// Serializes the properties of <see cref="PublicFeePolicyDocument" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="feePolicyDocument"></param>
+        /// <param name="publicFeePolicyDocument"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FeePolicyDocument feePolicyDocument, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, PublicFeePolicyDocument publicFeePolicyDocument, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (feePolicyDocument.Type == null)
-                throw new ArgumentNullException(nameof(feePolicyDocument.Type), "Property is required for class FeePolicyDocument.");
+            if (publicFeePolicyDocument.Type == null)
+                throw new ArgumentNullException(nameof(publicFeePolicyDocument.Type), "Property is required for class PublicFeePolicyDocument.");
 
-            if (feePolicyDocument.FeeAllowanceCapQuoteMicros == null)
-                throw new ArgumentNullException(nameof(feePolicyDocument.FeeAllowanceCapQuoteMicros), "Property is required for class FeePolicyDocument.");
+            writer.WriteString("type", publicFeePolicyDocument.Type);
 
-            writer.WriteString("type", feePolicyDocument.Type);
+            writer.WriteNumber("version", publicFeePolicyDocument.VarVersion);
 
-            writer.WriteNumber("version", feePolicyDocument.VarVersion);
-
-            var feeModeRawValue = FeePolicyModeInputEnumValueConverter.ToJsonValue(feePolicyDocument.FeeMode);
+            var feeModeRawValue = FeePolicyModeInputEnumValueConverter.ToJsonValue(publicFeePolicyDocument.FeeMode);
             writer.WriteString("feeMode", feeModeRawValue);
 
-            var quoteCurrencyRawValue = FeePolicyQuoteCurrencyInputEnumValueConverter.ToJsonValue(feePolicyDocument.QuoteCurrency);
+            var quoteCurrencyRawValue = FeePolicyQuoteCurrencyInputEnumValueConverter.ToJsonValue(publicFeePolicyDocument.QuoteCurrency);
             writer.WriteString("quoteCurrency", quoteCurrencyRawValue);
-
-            writer.WriteString("feeAllowanceCapQuoteMicros", feePolicyDocument.FeeAllowanceCapQuoteMicros);
         }
     }
 
     /// <summary>
-    /// The FeePolicyDocumentSerializationContext
+    /// The PublicFeePolicyDocumentSerializationContext
     /// </summary>
     [JsonSourceGenerationOptions(WriteIndented = true, GenerationMode = JsonSourceGenerationMode.Metadata | JsonSourceGenerationMode.Serialization)]
-    [JsonSerializable(typeof(FeePolicyDocument))]
-    public partial class FeePolicyDocumentSerializationContext : JsonSerializerContext { }
+    [JsonSerializable(typeof(PublicFeePolicyDocument))]
+    public partial class PublicFeePolicyDocumentSerializationContext : JsonSerializerContext { }
 }

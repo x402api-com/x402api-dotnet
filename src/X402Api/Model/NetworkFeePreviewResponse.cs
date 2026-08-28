@@ -38,7 +38,7 @@ namespace X402Api.Model
         /// <param name="alternatives">alternatives</param>
         /// <param name="feeQuoteDigest">feeQuoteDigest</param>
         [JsonConstructor]
-        public NetworkFeePreviewResponse(FeePolicyDocument feePolicy, List<NetworkFeeAlternative> alternatives, string feeQuoteDigest)
+        public NetworkFeePreviewResponse(PublicFeePolicyDocument feePolicy, List<PublicNetworkFeeAlternative> alternatives, string feeQuoteDigest)
         {
             FeePolicy = feePolicy;
             Alternatives = alternatives;
@@ -52,13 +52,13 @@ namespace X402Api.Model
         /// Gets or Sets FeePolicy
         /// </summary>
         [JsonPropertyName("fee_policy")]
-        public FeePolicyDocument FeePolicy { get; set; }
+        public PublicFeePolicyDocument FeePolicy { get; set; }
 
         /// <summary>
         /// Gets or Sets Alternatives
         /// </summary>
         [JsonPropertyName("alternatives")]
-        public List<NetworkFeeAlternative> Alternatives { get; set; }
+        public List<PublicNetworkFeeAlternative> Alternatives { get; set; }
 
         /// <summary>
         /// Gets or Sets FeeQuoteDigest
@@ -141,8 +141,8 @@ namespace X402Api.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<FeePolicyDocument?> feePolicy = default;
-            Option<List<NetworkFeeAlternative>?> alternatives = default;
+            Option<PublicFeePolicyDocument?> feePolicy = default;
+            Option<List<PublicNetworkFeeAlternative>?> alternatives = default;
             Option<string?> feeQuoteDigest = default;
 
             while (utf8JsonReader.Read())
@@ -161,10 +161,10 @@ namespace X402Api.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "fee_policy":
-                            feePolicy = new Option<FeePolicyDocument?>(JsonSerializer.Deserialize<FeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            feePolicy = new Option<PublicFeePolicyDocument?>(JsonSerializer.Deserialize<PublicFeePolicyDocument>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "alternatives":
-                            alternatives = new Option<List<NetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<NetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            alternatives = new Option<List<PublicNetworkFeeAlternative>?>(JsonSerializer.Deserialize<List<PublicNetworkFeeAlternative>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "fee_quote_digest":
                             feeQuoteDigest = new Option<string?>(utf8JsonReader.GetString()!);
