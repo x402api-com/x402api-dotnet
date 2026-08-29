@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceVersionId** | **Guid** |  |
+**ResourceVersionId** | **Guid** | Current active resource-version UUID used as the charge template. Read resources[].active_version.id from GET /v1/resources or copy Active version UUID (charge API) in the tenant dashboard. Do not use the top-level resource id or pay_ public_payment_id. |
 **ResourceUrl** | **string** |  |
 **Prices** | [**List&lt;DynamicChargePrice&gt;**](DynamicChargePrice.md) |  |
 **ExpiresInSeconds** | **int** |  |

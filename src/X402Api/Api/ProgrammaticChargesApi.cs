@@ -42,7 +42,7 @@ namespace X402Api.Api
         /// Create a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
+        /// Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. resource_version_id is the current active_version.id returned by GET /v1/resources, not the top-level resource id or pay_ public_payment_id. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
@@ -55,7 +55,7 @@ namespace X402Api.Api
         /// Create a programmatic charge
         /// </summary>
         /// <remarks>
-        /// Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
+        /// Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. resource_version_id is the current active_version.id returned by GET /v1/resources, not the top-level resource id or pay_ public_payment_id. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </remarks>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="dynamicChargeCreate"></param>
@@ -296,7 +296,7 @@ namespace X402Api.Api
         partial void OnErrorChargesCreate(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idempotencyKey, DynamicChargeCreate dynamicChargeCreate);
 
         /// <summary>
-        /// Create a programmatic charge Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
+        /// Create a programmatic charge Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. resource_version_id is the current active_version.id returned by GET /v1/resources, not the top-level resource id or pay_ public_payment_id. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </summary>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>
         /// <param name="dynamicChargeCreate"></param>
@@ -315,7 +315,7 @@ namespace X402Api.Api
         }
 
         /// <summary>
-        /// Create a programmatic charge Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
+        /// Create a programmatic charge Create one idempotent dynamic charge and immutable PAYMENT-REQUIRED challenge from an active resource template. resource_version_id is the current active_version.id returned by GET /v1/resources, not the top-level resource id or pay_ public_payment_id. The 201 management response contains the canonical buyer challenge; it does not submit or settle payment. Requires a tenant API key with the &#x60;commerce:write&#x60; scope.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idempotencyKey">Caller-persisted mutation key containing 8 to 160 safe ASCII characters. Replay the exact key and body after an uncertain outcome.</param>

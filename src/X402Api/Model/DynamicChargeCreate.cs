@@ -34,7 +34,7 @@ namespace X402Api.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicChargeCreate" /> class.
         /// </summary>
-        /// <param name="resourceVersionId">resourceVersionId</param>
+        /// <param name="resourceVersionId">Current active resource-version UUID used as the charge template. Read resources[].active_version.id from GET /v1/resources or copy Active version UUID (charge API) in the tenant dashboard. Do not use the top-level resource id or pay_ public_payment_id.</param>
         /// <param name="resourceUrl">resourceUrl</param>
         /// <param name="prices">prices</param>
         /// <param name="expiresInSeconds">expiresInSeconds</param>
@@ -106,8 +106,9 @@ namespace X402Api.Model
         public FeePolicyQuoteCurrencyInputEnum? QuoteCurrency { get { return this.QuoteCurrencyOption.Value; } set { this.QuoteCurrencyOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets ResourceVersionId
+        /// Current active resource-version UUID used as the charge template. Read resources[].active_version.id from GET /v1/resources or copy Active version UUID (charge API) in the tenant dashboard. Do not use the top-level resource id or pay_ public_payment_id.
         /// </summary>
+        /// <value>Current active resource-version UUID used as the charge template. Read resources[].active_version.id from GET /v1/resources or copy Active version UUID (charge API) in the tenant dashboard. Do not use the top-level resource id or pay_ public_payment_id.</value>
         [JsonPropertyName("resource_version_id")]
         public Guid ResourceVersionId { get; set; }
 
