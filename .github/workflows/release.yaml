@@ -1,0 +1,278 @@
+name: Publish .NET SDK
+run-name: .NET SDK ${{ inputs.mode }} v${{ inputs.set_version }}
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Validate with test or publish with direct
+        type: choice
+        options: [test, direct]
+        default: test
+      set_version:
+        description: Exact immutable SDK SemVer
+        type: string
+        required: true
+      source_revision:
+        description: Exact deployed x402api Git revision
+        type: string
+        required: true
+      contract_digest:
+        description: Canonical production OpenAPI sha256 digest
+        type: string
+        required: true
+      nuget_user:
+        description: NuGet.org account that owns the trusted-publishing policy
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  pull-request-tests:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+        with:
+          dotnet-version: 8.0.x
+      - name: Build and validate the package
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import pathlib
+          import xml.etree.ElementTree as ET
+
+          project = ET.parse("src/X402Api/X402Api.csproj").getroot()
+          version = project.findtext(".//Version")
+          package_id = project.findtext(".//PackageId")
+          manifest = json.loads(pathlib.Path(".x402api/release.json").read_text())
+          contract = json.loads(pathlib.Path(".openapi/openapi.json").read_text())
+          canonical = json.dumps(
+              contract, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+          ).encode()
+          digest = f"sha256:{hashlib.sha256(canonical).hexdigest()}"
+          if package_id != "X402Api":
+              raise SystemExit("unexpected NuGet package ID")
+          if manifest.get("record_type") != "x402api-sdk-source":
+              raise SystemExit("invalid release manifest record type")
+          if manifest.get("version") != version:
+              raise SystemExit("package and release manifest versions differ")
+          if contract.get("info", {}).get("version") != version:
+              raise SystemExit("package and SDK contract versions differ")
+          if manifest.get("sdk_openapi_sha256") != digest:
+              raise SystemExit(f"SDK contract digest mismatch: {digest}")
+          PY
+          python -m unittest discover -s tests -p 'test_*.py'
+          dotnet restore X402Api.sln
+          dotnet build X402Api.sln --configuration Release --no-restore
+          dotnet pack src/X402Api/X402Api.csproj \
+            --configuration Release --no-build --output dist
+          test "$(find dist -maxdepth 1 -name 'X402Api.1.1.0.nupkg' | wc -l)" -eq 1
+          git diff --check
+
+  validate-or-publish:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Validate immutable release inputs
+        shell: bash
+        env:
+          SDK_MODE: ${{ inputs.mode }}
+          SDK_VERSION: ${{ inputs.set_version }}
+          SOURCE_REVISION: ${{ inputs.source_revision }}
+          CONTRACT_DIGEST: ${{ inputs.contract_digest }}
+          NUGET_USER: ${{ inputs.nuget_user }}
+        run: |
+          set -Eeuo pipefail
+          [[ "${SDK_VERSION}" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          [[ "${SOURCE_REVISION}" =~ ^[0-9a-f]{40}$ ]]
+          [[ "${CONTRACT_DIGEST}" =~ ^sha256:[0-9a-f]{64}$ ]]
+          test -n "${NUGET_USER}"
+          if [[ "${SDK_MODE}" = "direct" ]]; then
+            test "${GITHUB_REF}" = "refs/heads/main"
+            test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          fi
+
+      - name: Require the exact deployed production contract
+        shell: bash
+        env:
+          SDK_VERSION: ${{ inputs.set_version }}
+          SOURCE_REVISION: ${{ inputs.source_revision }}
+          CONTRACT_DIGEST: ${{ inputs.contract_digest }}
+        run: |
+          set -Eeuo pipefail
+          headers="${RUNNER_TEMP}/production-health.headers"
+          contract="${RUNNER_TEMP}/live-openapi.json"
+          rendered="${RUNNER_TEMP}/sdk-openapi.json"
+          curl --fail --silent --show-error --location \
+            --connect-timeout 10 --max-time 30 --dump-header "${headers}" \
+            --output /dev/null https://api.x402api.com/health/ready
+          curl --fail --silent --show-error --location \
+            --connect-timeout 10 --max-time 30 \
+            --output "${contract}" https://api.x402api.com/openapi/openapi.json
+          python scripts/render-openapi.py --input "${contract}" --output "${rendered}"
+          python - "${headers}" "${contract}" "${rendered}" <<'PY'
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import sys
+          import xml.etree.ElementTree as ET
+
+          headers = pathlib.Path(sys.argv[1]).read_text().splitlines()
+          revisions = [
+              line.split(":", 1)[1].strip()
+              for line in headers
+              if line.lower().startswith("x-x402api-release:")
+          ]
+          if revisions != [os.environ["SOURCE_REVISION"]]:
+              raise SystemExit(f"production revision mismatch: {revisions!r}")
+          live = json.loads(pathlib.Path(sys.argv[2]).read_text())
+          canonical = json.dumps(
+              live, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+          ).encode()
+          live_digest = f"sha256:{hashlib.sha256(canonical).hexdigest()}"
+          if live_digest != os.environ["CONTRACT_DIGEST"]:
+              raise SystemExit(f"production contract digest mismatch: {live_digest}")
+          project = ET.parse("src/X402Api/X402Api.csproj").getroot()
+          version = project.findtext(".//Version")
+          package_id = project.findtext(".//PackageId")
+          manifest = json.loads(pathlib.Path(".x402api/release.json").read_text())
+          expected = {
+              "record_type": "x402api-sdk-source",
+              "version": os.environ["SDK_VERSION"],
+              "source_revision": os.environ["SOURCE_REVISION"],
+              "openapi_sha256": os.environ["CONTRACT_DIGEST"],
+          }
+          for key, value in expected.items():
+              if manifest.get(key) != value:
+                  raise SystemExit(f"release manifest {key} mismatch")
+          if package_id != "X402Api" or version != os.environ["SDK_VERSION"]:
+              raise SystemExit("NuGet package identity mismatch")
+          if live.get("info", {}).get("version") != os.environ["SDK_VERSION"]:
+              raise SystemExit("production contract version mismatch")
+          rendered = json.loads(pathlib.Path(sys.argv[3]).read_text())
+          canonical = json.dumps(
+              rendered, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+          ).encode()
+          sdk_digest = f"sha256:{hashlib.sha256(canonical).hexdigest()}"
+          if manifest.get("sdk_openapi_sha256") != sdk_digest:
+              raise SystemExit(f"SDK contract digest mismatch: {sdk_digest}")
+          checked = json.loads(pathlib.Path(".openapi/openapi.json").read_text())
+          if checked != rendered:
+              raise SystemExit("checked-in SDK contract differs from production render")
+          PY
+
+      - name: Require the immutable package source tag
+        shell: bash
+        env:
+          SDK_VERSION: ${{ inputs.set_version }}
+        run: |
+          set -Eeuo pipefail
+          tag="v${SDK_VERSION}"
+          git rev-parse --verify "refs/tags/${tag}^{commit}"
+          git diff --exit-code "${tag}" -- \
+            LICENSE README.md X402Api.sln src/X402Api
+
+      - name: Build and validate the release artifact
+        shell: bash
+        env:
+          SDK_VERSION: ${{ inputs.set_version }}
+        run: |
+          set -Eeuo pipefail
+          python -m unittest discover -s tests -p 'test_*.py'
+          dotnet restore X402Api.sln
+          dotnet build X402Api.sln --configuration Release --no-restore
+          dotnet pack src/X402Api/X402Api.csproj \
+            --configuration Release --no-build --output dist \
+            -p:ContinuousIntegrationBuild=true \
+            -p:RepositoryCommit="$(git rev-list -n 1 "v${SDK_VERSION}")"
+          package="dist/X402Api.${SDK_VERSION}.nupkg"
+          test -f "${package}"
+          unzip -p "${package}" X402Api.nuspec | grep -F "<version>${SDK_VERSION}</version>"
+          smoke="${RUNNER_TEMP}/smoke"
+          dotnet new console --framework net8.0 --output "${smoke}"
+          dotnet add "${smoke}" package X402Api --version "${SDK_VERSION}" \
+            --source "${GITHUB_WORKSPACE}/dist"
+          dotnet build "${smoke}" --configuration Release
+          git diff --check
+
+      - name: Detect an existing publication
+        if: inputs.mode == 'direct'
+        id: publication
+        shell: bash
+        env:
+          SDK_VERSION: ${{ inputs.set_version }}
+        run: |
+          set -Eeuo pipefail
+          status="$(curl --silent --show-error --output /dev/null \
+            --write-out '%{http_code}' \
+            "https://api.nuget.org/v3-flatcontainer/x402api/${SDK_VERSION}/x402api.${SDK_VERSION}.nupkg")"
+          case "${status}" in
+            200) echo "exists=true" >>"${GITHUB_OUTPUT}" ;;
+            404) echo "exists=false" >>"${GITHUB_OUTPUT}" ;;
+            *) echo "unexpected NuGet status: ${status}" >&2; exit 1 ;;
+          esac
+
+      - name: Obtain a short-lived NuGet API key
+        if: inputs.mode == 'direct' && steps.publication.outputs.exists != 'true'
+        id: login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ inputs.nuget_user }}
+
+      - name: Publish with NuGet Trusted Publishing
+        if: inputs.mode == 'direct' && steps.publication.outputs.exists != 'true'
+        shell: bash
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          set -Eeuo pipefail
+          test -n "${NUGET_API_KEY}"
+          dotnet nuget push dist/*.nupkg \
+            --api-key "${NUGET_API_KEY}" \
+            --source https://api.nuget.org/v3/index.json
+
+      - name: Verify the public package
+        if: inputs.mode == 'direct'
+        shell: bash
+        env:
+          SDK_VERSION: ${{ inputs.set_version }}
+        run: |
+          set -Eeuo pipefail
+          package_url="https://api.nuget.org/v3-flatcontainer/x402api/${SDK_VERSION}/x402api.${SDK_VERSION}.nupkg"
+          for _ in $(seq 1 30); do
+            status="$(curl --silent --show-error --output /dev/null \
+              --write-out '%{http_code}' "${package_url}")"
+            [[ "${status}" = "200" ]] && break
+            sleep 5
+          done
+          test "${status}" = "200"
+          smoke="${RUNNER_TEMP}/public-smoke"
+          dotnet new console --framework net8.0 --output "${smoke}"
+          dotnet add "${smoke}" package X402Api --version "${SDK_VERSION}" \
+            --source https://api.nuget.org/v3/index.json
+          dotnet build "${smoke}" --configuration Release
