@@ -1,0 +1,7 @@
+{
+  "record_type": "x402api-sdk-source",
+  "version": "1.1.0",
+  "source_revision": "217ee8388bb0a7623e411b57b9d769fb566afb76",
+  "openapi_sha256": "sha256:7f56f00768c645837daf5e0d6ab288347718b07dff89ba861abf5a43faf27bfe",
+  "sdk_openapi_sha256": "sha256:ce6f69345b941578845d582143ff63cbf70a02e729508717106df244bbc23cc3"
+}
