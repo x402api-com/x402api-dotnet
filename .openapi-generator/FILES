@@ -13,6 +13,7 @@ docs/models/ApiErrorEnvelope.md
 docs/models/BalanceAsset.md
 docs/models/CanonicalPaymentReadinessRail.md
 docs/models/DynamicChargeCreate.md
+docs/models/DynamicChargePaymentResponse.md
 docs/models/DynamicChargePrice.md
 docs/models/DynamicChargeResponse.md
 docs/models/ExternalAddressControlCapabilities.md
@@ -132,6 +133,7 @@ src/X402Api/Model/ApiErrorEnvelope.cs
 src/X402Api/Model/BalanceAsset.cs
 src/X402Api/Model/CanonicalPaymentReadinessRail.cs
 src/X402Api/Model/DynamicChargeCreate.cs
+src/X402Api/Model/DynamicChargePaymentResponse.cs
 src/X402Api/Model/DynamicChargePrice.cs
 src/X402Api/Model/DynamicChargeResponse.cs
 src/X402Api/Model/ExternalAddressControlCapabilities.cs
