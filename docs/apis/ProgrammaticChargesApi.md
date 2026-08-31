@@ -6,6 +6,7 @@ All URIs are relative to *https://api.x402api.com*
 |--------|--------------|-------------|
 | [**ChargesCreate**](ProgrammaticChargesApi.md#chargescreate) | **POST** /v1/charges | Create a programmatic charge |
 | [**ChargesRetrieve**](ProgrammaticChargesApi.md#chargesretrieve) | **GET** /v1/charges/{charge_id} | Retrieve a programmatic charge |
+| [**ChargesSubmitPayment**](ProgrammaticChargesApi.md#chargessubmitpayment) | **POST** /v1/charges/{charge_id}/payments | Submit a programmatic charge payment |
 
 <a id="chargescreate"></a>
 # **ChargesCreate**
@@ -81,6 +82,50 @@ Retrieve the frozen terms and current projected status of a tenant charge. Requi
 |-------------|-------------|------------------|
 | **200** | Successful response for retrieve a programmatic charge. |  * X-Request-ID -  <br>  |
 | **404** | The request failed. |  * X-Request-ID -  <br>  |
+| **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="chargessubmitpayment"></a>
+# **ChargesSubmitPayment**
+> DynamicChargePaymentResponse ChargesSubmitPayment (string PAYMENT_SIGNATURE, Guid chargeId)
+
+Submit a programmatic charge payment
+
+Submit one exact canonical PAYMENT-SIGNATURE for a tenant charge. The request body is empty. Preserve and retry the identical signature after HTTP 202 or 503; never create a replacement authorization for an ambiguous outcome. Requires a tenant API key with the `commerce:write` scope.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **PAYMENT_SIGNATURE** | **string** | Canonical base64-encoded x402 v2 PaymentPayload. |  |
+| **chargeId** | **Guid** |  |  |
+
+### Return type
+
+[**DynamicChargePaymentResponse**](DynamicChargePaymentResponse.md)
+
+### Authorization
+
+[tenantApiKey](../README.md#tenantApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful response for submit a programmatic charge payment. |  * X-Request-ID -  <br>  * PAYMENT-RESPONSE - Canonical x402 v2 settlement projection. <br>  |
+| **202** | Successful response for submit a programmatic charge payment. |  * X-Request-ID -  <br>  * PAYMENT-RESPONSE - Canonical x402 v2 settlement projection. <br>  * Retry-After -  <br>  |
+| **400** | The request failed. |  * X-Request-ID -  <br>  |
+| **402** | The request failed. |  * X-Request-ID -  <br>  * PAYMENT-RESPONSE - Canonical x402 v2 settlement projection. <br>  |
+| **404** | The request failed. |  * X-Request-ID -  <br>  |
+| **409** | The request failed. |  * X-Request-ID -  <br>  |
+| **503** | The request failed. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 | **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
