@@ -23,10 +23,6 @@ on:
         description: Canonical production OpenAPI sha256 digest
         type: string
         required: true
-      nuget_user:
-        description: NuGet.org account that owns the trusted-publishing policy
-        type: string
-        required: true
 
 permissions:
   contents: read
@@ -78,7 +74,8 @@ jobs:
           dotnet build X402Api.sln --configuration Release --no-restore
           dotnet pack src/X402Api/X402Api.csproj \
             --configuration Release --no-build --output dist
-          test "$(find dist -maxdepth 1 -name 'X402Api.1.1.0.nupkg' | wc -l)" -eq 1
+          version="$(python -c 'import xml.etree.ElementTree as ET; print(ET.parse("src/X402Api/X402Api.csproj").getroot().findtext(".//Version"))')"
+          test -f "dist/X402Api.${version}.nupkg"
           git diff --check
 
   validate-or-publish:
@@ -104,7 +101,7 @@ jobs:
           SDK_VERSION: ${{ inputs.set_version }}
           SOURCE_REVISION: ${{ inputs.source_revision }}
           CONTRACT_DIGEST: ${{ inputs.contract_digest }}
-          NUGET_USER: ${{ inputs.nuget_user }}
+          NUGET_USER: ${{ secrets.NUGET_USER }}
         run: |
           set -Eeuo pipefail
           [[ "${SDK_VERSION}" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
@@ -187,6 +184,7 @@ jobs:
           PY
 
       - name: Require the immutable package source tag
+        if: inputs.mode == 'direct'
         shell: bash
         env:
           SDK_VERSION: ${{ inputs.set_version }}
@@ -242,7 +240,7 @@ jobs:
         id: login
         uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
-          user: ${{ inputs.nuget_user }}
+          user: ${{ secrets.NUGET_USER }}
 
       - name: Publish with NuGet Trusted Publishing
         if: inputs.mode == 'direct' && steps.publication.outputs.exists != 'true'
