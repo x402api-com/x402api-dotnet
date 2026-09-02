@@ -41,6 +41,8 @@ namespace X402Api.Model
         /// <param name="walletReady">walletReady</param>
         /// <param name="platformAvailable">platformAvailable</param>
         /// <param name="acceptingNewPayments">acceptingNewPayments</param>
+        /// <param name="readyForNewPayment">readyForNewPayment</param>
+        /// <param name="feeQuoteReady">feeQuoteReady</param>
         /// <param name="status">status</param>
         /// <param name="blockers">blockers</param>
         /// <param name="tenantChallengesEnabled">tenantChallengesEnabled</param>
@@ -49,8 +51,10 @@ namespace X402Api.Model
         /// <param name="challengeControlReady">challengeControlReady</param>
         /// <param name="settlementControlReady">settlementControlReady</param>
         /// <param name="assets">assets</param>
+        /// <param name="readinessValidUntil">readinessValidUntil</param>
+        /// <param name="feeQuoteValidUntil">feeQuoteValidUntil</param>
         [JsonConstructor]
-        internal PaymentReadinessRail(string assetId, string network, string symbol, bool selected, bool walletReady, bool platformAvailable, bool acceptingNewPayments, string status, List<PaymentReadinessBlocker> blockers, bool tenantChallengesEnabled, bool tenantSettlementEnabled, bool networkAssistanceEnabled, bool challengeControlReady, bool settlementControlReady, List<PaymentReadinessAsset> assets)
+        internal PaymentReadinessRail(string assetId, string network, string symbol, bool selected, bool walletReady, bool platformAvailable, bool acceptingNewPayments, bool readyForNewPayment, bool feeQuoteReady, string status, List<PaymentReadinessBlocker> blockers, bool tenantChallengesEnabled, bool tenantSettlementEnabled, bool networkAssistanceEnabled, bool challengeControlReady, bool settlementControlReady, List<PaymentReadinessAsset> assets, DateTimeOffset? readinessValidUntil = default, DateTimeOffset? feeQuoteValidUntil = default)
         {
             AssetId = assetId;
             Network = network;
@@ -59,6 +63,8 @@ namespace X402Api.Model
             WalletReady = walletReady;
             PlatformAvailable = platformAvailable;
             AcceptingNewPayments = acceptingNewPayments;
+            ReadyForNewPayment = readyForNewPayment;
+            FeeQuoteReady = feeQuoteReady;
             Status = status;
             Blockers = blockers;
             TenantChallengesEnabled = tenantChallengesEnabled;
@@ -67,6 +73,8 @@ namespace X402Api.Model
             ChallengeControlReady = challengeControlReady;
             SettlementControlReady = settlementControlReady;
             Assets = assets;
+            ReadinessValidUntil = readinessValidUntil;
+            FeeQuoteValidUntil = feeQuoteValidUntil;
             OnCreated();
         }
 
@@ -113,6 +121,18 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("accepting_new_payments")]
         public bool AcceptingNewPayments { get; }
+
+        /// <summary>
+        /// Gets or Sets ReadyForNewPayment
+        /// </summary>
+        [JsonPropertyName("ready_for_new_payment")]
+        public bool ReadyForNewPayment { get; }
+
+        /// <summary>
+        /// Gets or Sets FeeQuoteReady
+        /// </summary>
+        [JsonPropertyName("fee_quote_ready")]
+        public bool FeeQuoteReady { get; }
 
         /// <summary>
         /// Gets or Sets Status
@@ -163,6 +183,18 @@ namespace X402Api.Model
         public List<PaymentReadinessAsset> Assets { get; }
 
         /// <summary>
+        /// Gets or Sets ReadinessValidUntil
+        /// </summary>
+        [JsonPropertyName("readiness_valid_until")]
+        public DateTimeOffset? ReadinessValidUntil { get; }
+
+        /// <summary>
+        /// Gets or Sets FeeQuoteValidUntil
+        /// </summary>
+        [JsonPropertyName("fee_quote_valid_until")]
+        public DateTimeOffset? FeeQuoteValidUntil { get; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -183,6 +215,8 @@ namespace X402Api.Model
             sb.Append("  WalletReady: ").Append(WalletReady).Append("\n");
             sb.Append("  PlatformAvailable: ").Append(PlatformAvailable).Append("\n");
             sb.Append("  AcceptingNewPayments: ").Append(AcceptingNewPayments).Append("\n");
+            sb.Append("  ReadyForNewPayment: ").Append(ReadyForNewPayment).Append("\n");
+            sb.Append("  FeeQuoteReady: ").Append(FeeQuoteReady).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Blockers: ").Append(Blockers).Append("\n");
             sb.Append("  TenantChallengesEnabled: ").Append(TenantChallengesEnabled).Append("\n");
@@ -191,6 +225,8 @@ namespace X402Api.Model
             sb.Append("  ChallengeControlReady: ").Append(ChallengeControlReady).Append("\n");
             sb.Append("  SettlementControlReady: ").Append(SettlementControlReady).Append("\n");
             sb.Append("  Assets: ").Append(Assets).Append("\n");
+            sb.Append("  ReadinessValidUntil: ").Append(ReadinessValidUntil).Append("\n");
+            sb.Append("  FeeQuoteValidUntil: ").Append(FeeQuoteValidUntil).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -223,6 +259,16 @@ namespace X402Api.Model
         }
 
         /// <summary>
+        /// The format to use to serialize ReadinessValidUntil
+        /// </summary>
+        public string ReadinessValidUntilFormat { get; private set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize FeeQuoteValidUntil
+        /// </summary>
+        public string FeeQuoteValidUntilFormat { get; private set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="PaymentReadinessRail" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -246,6 +292,8 @@ namespace X402Api.Model
             Option<bool?> walletReady = default;
             Option<bool?> platformAvailable = default;
             Option<bool?> acceptingNewPayments = default;
+            Option<bool?> readyForNewPayment = default;
+            Option<bool?> feeQuoteReady = default;
             Option<string?> status = default;
             Option<List<PaymentReadinessBlocker>?> blockers = default;
             Option<bool?> tenantChallengesEnabled = default;
@@ -254,6 +302,8 @@ namespace X402Api.Model
             Option<bool?> challengeControlReady = default;
             Option<bool?> settlementControlReady = default;
             Option<List<PaymentReadinessAsset>?> assets = default;
+            Option<DateTimeOffset?> readinessValidUntil = default;
+            Option<DateTimeOffset?> feeQuoteValidUntil = default;
 
             while (utf8JsonReader.Read())
             {
@@ -291,6 +341,12 @@ namespace X402Api.Model
                         case "accepting_new_payments":
                             acceptingNewPayments = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
+                        case "ready_for_new_payment":
+                            readyForNewPayment = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "fee_quote_ready":
+                            feeQuoteReady = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         case "status":
                             status = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -314,6 +370,12 @@ namespace X402Api.Model
                             break;
                         case "assets":
                             assets = new Option<List<PaymentReadinessAsset>?>(JsonSerializer.Deserialize<List<PaymentReadinessAsset>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "readiness_valid_until":
+                            readinessValidUntil = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "fee_quote_valid_until":
+                            feeQuoteValidUntil = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -342,6 +404,12 @@ namespace X402Api.Model
             if (!acceptingNewPayments.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(acceptingNewPayments));
 
+            if (!readyForNewPayment.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(readyForNewPayment));
+
+            if (!feeQuoteReady.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(feeQuoteReady));
+
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(status));
 
@@ -366,6 +434,12 @@ namespace X402Api.Model
             if (!assets.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(assets));
 
+            if (!readinessValidUntil.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(readinessValidUntil));
+
+            if (!feeQuoteValidUntil.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadinessRail.", nameof(feeQuoteValidUntil));
+
             if (assetId.IsSet && assetId.Value == null)
                 throw new ArgumentNullException(nameof(assetId), "Property is not nullable for class PaymentReadinessRail.");
 
@@ -386,6 +460,12 @@ namespace X402Api.Model
 
             if (acceptingNewPayments.IsSet && acceptingNewPayments.Value == null)
                 throw new ArgumentNullException(nameof(acceptingNewPayments), "Property is not nullable for class PaymentReadinessRail.");
+
+            if (readyForNewPayment.IsSet && readyForNewPayment.Value == null)
+                throw new ArgumentNullException(nameof(readyForNewPayment), "Property is not nullable for class PaymentReadinessRail.");
+
+            if (feeQuoteReady.IsSet && feeQuoteReady.Value == null)
+                throw new ArgumentNullException(nameof(feeQuoteReady), "Property is not nullable for class PaymentReadinessRail.");
 
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PaymentReadinessRail.");
@@ -411,7 +491,7 @@ namespace X402Api.Model
             if (assets.IsSet && assets.Value == null)
                 throw new ArgumentNullException(nameof(assets), "Property is not nullable for class PaymentReadinessRail.");
 
-            return new PaymentReadinessRail(assetId.Value!, network.Value!, symbol.Value!, selected.Value!.Value!, walletReady.Value!.Value!, platformAvailable.Value!.Value!, acceptingNewPayments.Value!.Value!, status.Value!, blockers.Value!, tenantChallengesEnabled.Value!.Value!, tenantSettlementEnabled.Value!.Value!, networkAssistanceEnabled.Value!.Value!, challengeControlReady.Value!.Value!, settlementControlReady.Value!.Value!, assets.Value!);
+            return new PaymentReadinessRail(assetId.Value!, network.Value!, symbol.Value!, selected.Value!.Value!, walletReady.Value!.Value!, platformAvailable.Value!.Value!, acceptingNewPayments.Value!.Value!, readyForNewPayment.Value!.Value!, feeQuoteReady.Value!.Value!, status.Value!, blockers.Value!, tenantChallengesEnabled.Value!.Value!, tenantSettlementEnabled.Value!.Value!, networkAssistanceEnabled.Value!.Value!, challengeControlReady.Value!.Value!, settlementControlReady.Value!.Value!, assets.Value!, readinessValidUntil.Value!, feeQuoteValidUntil.Value!);
         }
 
         /// <summary>
@@ -470,6 +550,10 @@ namespace X402Api.Model
 
             writer.WriteBoolean("accepting_new_payments", paymentReadinessRail.AcceptingNewPayments);
 
+            writer.WriteBoolean("ready_for_new_payment", paymentReadinessRail.ReadyForNewPayment);
+
+            writer.WriteBoolean("fee_quote_ready", paymentReadinessRail.FeeQuoteReady);
+
             writer.WriteString("status", paymentReadinessRail.Status);
 
             writer.WritePropertyName("blockers");
@@ -486,6 +570,15 @@ namespace X402Api.Model
 
             writer.WritePropertyName("assets");
             JsonSerializer.Serialize(writer, paymentReadinessRail.Assets, jsonSerializerOptions);
+            if (paymentReadinessRail.ReadinessValidUntil != null)
+                writer.WriteString("readiness_valid_until", paymentReadinessRail.ReadinessValidUntil.Value.ToString(ReadinessValidUntilFormat));
+            else
+                writer.WriteNull("readiness_valid_until");
+
+            if (paymentReadinessRail.FeeQuoteValidUntil != null)
+                writer.WriteString("fee_quote_valid_until", paymentReadinessRail.FeeQuoteValidUntil.Value.ToString(FeeQuoteValidUntilFormat));
+            else
+                writer.WriteNull("fee_quote_valid_until");
         }
     }
 

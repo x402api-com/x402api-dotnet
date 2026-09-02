@@ -36,9 +36,9 @@ namespace X402Api.Model
         /// </summary>
         /// <param name="state">state</param>
         /// <param name="acceptingNewPayments">acceptingNewPayments</param>
+        /// <param name="readyForNewPayment">readyForNewPayment</param>
         /// <param name="pausedByTenant">pausedByTenant</param>
         /// <param name="platformAvailable">platformAvailable</param>
-        /// <param name="healthValidUntil">healthValidUntil</param>
         /// <param name="observedAt">observedAt</param>
         /// <param name="tenantStatus">tenantStatus</param>
         /// <param name="tenantAcceptingNewChallenges">tenantAcceptingNewChallenges</param>
@@ -48,15 +48,16 @@ namespace X402Api.Model
         /// <param name="controlPlaneReadyForSettlement">controlPlaneReadyForSettlement</param>
         /// <param name="rails">rails</param>
         /// <param name="canonicalRails">canonicalRails</param>
+        /// <param name="healthValidUntil">healthValidUntil</param>
         /// <param name="externalOnboarding">externalOnboarding</param>
         [JsonConstructor]
-        internal PaymentReadiness(PaymentReadinessStateEnum state, bool acceptingNewPayments, bool pausedByTenant, bool platformAvailable, DateTimeOffset healthValidUntil, DateTimeOffset observedAt, string tenantStatus, bool tenantAcceptingNewChallenges, bool globalChallengesEnabled, bool globalSettlementEnabled, bool controlPlaneReadyForNewChallenges, bool controlPlaneReadyForSettlement, List<PaymentReadinessRail> rails, List<CanonicalPaymentReadinessRail> canonicalRails, Object? externalOnboarding = default)
+        internal PaymentReadiness(PaymentReadinessStateEnum state, bool acceptingNewPayments, bool readyForNewPayment, bool pausedByTenant, bool platformAvailable, DateTimeOffset observedAt, string tenantStatus, bool tenantAcceptingNewChallenges, bool globalChallengesEnabled, bool globalSettlementEnabled, bool controlPlaneReadyForNewChallenges, bool controlPlaneReadyForSettlement, List<PaymentReadinessRail> rails, List<CanonicalPaymentReadinessRail> canonicalRails, DateTimeOffset? healthValidUntil = default, Object? externalOnboarding = default)
         {
             State = state;
             AcceptingNewPayments = acceptingNewPayments;
+            ReadyForNewPayment = readyForNewPayment;
             PausedByTenant = pausedByTenant;
             PlatformAvailable = platformAvailable;
-            HealthValidUntil = healthValidUntil;
             ObservedAt = observedAt;
             TenantStatus = tenantStatus;
             TenantAcceptingNewChallenges = tenantAcceptingNewChallenges;
@@ -66,6 +67,7 @@ namespace X402Api.Model
             ControlPlaneReadyForSettlement = controlPlaneReadyForSettlement;
             Rails = rails;
             CanonicalRails = canonicalRails;
+            HealthValidUntil = healthValidUntil;
             ExternalOnboarding = externalOnboarding;
             OnCreated();
         }
@@ -85,6 +87,12 @@ namespace X402Api.Model
         public bool AcceptingNewPayments { get; }
 
         /// <summary>
+        /// Gets or Sets ReadyForNewPayment
+        /// </summary>
+        [JsonPropertyName("ready_for_new_payment")]
+        public bool ReadyForNewPayment { get; }
+
+        /// <summary>
         /// Gets or Sets PausedByTenant
         /// </summary>
         [JsonPropertyName("paused_by_tenant")]
@@ -95,12 +103,6 @@ namespace X402Api.Model
         /// </summary>
         [JsonPropertyName("platform_available")]
         public bool PlatformAvailable { get; }
-
-        /// <summary>
-        /// Gets or Sets HealthValidUntil
-        /// </summary>
-        [JsonPropertyName("health_valid_until")]
-        public DateTimeOffset HealthValidUntil { get; }
 
         /// <summary>
         /// Gets or Sets ObservedAt
@@ -162,6 +164,12 @@ namespace X402Api.Model
         public List<CanonicalPaymentReadinessRail> CanonicalRails { get; }
 
         /// <summary>
+        /// Gets or Sets HealthValidUntil
+        /// </summary>
+        [JsonPropertyName("health_valid_until")]
+        public DateTimeOffset? HealthValidUntil { get; }
+
+        /// <summary>
         /// Gets or Sets ExternalOnboarding
         /// </summary>
         [JsonPropertyName("external_onboarding")]
@@ -183,9 +191,9 @@ namespace X402Api.Model
             sb.Append("class PaymentReadiness {\n");
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  AcceptingNewPayments: ").Append(AcceptingNewPayments).Append("\n");
+            sb.Append("  ReadyForNewPayment: ").Append(ReadyForNewPayment).Append("\n");
             sb.Append("  PausedByTenant: ").Append(PausedByTenant).Append("\n");
             sb.Append("  PlatformAvailable: ").Append(PlatformAvailable).Append("\n");
-            sb.Append("  HealthValidUntil: ").Append(HealthValidUntil).Append("\n");
             sb.Append("  ObservedAt: ").Append(ObservedAt).Append("\n");
             sb.Append("  TenantStatus: ").Append(TenantStatus).Append("\n");
             sb.Append("  TenantAcceptingNewChallenges: ").Append(TenantAcceptingNewChallenges).Append("\n");
@@ -195,6 +203,7 @@ namespace X402Api.Model
             sb.Append("  ControlPlaneReadyForSettlement: ").Append(ControlPlaneReadyForSettlement).Append("\n");
             sb.Append("  Rails: ").Append(Rails).Append("\n");
             sb.Append("  CanonicalRails: ").Append(CanonicalRails).Append("\n");
+            sb.Append("  HealthValidUntil: ").Append(HealthValidUntil).Append("\n");
             sb.Append("  ExternalOnboarding: ").Append(ExternalOnboarding).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -228,14 +237,14 @@ namespace X402Api.Model
         }
 
         /// <summary>
-        /// The format to use to serialize HealthValidUntil
-        /// </summary>
-        public string HealthValidUntilFormat { get; private set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
         /// The format to use to serialize ObservedAt
         /// </summary>
         public string ObservedAtFormat { get; private set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize HealthValidUntil
+        /// </summary>
+        public string HealthValidUntilFormat { get; private set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
         /// Deserializes json to <see cref="PaymentReadiness" />
@@ -256,9 +265,9 @@ namespace X402Api.Model
 
             Option<PaymentReadinessStateEnum?> state = default;
             Option<bool?> acceptingNewPayments = default;
+            Option<bool?> readyForNewPayment = default;
             Option<bool?> pausedByTenant = default;
             Option<bool?> platformAvailable = default;
-            Option<DateTimeOffset?> healthValidUntil = default;
             Option<DateTimeOffset?> observedAt = default;
             Option<string?> tenantStatus = default;
             Option<bool?> tenantAcceptingNewChallenges = default;
@@ -268,6 +277,7 @@ namespace X402Api.Model
             Option<bool?> controlPlaneReadyForSettlement = default;
             Option<List<PaymentReadinessRail>?> rails = default;
             Option<List<CanonicalPaymentReadinessRail>?> canonicalRails = default;
+            Option<DateTimeOffset?> healthValidUntil = default;
             Option<Object?> externalOnboarding = default;
 
             while (utf8JsonReader.Read())
@@ -291,14 +301,14 @@ namespace X402Api.Model
                         case "accepting_new_payments":
                             acceptingNewPayments = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
+                        case "ready_for_new_payment":
+                            readyForNewPayment = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         case "paused_by_tenant":
                             pausedByTenant = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "platform_available":
                             platformAvailable = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "health_valid_until":
-                            healthValidUntil = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "observed_at":
                             observedAt = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset>(ref utf8JsonReader, jsonSerializerOptions));
@@ -327,6 +337,9 @@ namespace X402Api.Model
                         case "canonical_rails":
                             canonicalRails = new Option<List<CanonicalPaymentReadinessRail>?>(JsonSerializer.Deserialize<List<CanonicalPaymentReadinessRail>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "health_valid_until":
+                            healthValidUntil = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "external_onboarding":
                             externalOnboarding = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -342,14 +355,14 @@ namespace X402Api.Model
             if (!acceptingNewPayments.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(acceptingNewPayments));
 
+            if (!readyForNewPayment.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(readyForNewPayment));
+
             if (!pausedByTenant.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(pausedByTenant));
 
             if (!platformAvailable.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(platformAvailable));
-
-            if (!healthValidUntil.IsSet)
-                throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(healthValidUntil));
 
             if (!observedAt.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(observedAt));
@@ -378,6 +391,9 @@ namespace X402Api.Model
             if (!canonicalRails.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(canonicalRails));
 
+            if (!healthValidUntil.IsSet)
+                throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(healthValidUntil));
+
             if (!externalOnboarding.IsSet)
                 throw new ArgumentException("Property is required for class PaymentReadiness.", nameof(externalOnboarding));
 
@@ -387,14 +403,14 @@ namespace X402Api.Model
             if (acceptingNewPayments.IsSet && acceptingNewPayments.Value == null)
                 throw new ArgumentNullException(nameof(acceptingNewPayments), "Property is not nullable for class PaymentReadiness.");
 
+            if (readyForNewPayment.IsSet && readyForNewPayment.Value == null)
+                throw new ArgumentNullException(nameof(readyForNewPayment), "Property is not nullable for class PaymentReadiness.");
+
             if (pausedByTenant.IsSet && pausedByTenant.Value == null)
                 throw new ArgumentNullException(nameof(pausedByTenant), "Property is not nullable for class PaymentReadiness.");
 
             if (platformAvailable.IsSet && platformAvailable.Value == null)
                 throw new ArgumentNullException(nameof(platformAvailable), "Property is not nullable for class PaymentReadiness.");
-
-            if (healthValidUntil.IsSet && healthValidUntil.Value == null)
-                throw new ArgumentNullException(nameof(healthValidUntil), "Property is not nullable for class PaymentReadiness.");
 
             if (observedAt.IsSet && observedAt.Value == null)
                 throw new ArgumentNullException(nameof(observedAt), "Property is not nullable for class PaymentReadiness.");
@@ -423,7 +439,7 @@ namespace X402Api.Model
             if (canonicalRails.IsSet && canonicalRails.Value == null)
                 throw new ArgumentNullException(nameof(canonicalRails), "Property is not nullable for class PaymentReadiness.");
 
-            return new PaymentReadiness(state.Value!.Value!, acceptingNewPayments.Value!.Value!, pausedByTenant.Value!.Value!, platformAvailable.Value!.Value!, healthValidUntil.Value!.Value!, observedAt.Value!.Value!, tenantStatus.Value!, tenantAcceptingNewChallenges.Value!.Value!, globalChallengesEnabled.Value!.Value!, globalSettlementEnabled.Value!.Value!, controlPlaneReadyForNewChallenges.Value!.Value!, controlPlaneReadyForSettlement.Value!.Value!, rails.Value!, canonicalRails.Value!, externalOnboarding.Value!);
+            return new PaymentReadiness(state.Value!.Value!, acceptingNewPayments.Value!.Value!, readyForNewPayment.Value!.Value!, pausedByTenant.Value!.Value!, platformAvailable.Value!.Value!, observedAt.Value!.Value!, tenantStatus.Value!, tenantAcceptingNewChallenges.Value!.Value!, globalChallengesEnabled.Value!.Value!, globalSettlementEnabled.Value!.Value!, controlPlaneReadyForNewChallenges.Value!.Value!, controlPlaneReadyForSettlement.Value!.Value!, rails.Value!, canonicalRails.Value!, healthValidUntil.Value!, externalOnboarding.Value!);
         }
 
         /// <summary>
@@ -464,11 +480,11 @@ namespace X402Api.Model
 
             writer.WriteBoolean("accepting_new_payments", paymentReadiness.AcceptingNewPayments);
 
+            writer.WriteBoolean("ready_for_new_payment", paymentReadiness.ReadyForNewPayment);
+
             writer.WriteBoolean("paused_by_tenant", paymentReadiness.PausedByTenant);
 
             writer.WriteBoolean("platform_available", paymentReadiness.PlatformAvailable);
-
-            writer.WriteString("health_valid_until", paymentReadiness.HealthValidUntil.ToString(HealthValidUntilFormat));
 
             writer.WriteString("observed_at", paymentReadiness.ObservedAt.ToString(ObservedAtFormat));
 
@@ -488,6 +504,11 @@ namespace X402Api.Model
             JsonSerializer.Serialize(writer, paymentReadiness.Rails, jsonSerializerOptions);
             writer.WritePropertyName("canonical_rails");
             JsonSerializer.Serialize(writer, paymentReadiness.CanonicalRails, jsonSerializerOptions);
+            if (paymentReadiness.HealthValidUntil != null)
+                writer.WriteString("health_valid_until", paymentReadiness.HealthValidUntil.Value.ToString(HealthValidUntilFormat));
+            else
+                writer.WriteNull("health_valid_until");
+
             if (paymentReadiness.ExternalOnboarding != null)
             {
                 writer.WritePropertyName("external_onboarding");
