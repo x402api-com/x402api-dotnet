@@ -207,7 +207,7 @@ Retrieve one tenant-visible payment by its canonical identifier. Requires a tena
 
 Retrieve a payment receipt
 
-Retrieve the signed receipt projection for one tenant-visible payment. Requires a tenant API key with the `payments:read` scope.
+Retrieve the signed receipt projection for one tenant-visible payment. HTTP 202 returns confirmation and finality state while the signed receipt is pending. Requires a tenant API key with the `payments:read` scope.
 
 
 ### Parameters
@@ -234,6 +234,9 @@ Retrieve the signed receipt projection for one tenant-visible payment. Requires 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful response for retrieve a payment receipt. |  * X-Request-ID -  <br>  |
+| **202** | Payment status while the signed finalized receipt is pending. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
+| **409** | The request failed. |  * X-Request-ID -  <br>  |
+| **503** | The request failed. |  * X-Request-ID -  <br>  |
 | **0** | The request failed with a stable machine-readable error. |  * X-Request-ID -  <br>  * Retry-After -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

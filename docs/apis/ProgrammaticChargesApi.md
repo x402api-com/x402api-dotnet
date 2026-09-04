@@ -92,7 +92,7 @@ Retrieve the frozen terms and current projected status of a tenant charge. Requi
 
 Submit a programmatic charge payment
 
-Submit one exact canonical PAYMENT-SIGNATURE for a tenant charge. The request body is empty. Preserve and retry the identical signature after HTTP 202 or 503; never create a replacement authorization for an ambiguous outcome. Requires a tenant API key with the `commerce:write` scope.
+Submit one exact canonical PAYMENT-SIGNATURE for a tenant charge. The request body is empty. HTTP 200 with confirmed=true means the payment is accepted and must not be resubmitted; finalized=true means the signed receipt is ready. Preserve and retry the identical signature after HTTP 202 or 503; never create a replacement authorization for an ambiguous outcome. Requires a tenant API key with the `commerce:write` scope.
 
 
 ### Parameters

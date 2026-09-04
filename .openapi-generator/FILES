@@ -47,10 +47,12 @@ docs/models/PaymentReadinessRail.md
 docs/models/PaymentReadinessRailStatusEnum.md
 docs/models/PaymentReadinessStateEnum.md
 docs/models/PaymentReceipt.md
+docs/models/PaymentReceiptStatus.md
 docs/models/PriceInput.md
 docs/models/PublicFeePolicyDocument.md
 docs/models/PublicNetworkFeeAlternative.md
 docs/models/ReadinessStatusEnum.md
+docs/models/ReceiptStatusEnum.md
 docs/models/ReceiptVerificationKey.md
 docs/models/ReceiptVerificationKeyHistory.md
 docs/models/Resource.md
@@ -167,10 +169,12 @@ src/X402Api/Model/PaymentReadinessRail.cs
 src/X402Api/Model/PaymentReadinessRailStatusEnum.cs
 src/X402Api/Model/PaymentReadinessStateEnum.cs
 src/X402Api/Model/PaymentReceipt.cs
+src/X402Api/Model/PaymentReceiptStatus.cs
 src/X402Api/Model/PriceInput.cs
 src/X402Api/Model/PublicFeePolicyDocument.cs
 src/X402Api/Model/PublicNetworkFeeAlternative.cs
 src/X402Api/Model/ReadinessStatusEnum.cs
+src/X402Api/Model/ReceiptStatusEnum.cs
 src/X402Api/Model/ReceiptVerificationKey.cs
 src/X402Api/Model/ReceiptVerificationKeyHistory.cs
 src/X402Api/Model/Resource.cs

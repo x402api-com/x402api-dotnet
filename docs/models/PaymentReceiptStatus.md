@@ -1,18 +1,17 @@
-# X402Api.Model.DynamicChargePaymentResponse
+# X402Api.Model.PaymentReceiptStatus
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChargeId** | **Guid** |  |
-**OrderId** | **Guid** |  |
-**PaymentId** | **Guid** | Durable settlement identifier used by payment and receipt APIs. |
+**PaymentId** | **Guid** |  |
 **State** | **string** |  |
-**Payer** | **string** |  |
+**Confirmed** | **bool** |  |
+**Finalized** | **bool** |  |
 **Transaction** | **string** |  |
 **Network** | **string** |  |
-**ErrorReason** | **string** |  |
-**Confirmed** | **bool** |  | [optional]
-**Finalized** | **bool** |  | [optional]
+**ReceiptStatus** | **ReceiptStatusEnum** |  |
+**ConfirmedAt** | **DateTimeOffset** |  |
+**FinalizedAt** | **DateTimeOffset** |  |
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

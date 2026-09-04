@@ -27,6 +27,8 @@ Name | Type | Description | Notes
 **Receipt** | [**TenantPaymentReceiptProjection**](TenantPaymentReceiptProjection.md) |  | [readonly]
 **Screening** | [**TenantPaymentScreeningProjection**](TenantPaymentScreeningProjection.md) |  | [readonly]
 **Fulfillment** | [**TenantPaymentFulfillmentProjection**](TenantPaymentFulfillmentProjection.md) |  | [readonly]
+**Confirmed** | **bool** |  | [optional] [readonly]
+**Finalized** | **bool** |  | [optional] [readonly]
 **GasExecutionObservedAt** | **DateTimeOffset** |  | [readonly]
 **SettlementResult** | **Object** |  | [readonly]
 **ConfirmedAt** | **DateTimeOffset** |  | [readonly]
