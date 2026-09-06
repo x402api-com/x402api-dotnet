@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **EligibleAlternatives** | [**List&lt;PublicNetworkFeeAlternative&gt;**](PublicNetworkFeeAlternative.md) |  |
 **FeePolicy** | [**PublicFeePolicyDocument**](PublicFeePolicyDocument.md) |  |
 **FeeQuoteDigest** | **string** |  |
+**HumanCheckoutUrl** | **string** | Optional HTTPS hosted checkout for this exact charge. It is a short-lived bearer capability and expires with expires_at. | [optional]
+**QrPayload** | **string** | Optional canonical hosted-checkout URL to encode as a QR; never a recipient address. | [optional]
 **PaymentRequired** | **Object** | Complete immutable x402 v2 PAYMENT-REQUIRED document. |
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
